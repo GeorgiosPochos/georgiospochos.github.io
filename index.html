@@ -9,45 +9,47 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #ffffff;
+      background: linear-gradient(180deg, #ffffff 0%, #fff1f1 50%, #ffffff 100%);
       color: #222;
     }
 
     header {
-      background: linear-gradient(135deg, #b11226, #e63946);
-      color: white;
+      background: linear-gradient(135deg, #b11226 0%, #ffffff 100%);
       text-align: center;
-      padding: 70px 20px;
+      padding: 80px 20px;
     }
 
     header h1 {
       font-size: 42px;
       margin: 0;
+      color: #b11226;
     }
 
     header p {
       font-size: 22px;
-      margin: 15px 0 30px;
+      margin: 20px 0 35px;
       font-weight: bold;
-      animation: fadeIn 2s ease-in-out;
+      color: #b11226;
     }
 
     .call-btn {
       display: inline-block;
-      background: white;
-      color: #b11226;
-      padding: 15px 30px;
-      border-radius: 30px;
+      background: linear-gradient(135deg, #b11226, #e63946);
+      color: white;
+      padding: 15px 35px;
+      border-radius: 40px;
       text-decoration: none;
       font-weight: bold;
       font-size: 18px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      box-shadow: 0 10px 25px rgba(177,18,38,0.35);
     }
 
     section {
       padding: 60px 20px;
       max-width: 1100px;
-      margin: auto;
+      margin: 40px auto;
+      background: linear-gradient(180deg, #ffffff, #fff6f6);
+      border-radius: 25px;
     }
 
     h2 {
@@ -65,13 +67,12 @@
 
     .gallery img {
       width: 100%;
-      border-radius: 15px;
+      border-radius: 18px;
       box-shadow: 0 10px 25px rgba(177,18,38,0.25);
-      animation: fadeIn 2s ease-in-out;
     }
 
     .contact {
-      background: #fff5f5;
+      background: linear-gradient(135deg, #ffffff, #ffeaea);
       border: 2px solid #e63946;
       border-radius: 20px;
       padding: 40px;
@@ -90,27 +91,21 @@
       height: 300px;
       border: 0;
       border-radius: 15px;
-      margin-top: 20px;
+      margin-top: 25px;
     }
 
     footer {
-      background: #b11226;
-      color: white;
+      background: linear-gradient(135deg, #b11226, #ffffff);
+      color: #b11226;
       text-align: center;
-      padding: 20px;
+      padding: 25px;
       font-size: 14px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 600px) {
       header h1 {
         font-size: 32px;
       }
-
       header p {
         font-size: 18px;
       }
@@ -130,24 +125,24 @@
   <h2>Unsere Praxis</h2>
   <div class="gallery">
     <img src="images/empfang.jpg" alt="Empfang">
-    <img src="images/praxis1.jpg" alt="Praxis Bild">
-    <img src="images/praxis2.jpg" alt="Praxis Bild">
+    <img src="images/praxis1.jpg" alt="Praxis">
+    <img src="images/praxis2.jpg" alt="Behandlungsraum">
   </div>
 </section>
 
 <section>
   <h2>Kontakt & Standort</h2>
   <div class="contact">
-    <p><strong>Telefon:</strong><br>
+    <p><strong>Telefon</strong><br>
       <a href="tel:0208602743">0208 602743</a>
     </p>
 
-    <p><strong>Adresse:</strong><br>
+    <p><strong>Adresse</strong><br>
       Hasenstraße 17<br>
       46119 Oberhausen
     </p>
 
-    <iframe 
+    <iframe
       src="https://www.google.com/maps?q=Hasenstraße+17+46119+Oberhausen&output=embed">
     </iframe>
   </div>
@@ -159,3 +154,4 @@
 
 </body>
 </html>
+
