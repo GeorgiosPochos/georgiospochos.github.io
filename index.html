@@ -3,9 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stavros Avgerinos – Zahnarzt</title>
+<title>Stavros Avgerinos – Zahnarzt Oberhausen</title>
+
+<!-- SEO -->
+<meta name="description" content="Zahnarztpraxis Stavros Avgerinos in Oberhausen – moderne Zahnmedizin, mehrsprachig, familienfreundlich.">
 
 <style>
+:root {
+  --bg: #ffffff;
+  --text: #111;
+  --card: #ffffff;
+  --border: #e5e5e5;
+}
+
+body.dark {
+  --bg: #111;
+  --text: #f1f1f1;
+  --card: #1c1c1c;
+  --border: #333;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,27 +31,29 @@
 }
 
 body {
-  background: #fff;
-  color: #111;
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s;
 }
 
 /* HEADER */
 header {
-  padding: 20px 30px;
-  border-bottom: 1px solid #eee;
+  padding: 15px 25px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .tabs {
   display: flex;
-  gap: 15px;
+  gap: 12px;
 }
 
 .tab {
-  padding: 10px 18px;
+  padding: 8px 16px;
   border-radius: 10px;
   cursor: pointer;
-  font-weight: 500;
-  color: #333;
 }
 
 .tab.active {
@@ -42,7 +61,19 @@ header {
   color: red;
 }
 
-/* CONTENT */
+body.dark .tab.active {
+  background: #222;
+}
+
+/* LANGUAGE */
+.lang {
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* SECTIONS */
 section {
   display: none;
   padding: 60px 20px;
@@ -54,7 +85,7 @@ section.active {
   display: block;
 }
 
-/* LEISTUNGEN */
+/* SERVICES */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -62,47 +93,55 @@ section.active {
 }
 
 .service-card {
-  border: 1px solid #e5e5e5;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: 30px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-  transition: 0.3s;
-}
-
-.service-card:hover {
-  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 .icon {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #ff3b2f, #ff7b54);
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, red, darkred);
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin-bottom: 15px;
 }
 
-.service-card h3 {
-  margin-bottom: 10px;
+/* FLOATING BUTTONS */
+.darkmode {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #222;
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.service-card ul {
-  list-style: none;
-  margin-top: 15px;
-}
-
-.service-card li {
-  margin-bottom: 8px;
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
-  .tabs {
-    flex-wrap: wrap;
+  header {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 </style>
@@ -117,27 +156,28 @@ section.active {
     <div class="tab" onclick="showTab('team')">Team</div>
     <div class="tab" onclick="showTab('kontakt')">Kontakt</div>
   </div>
+
+  <!-- LANGUAGES -->
+  <div class="lang">
+    🇩🇪 🇬🇧 🇬🇷 🇵🇱 🇪🇸 🇹🇷 🇷🇺
+  </div>
 </header>
 
-<!-- HOME -->
 <section id="home" class="active">
   <h1>Willkommen</h1>
   <p>Zahnarztpraxis Stavros Avgerinos · Oberhausen</p>
 </section>
 
-<!-- LEISTUNGEN -->
 <section id="leistungen">
-  <h1>Unsere Leistungen</h1>
-  <br>
+  <h1>Unsere Leistungen</h1><br>
 
   <div class="services-grid">
     <div class="service-card">
       <div class="icon">🏃‍♂️</div>
       <h3>Sportzahnmedizin</h3>
-      <p>Spezialisierte Versorgung für Sportler.</p>
       <ul>
         <li>✓ Mundschutz</li>
-        <li>✓ Zahnunfall</li>
+        <li>✓ Zahnunfälle</li>
         <li>✓ Beratung</li>
       </ul>
     </div>
@@ -145,9 +185,8 @@ section.active {
     <div class="service-card">
       <div class="icon">🧒</div>
       <h3>Kinderzahnheilkunde</h3>
-      <p>Sanft & kindgerecht.</p>
       <ul>
-        <li>✓ Kariesprävention</li>
+        <li>✓ Früh­erkennung</li>
         <li>✓ Kinderfreundlich</li>
         <li>✓ Zahnputzschule</li>
       </ul>
@@ -155,25 +194,36 @@ section.active {
   </div>
 </section>
 
-<!-- TEAM -->
 <section id="team">
   <h1>Unser Team</h1>
-  <p>Kompetent · Freundlich · Modern</p>
+  <p>Erfahrung · Vertrauen · Moderne Zahnmedizin</p>
 </section>
 
-<!-- KONTAKT -->
 <section id="kontakt">
   <h1>Kontakt</h1>
-  <p>Hasenstraße 17<br>46119 Oberhausen</p>
+  <p>
+    Hasenstraße 17<br>
+    46119 Oberhausen
+  </p>
 </section>
+
+<!-- BUTTONS -->
+<div class="darkmode" onclick="toggleDark()">🌙</div>
+
+<a class="whatsapp" href="https://wa.me/49123456789" target="_blank">
+  WhatsApp
+</a>
 
 <script>
 function showTab(id) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-
   document.querySelector(`[onclick="showTab('${id}')"]`).classList.add('active');
   document.getElementById(id).classList.add('active');
+}
+
+function toggleDark() {
+  document.body.classList.toggle('dark');
 }
 </script>
 
