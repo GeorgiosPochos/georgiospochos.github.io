@@ -2,10 +2,145 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Meine erste Website</title>
+  <title>Zahnarztpraxis Stavros Avgerinos – Oberhausen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0aa1dd, #0779a8);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0779a8;
+      font-weight: bold;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h2 {
+      color: #0aa1dd;
+      margin-top: 0;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    footer {
+      background-color: #0779a8;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    /* Mobile Optimierung */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 26px;
+      }
+
+      nav {
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Hallo 👋</h1>
-  <p>Das ist meine erste GitHub-Page.</p>
-</body>
-</html>
+
+<header>
+  <h1>Zahnarztpraxis Stavros Avgerinos</h1>
+  <p>Moderne Zahnmedizin in Oberhausen</p>
+</header>
+
+<nav>
+  <a href="#praxis">Praxis</a>
+  <a href="#leistungen">Leistungen</a>
+  <a href="#kontakt">Kontakt</a>
+  <a href="#impressum">Impressum</a>
+  <a href="#datenschutz">Datenschutz</a>
+</nav>
+
+<section id="praxis">
+  <div class="card">
+    <h2>Unsere Praxis</h2>
+    <p>
+      In der Zahnarztpraxis <strong>Stavros Avgerinos</strong> stehen Sie als Patient im Mittelpunkt.
+      Wir bieten Ihnen moderne Zahnmedizin, persönliche Beratung und eine angenehme Atmosphäre.
+    </p>
+  </div>
+</section>
+
+<section id="leistungen">
+  <div class="card">
+    <h2>Unsere Leistungen</h2>
+    <ul>
+      <li>Professionelle Zahnreinigung & Prophylaxe</li>
+      <li>Ästhetische Zahnheilkunde</li>
+      <li>Implantologie</li>
+      <li>Wurzelbehandlung</li>
+      <li>Zahnersatz & Kronen</li>
+    </ul>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="card">
+    <h2>Kontakt</h2>
+    <p><strong>Adresse:</strong><br>
+      Hasenstraße 17<br>
+      46119 Oberhausen
+    </p>
+    <p><strong>Telefon:</strong> (bitte eintragen)</p>
+    <p><strong>E-Mail:</strong> (bitte eintragen)</p>
+  </div>
+</section>
+
+<section id="impressum">
+  <div class="card">
+    <h2>Impressum</h2>
+    <p>
+      Zahnarztpraxis Stavros Avgerinos<br>
+      Hasenstraße 17<br>
+      46
