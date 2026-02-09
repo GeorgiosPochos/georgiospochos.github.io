@@ -1,253 +1,253 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stavros Avgerinos – Zahnarzt Oberhausen</title>
 
-<title>Zahnarzt Oberhausen | Stavros Avgerinos</title>
+  <meta name="description" content="Zahnarztpraxis Stavros Avgerinos in Oberhausen. Moderne Zahnmedizin, Sportzahnmedizin & Kinderzahnheilkunde." />
 
-<meta name="description" content="Zahnarztpraxis Stavros Avgerinos in Oberhausen. Moderne Zahnmedizin, mehrsprachig, freundliches Team. Jetzt Termin vereinbaren.">
-<meta name="keywords" content="Zahnarzt Oberhausen, Zahnarzt Hasenstraße, Stavros Avgerinos, Zahnmedizin Oberhausen">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-<style>
-:root{
-  --bg:#f4f4f4;
-  --text:#222;
-  --card:#fff;
-  --red:#c4161c;
-}
+    body {
+      background: #ffffff;
+      color: #111;
+      line-height: 1.6;
+    }
 
-body.dark{
-  --bg:#121212;
-  --text:#eee;
-  --card:#1f1f1f;
-}
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid #eee;
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:var(--bg);color:var(--text);transition:.3s}
+n
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-/* HEADER */
-header{
-  background:var(--card);
-  padding:18px 25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 5px 20px rgba(0,0,0,.1);
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
+    .logo img {
+      height: 45px;
+    }
 
-/* LOGO */
-.logo{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.logo img{height:70px}
-.logo-text h1{color:var(--red);font-size:1.5rem}
-.logo-text p{font-size:.85rem;opacity:.8}
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
 
-.lang-flag{
-  font-size:1.1rem;
-}
+    nav a:hover {
+      color: #e60000;
+    }
 
-/* MENU */
-.menu{position:relative}
-.menu-btn{font-size:28px;cursor:pointer}
-.menu-panel{
-  display:none;
-  position:absolute;
-  right:0;
-  top:40px;
-  background:var(--card);
-  border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
-  overflow:hidden;
-}
-.menu-panel button{
-  padding:12px 18px;
-  border:none;
-  background:none;
-  width:100%;
-  text-align:left;
-  cursor:pointer;
-}
-.menu-panel button:hover{background:rgba(0,0,0,.05)}
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
 
-/* CONTENT */
-section{max-width:1100px;margin:50px auto;padding:0 20px}
-h2{text-align:center;color:var(--red);margin-bottom:30px}
+    h2 {
+      text-align: center;
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+    }
 
-.praxis{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-.praxis img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  border-radius:15px;
-}
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 50px;
+    }
 
-/* BOX */
-.box{
-  background:var(--card);
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
-  text-align:center;
-}
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: #fafafa;
+    }
 
-.map iframe{
-  width:100%;
-  height:350px;
-  border:0;
-  border-radius:15px;
-  margin-top:20px;
-}
+    .hero h1 {
+      font-size: 2.8rem;
+      color: #e60000;
+      margin-bottom: 10px;
+    }
 
-/* REVIEWS */
-.review{
-  font-style:italic;
-  margin:15px 0;
-}
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+    }
 
-/* DARK MODE BUTTON */
-.dark-toggle{
-  position:fixed;
-  left:20px;
-  bottom:20px;
-  background:var(--card);
-  padding:12px 16px;
-  border-radius:30px;
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,.3);
-}
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
 
-/* WHATSAPP */
-.whatsapp{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:#25d366;
-  color:#fff;
-  padding:15px 20px;
-  border-radius:50px;
-  text-decoration:none;
-  font-weight:bold;
-}
+    .service-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: 0.3s ease;
+    }
 
-footer{
-  text-align:center;
-  padding:30px;
-  font-size:.85rem;
-  opacity:.7;
-}
-</style>
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.1);
+    }
+
+    .service-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ff3b2f, #ff7b54);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .service-card ul {
+      list-style: none;
+      margin-top: 15px;
+    }
+
+    .service-card li {
+      margin-bottom: 8px;
+    }
+
+    /* OPENING */
+    .opening {
+      background: #fafafa;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .opening p {
+      margin-bottom: 8px;
+    }
+
+    /* MAP */
+    iframe {
+      width: 100%;
+      height: 400px;
+      border-radius: 20px;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #eee;
+      margin-top: 80px;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
   <div class="logo">
-    <img src="images/logo.png">
-    <div class="logo-text">
-      <h1 data-text="title">Stavros Avgerinos</h1>
-      <p data-text="subtitle">Zahnarzt · Oberhausen</p>
-    </div>
-    <span class="lang-flag" id="headerFlag">🇩🇪</span>
+    <img src="images/logo.png" alt="Logo" />
+    <strong>Stavros Avgerinos</strong>
   </div>
-
-  <div class="menu">
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
-    <div class="menu-panel" id="menu">
-      <button onclick="setLang('de')">🇩🇪 Deutsch</button>
-      <button onclick="setLang('en')">🇬🇧 English</button>
-      <button onclick="setLang('gr')">🇬🇷 Ελληνικά</button>
-      <button onclick="setLang('pl')">🇵🇱 Polski</button>
-      <button onclick="setLang('es')">🇪🇸 Español</button>
-      <button onclick="setLang('tr')">🇹🇷 Türkçe</button>
-      <button onclick="setLang('ru')">🇷🇺 Русский</button>
-    </div>
-  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#leistungen">Leistungen</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
 </header>
 
-<section>
-  <h2 data-text="praxis">Unsere Praxis</h2>
-  <div class="praxis">
-    <img src="images/empfang.png">
-    <img src="images/wartezimmer.png">
-    <img src="images/behandlungsraum.png">
-  </div>
+<section id="home" class="hero">
+  <h1>Stavros Avgerinos</h1>
+  <p>Zahnarzt · Oberhausen</p>
 </section>
 
-<section>
-  <h2 data-text="reviews">Patientenstimmen</h2>
-  <div class="box">
-    <p class="review">„Sehr freundliches Team und moderne Praxis.“ ⭐⭐⭐⭐⭐</p>
-    <p class="review">„Kaum Wartezeit, sehr kompetent.“ ⭐⭐⭐⭐⭐</p>
-    <a href="https://www.google.com/search?q=Zahnarzt+Stavros+Avgerinos+Oberhausen" target="_blank">
-      ➜ Alle Google Bewertungen ansehen
-    </a>
-  </div>
-</section>
+<section id="leistungen">
+  <h2>Unsere Leistungen</h2>
+  <p class="subtitle">Umfassende zahnmedizinische Versorgung auf höchstem Niveau</p>
 
-<section>
-  <h2 data-text="contact">Kontakt & Anfahrt</h2>
-  <div class="box">
-    <p>📞 0208 602743</p>
-    <p>📍 Hasenstraße 17, 46119 Oberhausen</p>
-    <div class="map">
-      <iframe src="https://www.google.com/maps?q=Hasenstraße+17+46119+Oberhausen&output=embed"></iframe>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏃‍♂️</div>
+      <h3>Sportzahnmedizin</h3>
+      <p>Spezialisierte Versorgung für Sportler und aktive Menschen.</p>
+      <ul>
+        <li>✓ Mundschutz</li>
+        <li>✓ Zahnunfallbehandlung</li>
+        <li>✓ Beratung</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🧒</div>
+      <h3>Kinderzahnheilkunde</h3>
+      <p>Sanfte und kindgerechte Zahnbehandlung.</p>
+      <ul>
+        <li>✓ Früherkennung von Karies</li>
+        <li>✓ Kinderfreundlich</li>
+        <li>✓ Zahnputzschule</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<div class="dark-toggle" onclick="toggleDark()">🌙 Dark Mode</div>
+<section>
+  <h2>Öffnungszeiten</h2>
+  <div class="opening">
+    <p>Montag: 08:00 – 20:20</p>
+    <p>Dienstag: 08:00 – 20:20</p>
+    <p>Mittwoch: 08:00 – 19:00</p>
+    <p>Donnerstag: 08:00 – 20:00</p>
+    <p>Freitag: 08:00 – 19:00</p>
+    <p>Samstag: geschlossen</p>
+    <p>Sonntag: geschlossen</p>
+  </div>
+</section>
 
-<a class="whatsapp" href="https://wa.me/49208602743">💬 WhatsApp</a>
+<section id="kontakt">
+  <h2>Kontakt & Anfahrt</h2>
+  <p class="subtitle">Hasenstraße 17, 46119 Oberhausen</p>
+
+  <iframe 
+    src="https://www.google.com/maps?q=Hasenstraße%2017,%2046119%20Oberhausen&output=embed">
+  </iframe>
+</section>
 
 <footer>
-© 2026 Zahnarztpraxis Stavros Avgerinos
+  © 2026 Zahnarztpraxis Stavros Avgerinos
 </footer>
-
-<script>
-function toggleMenu(){
-  const m=document.getElementById("menu");
-  m.style.display=m.style.display==="block"?"none":"block";
-}
-
-function toggleDark(){
-  document.body.classList.toggle("dark");
-  localStorage.setItem("dark",document.body.classList.contains("dark"));
-}
-if(localStorage.getItem("dark")==="true"){
-  document.body.classList.add("dark");
-}
-
-const flags={de:"🇩🇪",en:"🇬🇧",gr:"🇬🇷",pl:"🇵🇱",es:"🇪🇸",tr:"🇹🇷",ru:"🇷🇺"};
-
-const texts={
-  de:{title:"Stavros Avgerinos",subtitle:"Zahnarzt · Oberhausen",praxis:"Unsere Praxis",contact:"Kontakt & Anfahrt",reviews:"Patientenstimmen"},
-  en:{title:"Stavros Avgerinos",subtitle:"Dentist · Oberhausen",praxis:"Our Practice",contact:"Contact & Location",reviews:"Patient Reviews"},
-  gr:{title:"Σταύρος Αυγερινός",subtitle:"Οδοντίατρος · Oberhausen",praxis:"Το Ιατρείο μας",contact:"Επικοινωνία",reviews:"Κριτικές"},
-  pl:{title:"Stavros Avgerinos",subtitle:"Dentysta · Oberhausen",praxis:"Nasza Praktyka",contact:"Kontakt",reviews:"Opinie"},
-  es:{title:"Stavros Avgerinos",subtitle:"Dentista · Oberhausen",praxis:"Nuestra Clínica",contact:"Contacto",reviews:"Opiniones"},
-  tr:{title:"Stavros Avgerinos",subtitle:"Diş Hekimi · Oberhausen",praxis:"Kliniğimiz",contact:"İletişim",reviews:"Yorumlar"},
-  ru:{title:"Ставрос Авгеринос",subtitle:"Стоматолог · Oberhausen",praxis:"Наша клиника",contact:"Контакты",reviews:"Отзывы"}
-};
-
-function setLang(l){
-  document.querySelectorAll("[data-text]").forEach(el=>{
-    el.innerText=texts[l][el.dataset.text];
-  });
-  document.getElementById("headerFlag").innerText=flags[l];
-  toggleMenu();
-}
-</script>
 
 </body>
 </html>
