@@ -2,92 +2,42 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Zahnarztpraxis Stavros Avgerinos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>Stavros Avgerinos – Zahnarzt Oberhausen</title>
 
   <style>
-    :root {
-      --main: #0aa2b8;
-      --accent: #c62828;
-      --bg: #f4f7f8;
-      --text: #222;
-      --card: #ffffff;
-    }
-
-    body.dark {
-      --bg: #111;
-      --text: #eee;
-      --card: #1c1c1c;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #222;
     }
 
-    /* HEADER */
     header {
-      background: linear-gradient(135deg, #0aa2b8, #0dc0a8);
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
       color: white;
-      padding: 90px 20px 70px;
+      padding: 80px 20px;
       text-align: center;
-      position: relative;
-    }
-
-    header img {
-      width: 120px;
-      margin-bottom: 20px;
     }
 
     header h1 {
-      font-size: 2.4rem;
+      font-size: 48px;
       margin-bottom: 10px;
     }
 
     header p {
-      font-size: 1.4rem;
-      color: #ffdddd;
-      animation: fadeIn 2s ease forwards;
+      font-size: 20px;
+      margin-bottom: 30px;
     }
 
-    /* FLOATING BUTTONS */
-    .call-btn {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      background: var(--accent);
-      color: white;
-      padding: 16px 18px;
-      border-radius: 50%;
-      font-size: 22px;
+    .cta {
+      background: white;
+      color: #0077b6;
+      padding: 15px 30px;
+      border-radius: 30px;
       text-decoration: none;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      font-weight: bold;
     }
 
-    .dark-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--card);
-      border: none;
-      padding: 10px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    /* SECTIONS */
     section {
       padding: 60px 20px;
       max-width: 1100px;
@@ -97,10 +47,9 @@
     h2 {
       text-align: center;
       margin-bottom: 40px;
-      font-size: 2rem;
+      font-size: 32px;
     }
 
-    /* GALLERY */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -109,97 +58,55 @@
 
     .gallery img {
       width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
-    /* CONTACT CARD */
     .contact {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 30px;
+      background: #f5f5f5;
+      border-radius: 20px;
+      padding: 40px;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-
-    .contact a {
-      display: inline-block;
-      margin-top: 15px;
-      background: var(--accent);
-      color: white;
-      padding: 14px 22px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    iframe {
-      width: 100%;
-      height: 300px;
-      border: none;
-      border-radius: 14px;
-      margin-top: 25px;
     }
 
     footer {
       text-align: center;
-      padding: 30px;
+      padding: 20px;
+      background: #111;
+      color: #aaa;
       font-size: 14px;
-      opacity: 0.7;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 
 <body>
 
-<button class="dark-toggle" onclick="toggleDark()">🌙 Dark Mode</button>
+  <header>
+    <h1>Stavros Avgerinos</h1>
+    <p>Ihr Lächeln ist unsere Leidenschaft</p>
+    <a class="cta" href="tel:0208602743">📞 0208 602743</a>
+  </header>
 
-<a href="tel:0208602743" class="call-btn">📞</a>
+  <section>
+    <h2>Unsere Praxis</h2>
+    <div class="gallery">
+      <img src="images/empfang.png" alt="Empfang">
+      <img src="images/wartezimmer.png" alt="Wartezimmer">
+      <img src="images/behandlungsraum.png" alt="Behandlungsraum">
+    </div>
+  </section>
 
-<header>
-  <img src="images/logo.png" alt="Logo">
-  <h1>Zahnarztpraxis Stavros Avgerinos</h1>
-  <p>🦷 Ihr Lächeln ist unsere Leidenschaft</p>
-</header>
+  <section>
+    <div class="contact">
+      <h2>Kontakt</h2>
+      <p><strong>📍 Standort:</strong> Oberhausen</p>
+      <p><strong>📞 Telefon:</strong> 0208 602743</p>
+    </div>
+  </section>
 
-<section>
-  <h2>Unsere Praxis</h2>
-  <div class="gallery">
-    <img src="images/empfang.png" alt="Empfang">
-    <img src="images/wartezimmer.png" alt="Wartezimmer">
-    <img src="images/behandlungsraum.png" alt="Behandlungsraum">
-  </div>
-</section>
-
-<section>
-  <h2>Kontakt & Standort</h2>
-  <div class="contact">
-    <p><strong>📍 Adresse</strong><br>
-    Hasenstraße 17<br>
-    46119 Oberhausen</p>
-
-    <a href="tel:0208602743">Jetzt anrufen: 0208 602743</a>
-
-    <iframe 
-      src="https://www.google.com/maps?q=Hasenstraße+17+46119+Oberhausen&output=embed">
-    </iframe>
-  </div>
-</section>
-
-<footer>
-  © 2026 Zahnarztpraxis Stavros Avgerinos · Impressum · Datenschutz
-</footer>
-
-<script>
-  function toggleDark() {
-    document.body.classList.toggle("dark");
-  }
-</script>
+  <footer>
+    © 2026 Stavros Avgerinos · Zahnarztpraxis Oberhausen
+  </footer>
 
 </body>
 </html>
