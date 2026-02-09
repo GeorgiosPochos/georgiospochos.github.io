@@ -51,14 +51,17 @@ header{
   border-radius:15px;
   box-shadow:0 10px 30px rgba(0,0,0,.2);
   overflow:hidden;
+  min-width:200px;
 }
 .menu-panel button{
-  display:block;
-  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
   border:none;
   background:none;
   width:100%;
-  text-align:left;
+  font-size:1rem;
   cursor:pointer;
 }
 .menu-panel button:hover{background:#f0f0f0}
@@ -173,12 +176,8 @@ footer{
   <div class="box">
     <p>📞 0208 602743</p>
     <p>📍 Hasenstraße 17, 46119 Oberhausen</p>
-
     <div class="map">
-      <iframe 
-        src="https://www.google.com/maps?q=Hasenstraße+17+46119+Oberhausen&output=embed"
-        loading="lazy">
-      </iframe>
+      <iframe src="https://www.google.com/maps?q=Hasenstraße+17+46119+Oberhausen&output=embed"></iframe>
     </div>
   </div>
 </section>
