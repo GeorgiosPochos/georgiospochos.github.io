@@ -31,19 +31,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: var(--font-body); color: var(--color-anthracite); background-color: var(--color-ivory); line-height: 1.6; overflow-x: hidden; }
-        h1, h2, h3 { font-family: var(--font-heading); color: var(--color-dark-blue); line-height: 1.2; }
-        img { max-width: 100%; height: auto; display: block; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--color-dark-blue); line-height: 1.2; }
+        img { max-width: 100%; height: auto; display: block; border-radius: var(--radius-soft); }
 
-        /* --- ANIMATIONS --- */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-up { animation: fadeUp 0.8s ease forwards; }
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
+        /* --- SCROLL ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- HEADER & NAVIGATION --- */
+        /* --- HEADER --- */
         header {
             position: fixed; top: 0; width: 100%;
             background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
@@ -51,149 +46,208 @@
             box-shadow: 0 2px 15px rgba(0,0,0,0.05);
         }
         .logo { font-family: var(--font-heading); font-weight: 700; font-size: 1.5rem; color: var(--color-dark-blue); text-decoration: none; }
-        
-        /* Desktop Nav */
         .desktop-nav { display: flex; align-items: center; gap: 30px; }
         .desktop-nav a.nav-link { text-decoration: none; color: var(--color-anthracite); font-weight: 500; transition: var(--transition); }
         .desktop-nav a.nav-link:hover { color: var(--color-gold); }
-        
-        /* Hamburger Menu Icon */
-        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-        .hamburger span { width: 25px; height: 3px; background-color: var(--color-dark-blue); border-radius: 3px; transition: var(--transition); }
-        
-        /* Mobile Menu Overlay */
-        .mobile-menu {
-            position: fixed; top: 70px; left: 100%; width: 100%; height: calc(100vh - 70px);
-            background: var(--color-white); z-index: 999; display: flex; flex-direction: column;
-            padding: 40px 5%; transition: var(--transition);
-        }
-        .mobile-menu.active { left: 0; }
-        .mobile-menu a { font-size: 1.5rem; margin-bottom: 20px; text-decoration: none; color: var(--color-dark-blue); font-family: var(--font-heading); font-weight: 600; }
-
-        /* --- BUTTONS --- */
-        .btn {
-            padding: 14px 28px; border-radius: var(--radius-button); font-family: var(--font-body); font-weight: 600;
-            text-decoration: none; transition: var(--transition); cursor: pointer; border: none; display: inline-block; text-align: center;
-        }
+        .btn { padding: 14px 28px; border-radius: var(--radius-button); font-family: var(--font-body); font-weight: 600; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; display: inline-block; text-align: center; }
         .btn-primary { background-color: var(--color-gold); color: var(--color-white); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5); }
-        .btn-white { background-color: var(--color-white); color: var(--color-dark-blue); }
+        .btn-outline { background: transparent; border: 2px solid var(--color-white); color: var(--color-white); }
+        .btn-outline:hover { background: var(--color-white); color: var(--color-dark-blue); }
 
-        /* --- HERO MIT HINTERGRUNDBILD --- */
+        /* --- WHATSAPP FLOATER --- */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--color-whatsapp); color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 15px rgba(37, 211, 102, 0.4); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: var(--transition); }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* --- HERO --- */
         .hero {
             position: relative; padding: 200px 5% 120px;
             background: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 90vh;
         }
-        /* Dunkles Overlay über dem Bild für Lesbarkeit */
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 25, 47, 0.7); z-index: 1; }
-        
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 25, 47, 0.75); z-index: 1; }
         .hero-content { position: relative; z-index: 2; color: var(--color-white); max-width: 900px; }
-        .hero-trust-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; color: var(--color-white); border: 1px solid rgba(255,255,255,0.2); margin-bottom: 30px; font-weight: 500; }
+        .hero-trust-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; color: var(--color-white); border: 1px solid rgba(255,255,255,0.2); margin-bottom: 30px; }
         .hero-trust-badge span { color: var(--color-gold); }
         .hero h1 { color: var(--color-white); font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 25px; }
         .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 40px; }
 
+        /* --- TRUST BAR --- */
+        .trust-bar { background: var(--color-white); padding: 40px 5%; display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(0,0,0,0.02); position: relative; z-index: 10; margin-top: -30px; border-radius: var(--radius-soft); max-width: 1200px; margin-left: auto; margin-right: auto; }
+        .trust-item { text-align: center; }
+        .trust-item h4 { font-size: 1.8rem; color: var(--color-gold); margin-bottom: 5px; }
+        .trust-item p { font-size: 0.9rem; font-weight: 500; color: var(--color-dark-blue); }
+
+        /* --- ÜBER DEN ARZT --- */
+        .about { padding: 100px 5%; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-text h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 20px; }
+        .about-text p { margin-bottom: 20px; font-size: 1.1rem; color: var(--color-anthracite); }
+        .about-image img { box-shadow: var(--shadow-premium); }
+
+        /* --- LEISTUNGEN --- */
+        .services { padding: 100px 5%; background-color: var(--color-white); }
+        .section-header { text-align: center; margin-bottom: 60px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .section-header h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 15px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .service-card { background: var(--color-ivory); border-radius: var(--radius-soft); overflow: hidden; box-shadow: var(--shadow-premium); padding: 40px; border: 1px solid rgba(10,25,47,0.03); transition: var(--transition); }
+        .service-card:hover { transform: translateY(-10px); background: var(--color-white); box-shadow: 0 20px 40px rgba(10,25,47,0.12); }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .service-card p { margin-bottom: 25px; }
+
+        /* --- REVIEWS --- */
+        .reviews { padding: 100px 5%; background: var(--color-dark-blue); color: var(--color-white); text-align: center; }
+        .reviews h2 { color: var(--color-white); margin-bottom: 50px; }
+        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .review-card { background: rgba(255,255,255,0.05); padding: 40px; border-radius: var(--radius-soft); border: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .stars { color: var(--color-gold); font-size: 1.2rem; margin-bottom: 15px; }
+
         /* --- TERMIN FORMULAR --- */
         .contact-section { padding: 100px 5%; background: var(--color-white); display: flex; justify-content: center; }
-        .form-wrapper { background: var(--color-ivory); padding: 50px; border-radius: var(--radius-soft); box-shadow: var(--shadow-premium); width: 100%; max-width: 800px; border: 1px solid rgba(0,0,0,0.03); }
+        .form-wrapper { background: var(--color-ivory); padding: 60px; border-radius: var(--radius-soft); box-shadow: var(--shadow-premium); width: 100%; max-width: 800px; border: 1px solid rgba(0,0,0,0.03); }
         .form-wrapper h2 { text-align: center; margin-bottom: 10px; }
-        .form-wrapper p { text-align: center; margin-bottom: 40px; color: var(--color-anthracite); }
-        
+        .form-wrapper p { text-align: center; margin-bottom: 40px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .input-group { display: flex; flex-direction: column; gap: 8px; }
         .input-group.full { grid-column: 1 / -1; }
-        
         label { font-size: 0.9rem; font-weight: 600; color: var(--color-dark-blue); }
-        input, select { padding: 15px; border: 1px solid rgba(10,25,47,0.1); border-radius: var(--radius-button); font-family: var(--font-body); font-size: 1rem; outline: none; transition: var(--transition); background: var(--color-white); }
+        input, select { padding: 15px; border: 1px solid rgba(10,25,47,0.1); border-radius: var(--radius-button); font-family: var(--font-body); font-size: 1rem; outline: none; transition: var(--transition); }
         input:focus, select:focus { border-color: var(--color-gold); box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2); }
-        
-        /* --- WHATSAPP FLOATER --- */
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--color-whatsapp); color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 15px rgba(37, 211, 102, 0.4); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: var(--transition); }
-        .whatsapp-float:hover { transform: scale(1.1); }
 
+        /* --- FOOTER --- */
+        footer { background: var(--color-dark-blue); color: rgba(255,255,255,0.7); padding: 50px 5%; text-align: center; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
+
+        @media (max-width: 900px) {
+            .about { grid-template-columns: 1fr; }
+            .about-image { order: -1; }
+        }
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
-            .hamburger { display: flex; }
             .form-grid { grid-template-columns: 1fr; }
+            .trust-bar { gap: 30px; }
+            .trust-item { width: 40%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- STICKY HEADER MIT HAMBURGER MENÜ -->
+    <!-- HEADER -->
     <header>
         <a href="#" class="logo">Dr. Avgerinos</a>
-        
         <nav class="desktop-nav">
+            <a href="#praxis" class="nav-link">Die Praxis</a>
             <a href="#leistungen" class="nav-link">Leistungen</a>
-            <a href="#praxis" class="nav-link">Praxis</a>
-            <div class="lang-switch" style="display:flex; gap:5px; font-size:0.9rem; font-weight:bold; color:var(--color-dark-blue);">
-                <a href="#" style="color:var(--color-gold); text-decoration:none;">DE</a> | <a href="#" style="color:var(--color-anthracite); text-decoration:none;">EN</a>
-            </div>
             <a href="#termin" class="btn btn-primary">Termin buchen</a>
         </nav>
-
-        <!-- Mobile Icon -->
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
     </header>
-
-    <!-- MOBILE MENÜ OVERLAY -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#leistungen" onclick="toggleMenu()">Behandlungen</a>
-        <a href="#praxis" onclick="toggleMenu()">Die Praxis</a>
-        <a href="#team" onclick="toggleMenu()">Team</a>
-        <a href="#termin" class="btn btn-primary" onclick="toggleMenu()">Jetzt Termin buchen</a>
-    </div>
 
     <!-- WHATSAPP -->
     <a href="https://wa.me/49123456789" class="whatsapp-float">💬</a>
 
-    <!-- MASSIVER HERO BEREICH MIT BILD & ANIMATION -->
+    <!-- HERO -->
     <section class="hero">
-        <div class="hero-content">
-            <div class="hero-trust-badge animate-fade-up">
-                <span>★★★★★</span> 4.9/5 auf Google (150+ Bewertungen)
+        <div class="hero-content reveal active">
+            <div class="hero-trust-badge">
+                <span>★★★★★</span> 4.9/5 auf Google
             </div>
-            <h1 class="animate-fade-up delay-1">Premium Zahnmedizin für ein perfektes Lächeln.</h1>
-            <p class="animate-fade-up delay-1">Erleben Sie zahnmedizinische Exzellenz in Essen. Spezialisiert auf Angstpatienten, Implantologie und hochästhetische Ergebnisse.</p>
-            <div class="hero-ctas animate-fade-up delay-2">
-                <a href="#termin" class="btn btn-primary" style="margin-right: 15px;">Termin vereinbaren</a>
-                <a href="#leistungen" class="btn btn-white">Behandlungen entdecken</a>
+            <h1>Premium Zahnmedizin für ein perfektes Lächeln.</h1>
+            <p>Erleben Sie zahnmedizinische Exzellenz. Spezialisiert auf Angstpatienten, Implantologie und hochästhetische Ergebnisse.</p>
+            <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+                <a href="#termin" class="btn btn-primary">Termin vereinbaren</a>
+                <a href="#leistungen" class="btn btn-outline">Behandlungen ansehen</a>
             </div>
         </div>
     </section>
 
-    <!-- NEU: KONTAKT / TERMIN FUNNEL -->
-    <section class="contact-section" id="termin">
+    <!-- TRUST BAR -->
+    <section class="trust-bar reveal">
+        <div class="trust-item"><h4>15+</h4><p>Jahre Erfahrung</p></div>
+        <div class="trust-item"><h4>100%</h4><p>Sanfte Methoden</p></div>
+        <div class="trust-item"><h4>3D</h4><p>Diagnostik-Zentrum</p></div>
+        <div class="trust-item"><h4>Meister</h4><p>Eigenes Labor</p></div>
+    </section>
+
+    <!-- ABOUT / PRAXIS -->
+    <section class="about reveal" id="praxis">
+        <div class="about-text">
+            <h2>Zahnmedizin ohne Angst. <br>Mit höchster Präzision.</h2>
+            <p>Wir wissen, dass der Weg zum Zahnarzt für viele Menschen mit Stress verbunden ist. Deshalb haben wir eine Praxis geschaffen, die sich nicht wie eine anfühlt.</p>
+            <p>Unter der Leitung von Dr. Stavros Avgerinos kombinieren wir modernste Hightech-Zahnmedizin mit echter menschlicher Wärme und Empathie. Wir hören Ihnen zu, bevor wir Sie behandeln.</p>
+            <a href="#termin" class="btn btn-primary" style="margin-top: 15px;">Lernen Sie uns kennen</a>
+        </div>
+        <div class="about-image">
+            <!-- Platzhalter Arzt/Praxis -->
+            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80" alt="Moderne Zahnarztpraxis">
+        </div>
+    </section>
+
+    <!-- LEISTUNGEN -->
+    <section class="services reveal" id="leistungen">
+        <div class="section-header">
+            <h2>Unsere Behandlungen</h2>
+            <p>Von der schmerzfreien Vorsorge bis zum kompletten Smile-Makeover.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Ästhetik & Veneers</h3>
+                <p>Hauchdünne Keramikschalen und sanftes Bleaching für ein strahlendes, natürliches Lächeln nach Hollywood-Standard.</p>
+                <a href="#termin" style="color:var(--color-gold); font-weight:600; text-decoration:none;">Mehr erfahren →</a>
+            </div>
+            <div class="service-card">
+                <h3>Zahnimplantate</h3>
+                <p>Fester Biss wie mit eigenen Zähnen. Wir planen computergestützt in 3D für maximale Sicherheit und schnelle Einheilung.</p>
+                <a href="#termin" style="color:var(--color-gold); font-weight:600; text-decoration:none;">Mehr erfahren →</a>
+            </div>
+            <div class="service-card">
+                <h3>Angstpatienten</h3>
+                <p>Sie haben Angst? Das ist völlig normal. Mit Dämmerschlaf, Lachgas und ganz viel Zeit nehmen wir Ihnen jeden Stress.</p>
+                <a href="#termin" style="color:var(--color-gold); font-weight:600; text-decoration:none;">Mehr erfahren →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="reviews reveal">
+        <h2>Das sagen unsere Patienten</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Ich war absoluter Angstpatient. Das Team hat mir komplett die Angst genommen. Habe absolut nichts gespürt!"</p>
+                <br><small>– Michael S.</small>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Habe meine Veneers hier machen lassen. Das Ergebnis ist unfassbar schön geworden. Absolute Empfehlung!"</p>
+                <br><small>– Elena K.</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- TERMIN FUNNEL -->
+    <section class="contact-section reveal" id="termin">
         <div class="form-wrapper">
             <h2>Starten Sie Ihre Behandlung</h2>
-            <p>Füllen Sie das kurze Formular aus. Wir melden uns umgehend bei Ihnen zurück.</p>
+            <p>Füllen Sie das kurze Formular aus. Wir melden uns umgehend zur Terminabstimmung.</p>
             
-            <form action="#" method="POST" class="form-grid">
+            <form action="#" class="form-grid">
                 <div class="input-group">
                     <label>Vorname</label>
-                    <input type="text" placeholder="Ihr Vorname" required>
+                    <input type="text" required>
                 </div>
                 <div class="input-group">
                     <label>Nachname</label>
-                    <input type="text" placeholder="Ihr Nachname" required>
+                    <input type="text" required>
                 </div>
                 <div class="input-group full">
                     <label>Telefonnummer (für Rückruf)</label>
-                    <input type="tel" placeholder="Ihre Handynummer" required>
+                    <input type="tel" required>
                 </div>
                 <div class="input-group full">
                     <label>Wofür interessieren Sie sich?</label>
                     <select required>
                         <option value="" disabled selected>Bitte auswählen...</option>
-                        <option value="kontrolle">Allgemeine Kontrolle / Schmerzen</option>
-                        <option value="angst">Beratung für Angstpatienten</option>
-                        <option value="implantate">Zahnimplantate</option>
+                        <option value="kontrolle">Kontrolle / Schmerzen</option>
+                        <option value="angst">Angstpatienten-Beratung</option>
+                        <option value="implantate">Implantate</option>
                         <option value="aesthetik">Ästhetik (Veneers, Bleaching)</option>
                     </select>
                 </div>
@@ -204,12 +258,28 @@
         </div>
     </section>
 
-    <!-- EINFACHES JAVASCRIPT FÜR DAS MOBILE MENÜ -->
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Dr. Stavros Avgerinos | Zahnmedizin auf höchstem Niveau in Essen.</p>
+        <p style="margin-top: 10px;"><a href="#" style="color:var(--color-gold); text-decoration:none;">Impressum</a> | <a href="#" style="color:var(--color-gold); text-decoration:none;">Datenschutz</a></p>
+    </footer>
+
+    <!-- JAVASCRIPT: Scroll Animation (Einblend-Effekt) -->
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
         }
+        window.addEventListener("scroll", reveal);
+        // Einmal beim Start ausführen, damit Elemente im sichtbaren Bereich direkt laden
+        reveal();
     </script>
 
 </body>
