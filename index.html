@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Stavros Avgerinos | Premium Zahnmedizin & Implantologie in Essen</title>
-    <meta name="description" content="Moderne Zahnmedizin auf höchstem Niveau. Schmerzfreie Behandlungen, Implantate und Ästhetik bei Dr. Stavros Avgerinos. Jetzt online Termin sichern.">
+    <title>Dr. Stavros Avgerinos | Premium Zahnmedizin Essen</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +17,6 @@
             --color-dark-blue: #0A192F;
             --color-anthracite: #333333;
             --color-gold: #D4AF37;
-            --color-soft-cyan: #E0F7FA;
             --color-whatsapp: #25D366;
             
             --font-heading: 'Outfit', sans-serif;
@@ -27,226 +25,192 @@
             --radius-soft: 16px;
             --radius-button: 8px;
             --shadow-premium: 0 10px 30px rgba(10, 25, 47, 0.08);
-            --shadow-hover: 0 20px 40px rgba(10, 25, 47, 0.15);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-body); color: var(--color-anthracite); background-color: var(--color-ivory); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--color-dark-blue); line-height: 1.2; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--color-anthracite); background-color: var(--color-ivory); line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3 { font-family: var(--font-heading); color: var(--color-dark-blue); line-height: 1.2; }
         img { max-width: 100%; height: auto; display: block; }
 
-        /* --- HEADER & SPRACHAUSWAHL --- */
+        /* --- ANIMATIONS --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fadeUp 0.8s ease forwards; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        /* --- HEADER & NAVIGATION --- */
         header {
             position: fixed; top: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px); z-index: 1000;
-            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            z-index: 1000; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
         }
         .logo { font-family: var(--font-heading); font-weight: 700; font-size: 1.5rem; color: var(--color-dark-blue); text-decoration: none; }
-        .header-right { display: flex; align-items: center; gap: 20px; }
         
-        .lang-switch { display: flex; gap: 8px; font-size: 0.9rem; font-weight: 500; }
-        .lang-switch a { color: var(--color-anthracite); text-decoration: none; transition: var(--transition); opacity: 0.6; }
-        .lang-switch a:hover, .lang-switch a.active { color: var(--color-dark-blue); opacity: 1; font-weight: 600; }
-        .lang-switch span { opacity: 0.3; }
+        /* Desktop Nav */
+        .desktop-nav { display: flex; align-items: center; gap: 30px; }
+        .desktop-nav a.nav-link { text-decoration: none; color: var(--color-anthracite); font-weight: 500; transition: var(--transition); }
+        .desktop-nav a.nav-link:hover { color: var(--color-gold); }
+        
+        /* Hamburger Menu Icon */
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .hamburger span { width: 25px; height: 3px; background-color: var(--color-dark-blue); border-radius: 3px; transition: var(--transition); }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed; top: 70px; left: 100%; width: 100%; height: calc(100vh - 70px);
+            background: var(--color-white); z-index: 999; display: flex; flex-direction: column;
+            padding: 40px 5%; transition: var(--transition);
+        }
+        .mobile-menu.active { left: 0; }
+        .mobile-menu a { font-size: 1.5rem; margin-bottom: 20px; text-decoration: none; color: var(--color-dark-blue); font-family: var(--font-heading); font-weight: 600; }
 
         /* --- BUTTONS --- */
         .btn {
-            padding: 12px 24px; border-radius: var(--radius-button); font-family: var(--font-body);
-            font-weight: 500; text-decoration: none; transition: var(--transition); cursor: pointer;
-            border: none; display: inline-block; text-align: center;
+            padding: 14px 28px; border-radius: var(--radius-button); font-family: var(--font-body); font-weight: 600;
+            text-decoration: none; transition: var(--transition); cursor: pointer; border: none; display: inline-block; text-align: center;
         }
-        .btn-primary { background-color: var(--color-gold); color: var(--color-dark-blue); font-weight: 600; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); }
-        
-        /* --- STICKY WHATSAPP --- */
-        .whatsapp-float {
-            position: fixed; bottom: 30px; right: 30px;
-            width: 60px; height: 60px; background-color: var(--color-whatsapp);
-            color: #FFF; border-radius: 50px; text-align: center;
-            font-size: 30px; box-shadow: 2px 2px 15px rgba(37, 211, 102, 0.4);
-            z-index: 100; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; transition: var(--transition);
-        }
-        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 2px 2px 20px rgba(37, 211, 102, 0.6); }
+        .btn-primary { background-color: var(--color-gold); color: var(--color-white); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5); }
+        .btn-white { background-color: var(--color-white); color: var(--color-dark-blue); }
 
-        /* --- HERO SECTION --- */
-        .hero { padding: 160px 5% 80px; background: linear-gradient(135deg, var(--color-white) 0%, var(--color-ivory) 100%); display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .hero-trust-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--color-white); padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; color: var(--color-dark-blue); box-shadow: var(--shadow-premium); margin-bottom: 30px; font-weight: 500; cursor: pointer; transition: var(--transition); }
-        .hero-trust-badge:hover { transform: translateY(-2px); }
+        /* --- HERO MIT HINTERGRUNDBILD --- */
+        .hero {
+            position: relative; padding: 200px 5% 120px;
+            background: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 90vh;
+        }
+        /* Dunkles Overlay über dem Bild für Lesbarkeit */
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 25, 47, 0.7); z-index: 1; }
+        
+        .hero-content { position: relative; z-index: 2; color: var(--color-white); max-width: 900px; }
+        .hero-trust-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; color: var(--color-white); border: 1px solid rgba(255,255,255,0.2); margin-bottom: 30px; font-weight: 500; }
         .hero-trust-badge span { color: var(--color-gold); }
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; max-width: 800px; }
-        .hero p { font-size: 1.125rem; color: var(--color-anthracite); max-width: 600px; margin-bottom: 40px; }
-        .hero-ctas { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .hero h1 { color: var(--color-white); font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 25px; }
+        .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 40px; }
 
-        /* --- LEISTUNGEN (KLICKBAR) --- */
-        .services { padding: 100px 5%; background-color: var(--color-white); }
-        .section-header { text-align: center; margin-bottom: 60px; max-width: 700px; margin: 0 auto 60px; }
-        .section-header h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 15px; }
+        /* --- TERMIN FORMULAR --- */
+        .contact-section { padding: 100px 5%; background: var(--color-white); display: flex; justify-content: center; }
+        .form-wrapper { background: var(--color-ivory); padding: 50px; border-radius: var(--radius-soft); box-shadow: var(--shadow-premium); width: 100%; max-width: 800px; border: 1px solid rgba(0,0,0,0.03); }
+        .form-wrapper h2 { text-align: center; margin-bottom: 10px; }
+        .form-wrapper p { text-align: center; margin-bottom: 40px; color: var(--color-anthracite); }
         
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .service-card { background: var(--color-ivory); border-radius: var(--radius-soft); overflow: hidden; box-shadow: var(--shadow-premium); transition: var(--transition); cursor: pointer; border: 1px solid rgba(10,25,47,0.03); }
-        .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); background: var(--color-white); }
-        .service-img-wrapper { height: 200px; overflow: hidden; }
-        .service-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .service-card:hover .service-img-wrapper img { transform: scale(1.05); }
-        .service-content { padding: 25px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-group.full { grid-column: 1 / -1; }
         
-        /* Interactive Tags */
-        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
-        .tag { background: var(--color-white); border: 1px solid rgba(10,25,47,0.1); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; color: var(--color-dark-blue); transition: var(--transition); }
-        .service-card:hover .tag { border-color: var(--color-gold); }
-        .tag:hover { background: var(--color-dark-blue); color: var(--color-white); }
-
-        /* --- REVIEWS --- */
-        .reviews { padding: 80px 5%; background: var(--color-dark-blue); color: var(--color-white); }
-        .reviews h2 { color: var(--color-white); text-align: center; margin-bottom: 50px; }
-        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .review-card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: var(--radius-soft); border: 1px solid rgba(255,255,255,0.1); transition: var(--transition); cursor: pointer; }
-        .review-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); }
-        .stars { color: var(--color-gold); font-size: 1.2rem; margin-bottom: 15px; }
+        label { font-size: 0.9rem; font-weight: 600; color: var(--color-dark-blue); }
+        input, select { padding: 15px; border: 1px solid rgba(10,25,47,0.1); border-radius: var(--radius-button); font-family: var(--font-body); font-size: 1rem; outline: none; transition: var(--transition); background: var(--color-white); }
+        input:focus, select:focus { border-color: var(--color-gold); box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2); }
         
-        /* --- INTERACTIVE FAQ --- */
-        .faq-section { padding: 100px 5%; max-width: 800px; margin: 0 auto; }
-        .faq-item { background: var(--color-white); margin-bottom: 15px; border-radius: var(--radius-button); box-shadow: 0 4px 10px rgba(0,0,0,0.03); overflow: hidden; }
-        .faq-question { padding: 20px; font-family: var(--font-heading); font-weight: 600; color: var(--color-dark-blue); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
-        .faq-question:hover { color: var(--color-gold); }
-        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; color: var(--color-anthracite); }
-        /* Simple Hack for interactive CSS only accordion (for prototype) */
-        .faq-item.active .faq-answer { padding: 0 20px 20px; max-height: 200px; }
-        .faq-item.active .faq-question::after { transform: rotate(45deg); }
-        .faq-question::after { content: '+'; font-size: 1.5rem; transition: transform 0.3s ease; }
+        /* --- WHATSAPP FLOATER --- */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--color-whatsapp); color: #FFF; border-radius: 50px; text-align: center; font-size: 30px; box-shadow: 2px 2px 15px rgba(37, 211, 102, 0.4); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: var(--transition); }
+        .whatsapp-float:hover { transform: scale(1.1); }
 
         @media (max-width: 768px) {
-            .lang-switch { display: none; } /* On mobile, hide or move to hamburger menu */
-            .header-right .btn { padding: 10px 16px; font-size: 0.9rem; }
+            .desktop-nav { display: none; }
+            .hamburger { display: flex; }
+            .form-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER MIT SPRACHWECHSLER -->
+    <!-- STICKY HEADER MIT HAMBURGER MENÜ -->
     <header>
-        <a href="/" class="logo">Dr. Avgerinos</a>
-        <div class="header-right">
-            <div class="lang-switch">
-                <a href="#" class="active">DE</a> <span>|</span>
-                <a href="#">EN</a> <span>|</span>
-                <a href="#">GR</a>
+        <a href="#" class="logo">Dr. Avgerinos</a>
+        
+        <nav class="desktop-nav">
+            <a href="#leistungen" class="nav-link">Leistungen</a>
+            <a href="#praxis" class="nav-link">Praxis</a>
+            <div class="lang-switch" style="display:flex; gap:5px; font-size:0.9rem; font-weight:bold; color:var(--color-dark-blue);">
+                <a href="#" style="color:var(--color-gold); text-decoration:none;">DE</a> | <a href="#" style="color:var(--color-anthracite); text-decoration:none;">EN</a>
             </div>
             <a href="#termin" class="btn btn-primary">Termin buchen</a>
+        </nav>
+
+        <!-- Mobile Icon -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </header>
 
-    <!-- WHATSAPP FLOATING BUTTON -->
-    <a href="https://wa.me/49123456789" class="whatsapp-float" target="_blank" title="Fragen? Schreiben Sie uns auf WhatsApp">
-        💬
-    </a>
+    <!-- MOBILE MENÜ OVERLAY -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#leistungen" onclick="toggleMenu()">Behandlungen</a>
+        <a href="#praxis" onclick="toggleMenu()">Die Praxis</a>
+        <a href="#team" onclick="toggleMenu()">Team</a>
+        <a href="#termin" class="btn btn-primary" onclick="toggleMenu()">Jetzt Termin buchen</a>
+    </div>
 
-    <!-- HERO -->
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/49123456789" class="whatsapp-float">💬</a>
+
+    <!-- MASSIVER HERO BEREICH MIT BILD & ANIMATION -->
     <section class="hero">
-        <a href="#reviews" class="hero-trust-badge">
-            <span>★★★★★</span> 4.9/5 auf Google (150+ Bewertungen)
-        </a>
-        <h1>Moderne Zahnmedizin auf höchstem Niveau.</h1>
-        <p>Schmerzfrei, technologisch führend und mit Fokus auf perfekte Ästhetik. Wir nehmen uns Zeit für Sie – besonders, wenn Sie Angst vor dem Zahnarzt haben.</p>
-        <div class="hero-ctas">
-            <a href="#termin" class="btn btn-primary">Jetzt Termin vereinbaren</a>
+        <div class="hero-content">
+            <div class="hero-trust-badge animate-fade-up">
+                <span>★★★★★</span> 4.9/5 auf Google (150+ Bewertungen)
+            </div>
+            <h1 class="animate-fade-up delay-1">Premium Zahnmedizin für ein perfektes Lächeln.</h1>
+            <p class="animate-fade-up delay-1">Erleben Sie zahnmedizinische Exzellenz in Essen. Spezialisiert auf Angstpatienten, Implantologie und hochästhetische Ergebnisse.</p>
+            <div class="hero-ctas animate-fade-up delay-2">
+                <a href="#termin" class="btn btn-primary" style="margin-right: 15px;">Termin vereinbaren</a>
+                <a href="#leistungen" class="btn btn-white">Behandlungen entdecken</a>
+            </div>
         </div>
     </section>
 
-    <!-- LEISTUNGEN MIT INTERAKTIVEN TAGS -->
-    <section class="services" id="leistungen">
-        <div class="section-header">
-            <h2>Behandlungen entdecken</h2>
-            <p>Klicken Sie auf einen Bereich, um mehr über unsere spezialisierten Methoden zu erfahren.</p>
-        </div>
-
-        <div class="services-grid">
-            <div class="service-card" onclick="location.href='#aesthetik';">
-                <div class="service-img-wrapper"><img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=600&q=80" alt="Ästhetik"></div>
-                <div class="service-content">
-                    <h3>Ästhetische Zahnmedizin</h3>
-                    <p>Ihr perfektes Lächeln durch modernste, minimalinvasive Verfahren.</p>
-                    <div class="tags">
-                        <span class="tag">Veneers</span>
-                        <span class="tag">Bleaching</span>
-                        <span class="tag">Invisalign®</span>
-                    </div>
+    <!-- NEU: KONTAKT / TERMIN FUNNEL -->
+    <section class="contact-section" id="termin">
+        <div class="form-wrapper">
+            <h2>Starten Sie Ihre Behandlung</h2>
+            <p>Füllen Sie das kurze Formular aus. Wir melden uns umgehend bei Ihnen zurück.</p>
+            
+            <form action="#" method="POST" class="form-grid">
+                <div class="input-group">
+                    <label>Vorname</label>
+                    <input type="text" placeholder="Ihr Vorname" required>
                 </div>
-            </div>
-
-            <div class="service-card" onclick="location.href='#implantate';">
-                <div class="service-img-wrapper"><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=600&q=80" alt="Implantate"></div>
-                <div class="service-content">
-                    <h3>Zahnimplantate</h3>
-                    <p>Fester Biss und natürliche Optik dank präziser 3D-Planung.</p>
-                    <div class="tags">
-                        <span class="tag">3D-Diagnostik</span>
-                        <span class="tag">Sofortimplantate</span>
-                        <span class="tag">Knochenaufbau</span>
-                    </div>
+                <div class="input-group">
+                    <label>Nachname</label>
+                    <input type="text" placeholder="Ihr Nachname" required>
                 </div>
-            </div>
-
-            <div class="service-card" onclick="location.href='#angst';">
-                <div class="service-img-wrapper"><img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80" alt="Angstpatienten"></div>
-                <div class="service-content">
-                    <h3>Für Angstpatienten</h3>
-                    <p>Kein Stress, keine Schmerzen. Wir behandeln Sie in völliger Ruhe.</p>
-                    <div class="tags">
-                        <span class="tag">Lachgas</span>
-                        <span class="tag">Dämmerschlaf</span>
-                        <span class="tag">Vollnarkose</span>
-                    </div>
+                <div class="input-group full">
+                    <label>Telefonnummer (für Rückruf)</label>
+                    <input type="tel" placeholder="Ihre Handynummer" required>
                 </div>
-            </div>
+                <div class="input-group full">
+                    <label>Wofür interessieren Sie sich?</label>
+                    <select required>
+                        <option value="" disabled selected>Bitte auswählen...</option>
+                        <option value="kontrolle">Allgemeine Kontrolle / Schmerzen</option>
+                        <option value="angst">Beratung für Angstpatienten</option>
+                        <option value="implantate">Zahnimplantate</option>
+                        <option value="aesthetik">Ästhetik (Veneers, Bleaching)</option>
+                    </select>
+                </div>
+                <div class="input-group full" style="margin-top: 10px;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Jetzt Anfrage senden</button>
+                </div>
+            </form>
         </div>
     </section>
 
-    <!-- REVIEWS / SOCIAL PROOF -->
-    <section class="reviews" id="reviews">
-        <h2>Das sagen unsere Patienten</h2>
-        <div class="review-grid">
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p>"Ich war absoluter Angstpatient. Dr. Avgerinos und sein Team haben mir komplett die Angst genommen. Habe nichts gespürt!"</p>
-                <br><small>– Michael S. (Google Bewertung)</small>
-            </div>
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p>"Habe meine Veneers hier machen lassen. Das Ergebnis ist unfassbar schön und natürlich geworden. Absolute Empfehlung!"</p>
-                <br><small>– Elena K. (Google Bewertung)</small>
-            </div>
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p>"Sehr moderne Praxis, kaum Wartezeiten und eine sehr ausführliche Beratung. Man fühlt sich hier wirklich als Premium-Patient."</p>
-                <br><small>– Thomas M. (Google Bewertung)</small>
-            </div>
-        </div>
-    </section>
-
-    <!-- KLICKBARE FAQs (Interaktiv mit kleinem Script) -->
-    <section class="faq-section" id="faq">
-        <div class="section-header">
-            <h2>Häufige Fragen</h2>
-        </div>
-        
-        <div class="faq-item" onclick="this.classList.toggle('active')">
-            <div class="faq-question">Nehmen Sie neue Patienten an?</div>
-            <div class="faq-answer"><p>Ja, wir freuen uns immer über neue Patienten. Sie können Ihren ersten Termin zur Beratung ganz bequem online oder telefonisch vereinbaren.</p></div>
-        </div>
-        <div class="faq-item" onclick="this.classList.toggle('active')">
-            <div class="faq-question">Wie läuft die Behandlung für Angstpatienten ab?</div>
-            <div class="faq-answer"><p>Wir nehmen uns zunächst viel Zeit für ein Gespräch außerhalb des Behandlungsstuhls. Danach besprechen wir schonende Methoden wie Lachgas oder Dämmerschlaf.</p></div>
-        </div>
-        <div class="faq-item" onclick="this.classList.toggle('active')">
-            <div class="faq-question">Bieten Sie Ratenzahlung für Implantate / Ästhetik an?</div>
-            <div class="faq-answer"><p>Ja, wir arbeiten mit externen Finanzierungspartnern zusammen, um Ihnen bequeme und flexible Ratenzahlungen (oftmals zinsfrei bis zu 6 Monaten) anzubieten.</p></div>
-        </div>
-    </section>
+    <!-- EINFACHES JAVASCRIPT FÜR DAS MOBILE MENÜ -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
 
 </body>
 </html>
