@@ -4,265 +4,383 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DEKAR RAIL Bottrop | Gleisbau & Sicherungsposten</title>
+<title>DEKAR RAIL Bottrop</title>
 
-<meta name="description" content="DEKAR RAIL Bottrop – Professionelle Gleisbausicherung, Sicherungsposten, Bahnservice und Baustellensicherung deutschlandweit. Schnell, zuverlässig & zertifiziert.">
+<meta name="description" content="DEKAR RAIL Bottrop – Professionelle Gleisbausicherung, Bahnservice und Sicherungsposten deutschlandweit.">
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#f4f4f4;
-    color:#222;
-    line-height:1.6;
+    background:#111;
+    color:white;
 }
 
-/* HEADER */
-header{
-    background:linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)),
-    url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=1600&auto=format&fit=crop');
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.85);
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:999;
+}
+
+nav h1{
+    color:#ffd000;
+    font-size:28px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#ffd000;
+}
+
+/* HERO */
+
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.7)),
+    url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=1600&auto=format&fit=crop');
+
     background-size:cover;
     background-position:center;
-    color:white;
-    padding:120px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     text-align:center;
+    padding:20px;
 }
 
-header h1{
-    font-size:60px;
+.hero-content h2{
+    font-size:70px;
+    color:#ffd000;
     margin-bottom:20px;
+    text-shadow:3px 3px 10px black;
 }
 
-header p{
-    font-size:24px;
-    margin-bottom:30px;
+.hero-content p{
+    font-size:28px;
+    margin-bottom:35px;
 }
 
 .btn{
     display:inline-block;
-    padding:15px 35px;
-    background:#ffcc00;
-    color:#000;
+    padding:18px 40px;
+    background:#ffd000;
+    color:black;
     text-decoration:none;
     font-weight:bold;
-    border-radius:8px;
-    transition:.3s;
+    border-radius:10px;
+    transition:0.3s;
 }
 
 .btn:hover{
-    background:#fff;
+    background:white;
     transform:scale(1.05);
 }
 
 /* SECTION */
+
 section{
-    padding:70px 20px;
+    padding:100px 25px;
+}
+
+.container{
     max-width:1200px;
     margin:auto;
 }
 
-h2{
+h3{
     text-align:center;
-    margin-bottom:40px;
-    font-size:40px;
-    color:#111;
+    font-size:45px;
+    color:#ffd000;
+    margin-bottom:60px;
 }
 
 /* SERVICES */
+
 .services{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
+    gap:30px;
 }
 
 .card{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-    transition:.3s;
+    background:#1d1d1d;
+    padding:35px;
+    border-radius:20px;
+    transition:0.3s;
+    border:2px solid transparent;
 }
 
 .card:hover{
-    transform:translateY(-8px);
+    transform:translateY(-10px);
+    border:2px solid #ffd000;
 }
 
-.card h3{
+.card h4{
+    color:#ffd000;
     margin-bottom:15px;
-    color:#ff9900;
+    font-size:24px;
+}
+
+/* IMAGE SECTION */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.gallery img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    border-radius:15px;
+    transition:0.3s;
+}
+
+.gallery img:hover{
+    transform:scale(1.03);
 }
 
 /* ABOUT */
+
 .about{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    align-items:center;
+    background:#181818;
+    border-radius:20px;
+    padding:50px;
+    text-align:center;
 }
 
-.about img{
-    width:100%;
-    border-radius:12px;
+.about p{
+    font-size:20px;
+    line-height:1.8;
 }
 
 /* CONTACT */
-.contact{
-    background:#111;
-    color:white;
-    border-radius:15px;
-    text-align:center;
-    padding:50px;
-}
 
-.contact h2{
-    color:white;
+.contact{
+    text-align:center;
 }
 
 .contact p{
+    font-size:22px;
     margin:15px 0;
-    font-size:20px;
 }
 
 /* FOOTER */
+
 footer{
-    background:#000;
-    color:#aaa;
+    background:black;
     text-align:center;
-    padding:20px;
-    margin-top:40px;
+    padding:30px;
+    color:#999;
 }
 
 /* MOBILE */
+
 @media(max-width:768px){
 
-header h1{
-    font-size:40px;
+.hero-content h2{
+    font-size:45px;
 }
 
-header p{
-    font-size:18px;
+.hero-content p{
+    font-size:20px;
 }
 
-.about{
-    grid-template-columns:1fr;
+nav{
+    flex-direction:column;
+}
+
+nav div{
+    margin-top:10px;
 }
 
 }
+
 </style>
 </head>
-
 <body>
 
-<header>
+<!-- NAVBAR -->
+
+<nav>
     <h1>DEKAR RAIL</h1>
-    <p>Gleisbau • Sicherungsposten • Bahnservice</p>
-
-    <a href="#kontakt" class="btn">Jetzt Auftrag anfragen</a>
-</header>
-
-<section>
-    <h2>Unsere Leistungen</h2>
-
-    <div class="services">
-
-        <div class="card">
-            <h3>Gleisbausicherung</h3>
-            <p>
-                Professionelle Sicherung von Baustellen im Bahnverkehr –
-                zuverlässig, schnell und deutschlandweit.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>Sicherungsposten</h3>
-            <p>
-                Erfahrene Sicherungsposten für maximale Sicherheit
-                auf jeder Baustelle.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>24/7 Einsatzbereit</h3>
-            <p>
-                Tag- und Nachtschichten, Wochenenden und kurzfristige Einsätze.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>Deutschlandweit</h3>
-            <p>
-                Einsätze in ganz Deutschland für Bahnunternehmen,
-                Gleisbaufirmen und Industrie.
-            </p>
-        </div>
-
-    </div>
-</section>
-
-<section class="about">
 
     <div>
-        <h2>Warum DEKAR RAIL?</h2>
-
-        <p>
-            DEKAR RAIL aus Bottrop steht für professionelle Gleisbausicherung,
-            Zuverlässigkeit und schnelle Einsatzbereitschaft.
-        </p>
-
-        <br>
-
-        <p>
-            Unser Team arbeitet präzise, verantwortungsvoll und nach höchsten
-            Sicherheitsstandards im Bahnbereich.
-        </p>
-
-        <br>
-
-        <p>
-            ✔ Zertifiziert <br>
-            ✔ Pünktlich <br>
-            ✔ Flexibel <br>
-            ✔ Starkes Team
-        </p>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#bilder">Bilder</a>
+        <a href="#kontakt">Kontakt</a>
     </div>
+</nav>
 
-    <div>
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop" alt="Gleisbau">
-    </div>
+<!-- HERO -->
 
-</section>
+<section class="hero">
 
-<section id="kontakt">
+    <div class="hero-content">
 
-    <div class="contact">
+        <h2>DEKAR RAIL</h2>
 
-        <h2>Kontakt</h2>
+        <p>
+            Gleisbausicherung • Bahnservice • Sicherungsposten
+        </p>
 
-        <p><strong>DEKAR RAIL Bottrop</strong></p>
-
-        <p>📞 Telefon: +49 000 000000</p>
-
-        <p>📧 E-Mail: info@dekarrail.de</p>
-
-        <p>📍 Bottrop, Deutschland</p>
-
-        <br>
-
-        <a href="mailto:info@dekarrail.de" class="btn">
-            Jetzt Anfrage senden
+        <a href="#kontakt" class="btn">
+            Jetzt Auftrag anfragen
         </a>
 
     </div>
 
 </section>
 
+<!-- SERVICES -->
+
+<section id="leistungen">
+
+<div class="container">
+
+<h3>Unsere Leistungen</h3>
+
+<div class="services">
+
+<div class="card">
+<h4>🚧 Gleisbausicherung</h4>
+<p>
+Professionelle Absicherung von Baustellen im Bahnverkehr.
+</p>
+</div>
+
+<div class="card">
+<h4>🚆 Sicherungsposten</h4>
+<p>
+Erfahrenes Personal für sichere Arbeiten an Bahngleisen.
+</p>
+</div>
+
+<div class="card">
+<h4>⚡ 24/7 Einsatz</h4>
+<p>
+Tag- und Nachtschichten deutschlandweit verfügbar.
+</p>
+</div>
+
+<div class="card">
+<h4>🦺 Sicherheitsservice</h4>
+<p>
+Sicherheit nach höchsten Standards im Bahnbereich.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BILDER -->
+
+<section id="bilder">
+
+<div class="container">
+
+<h3>Unsere Arbeit</h3>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=1200&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=1200&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=1200&auto=format&fit=crop">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section>
+
+<div class="container">
+
+<div class="about">
+
+<h3>Warum DEKAR RAIL?</h3>
+
+<p>
+DEKAR RAIL Bottrop steht für Zuverlässigkeit, Sicherheit und schnelle Einsatzbereitschaft im gesamten Bahn- und Gleisbau.
+<br><br>
+Unser Team arbeitet professionell, flexibel und deutschlandweit für Gleisbaufirmen und Bahnunternehmen.
+<br><br>
+✔ Zertifiziert<br>
+✔ Flexibel<br>
+✔ Deutschlandweit<br>
+✔ Starkes Team
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- KONTAKT -->
+
+<section id="kontakt">
+
+<div class="container">
+
+<div class="contact">
+
+<h3>Kontakt</h3>
+
+<p>📍 Bottrop, Deutschland</p>
+<p>📞 +49 000 000000</p>
+<p>📧 info@dekarrail.de</p>
+
+<br>
+
+<a class="btn" href="mailto:info@dekarrail.de">
+Jetzt Kontakt aufnehmen
+</a>
+
+</div>
+
+</div>
+
+</section>
+
 <footer>
-    © 2025 DEKAR RAIL Bottrop – Alle Rechte vorbehalten
+© 2025 DEKAR RAIL Bottrop – Alle Rechte vorbehalten
 </footer>
 
 </body>
