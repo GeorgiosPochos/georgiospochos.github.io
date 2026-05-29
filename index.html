@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO Meta Tags -->
     <title>Dr. Stavros Avgerinos | Premium Zahnmedizin & Implantologie in Essen</title>
     <meta name="description" content="Moderne Zahnmedizin auf höchstem Niveau. Schmerzfreie Behandlungen, Implantate und Ästhetik bei Dr. Stavros Avgerinos. Jetzt online Termin sichern.">
     
-    <!-- Preload Fonts (Performance) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
@@ -26,9 +24,10 @@
             --font-heading: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
             
-            --radius-soft: 12px;
+            --radius-soft: 16px;
             --radius-button: 8px;
             --shadow-premium: 0 10px 30px rgba(10, 25, 47, 0.08);
+            --shadow-hover: 0 20px 40px rgba(10, 25, 47, 0.12);
         }
 
         /* --- RESET & BASE --- */
@@ -45,13 +44,14 @@
             color: var(--color-dark-blue);
             line-height: 1.2;
         }
+        img { max-width: 100%; height: auto; display: block; }
 
-        /* --- STICKY HEADER (Glassmorphism) --- */
+        /* --- STICKY HEADER --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 15px 5%;
@@ -67,13 +67,9 @@
             color: var(--color-dark-blue);
             text-decoration: none;
         }
-        .header-actions {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
+        .header-actions { display: flex; gap: 15px; align-items: center; }
 
-        /* --- BUTTONS (Conversion) --- */
+        /* --- BUTTONS --- */
         .btn {
             padding: 12px 24px;
             border-radius: var(--radius-button);
@@ -84,6 +80,7 @@
             cursor: pointer;
             border: none;
             display: inline-block;
+            text-align: center;
         }
         .btn-primary {
             background-color: var(--color-gold);
@@ -105,15 +102,14 @@
             color: var(--color-white);
         }
 
-        /* --- HERO SECTION (Above the Fold) --- */
+        /* --- HERO SECTION --- */
         .hero {
-            padding: 150px 5% 80px;
+            padding: 160px 5% 80px;
             background: linear-gradient(135deg, var(--color-white) 0%, var(--color-ivory) 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            min-height: 90vh;
         }
         .hero-trust-badge {
             display: flex;
@@ -129,24 +125,10 @@
             font-weight: 500;
         }
         .hero-trust-badge span { color: var(--color-gold); }
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 20px;
-            max-width: 800px;
-        }
-        .hero p {
-            font-size: 1.125rem;
-            color: var(--color-anthracite);
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-        .hero-ctas {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 60px;
-        }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; max-width: 800px; }
+        .hero p { font-size: 1.125rem; color: var(--color-anthracite); max-width: 600px; margin-bottom: 40px; }
+        .hero-ctas { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 60px; }
+        
         .trust-bar {
             display: flex;
             gap: 40px;
@@ -157,55 +139,130 @@
             width: 100%;
             max-width: 1000px;
         }
-        .trust-item {
+        .trust-item { text-align: center; }
+        .trust-item h4 { font-size: 1.5rem; margin-bottom: 5px; }
+        .trust-item p { font-size: 0.9rem; margin-bottom: 0; }
+
+        /* --- LEISTUNGEN (SERVICES) SECTION --- */
+        .services {
+            padding: 100px 5%;
+            background-color: var(--color-white);
+        }
+        .section-header {
             text-align: center;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .trust-item h4 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 15px;
         }
-        .trust-item p {
-            font-size: 0.9rem;
-            margin-bottom: 0;
+        .section-header p {
+            color: var(--color-anthracite);
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--color-white);
+            border-radius: var(--radius-soft);
+            overflow: hidden;
+            box-shadow: var(--shadow-premium);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(10, 25, 47, 0.03);
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        .service-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+        .service-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .service-card:hover .service-img-wrapper img {
+            transform: scale(1.05);
+        }
+        .service-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .service-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        .service-content p {
+            font-size: 0.95rem;
+            color: var(--color-anthracite);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .service-link {
+            color: var(--color-dark-blue);
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+        }
+        .service-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover .service-link::after {
+            transform: translateX(5px);
         }
 
         /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 768px) {
             .hero-ctas { flex-direction: column; width: 100%; }
-            .btn { width: 100%; text-align: center; }
+            .btn { width: 100%; }
             .trust-bar { gap: 20px; }
             .trust-item { width: 45%; }
+            .services { padding: 60px 5%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- STICKY HEADER -->
     <header>
         <a href="/" class="logo">Dr. Avgerinos</a>
         <div class="header-actions">
-            <!-- Mobile versteckter Text, sichtbares Icon -->
-            <a href="tel:+49123456789" class="btn btn-secondary" style="display: none;">☎ 0201 123456</a>
             <a href="#termin" class="btn btn-primary">Termin buchen</a>
         </div>
     </header>
 
-    <!-- HERO SECTION (Konversion & Vertrauen innerhalb von 5 Sek.) -->
     <section class="hero">
-        
         <div class="hero-trust-badge">
             <span>★★★★★</span> 4.9/5 auf Google (150+ Bewertungen)
         </div>
-
         <h1>Moderne Zahnmedizin auf höchstem Niveau.</h1>
         <p>Schmerzfrei, technologisch führend und mit Fokus auf perfekte Ästhetik. Wir nehmen uns Zeit für Sie – besonders, wenn Sie Angst vor dem Zahnarzt haben.</p>
-
         <div class="hero-ctas">
             <a href="#termin" class="btn btn-primary">Jetzt Termin vereinbaren</a>
             <a href="#beratung" class="btn btn-secondary">Kostenlose Beratung anfragen</a>
         </div>
-
-        <!-- Trust Metriken unter dem CTA -->
         <div class="trust-bar">
             <div class="trust-item">
                 <h4>15+</h4>
@@ -226,7 +283,60 @@
         </div>
     </section>
 
-    <!-- HIER FOLGEN SECTION 2 bis 8 (Leistungen, Vorher-Nachher, FAQ) -->
+    <section class="services" id="leistungen">
+        <div class="section-header">
+            <h2>Unsere Behandlungen</h2>
+            <p>Von der professionellen Vorsorge bis zum High-End Smile Makeover. Entdecken Sie Zahnmedizin, die sich an Ihren Bedürfnissen orientiert.</p>
+        </div>
+
+        <div class="services-grid">
+            
+            <div class="service-card">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Professionelle Zahnreinigung und Prophylaxe">
+                </div>
+                <div class="service-content">
+                    <h3>Prophylaxe & Reinigung</h3>
+                    <p>Gesunde Zähne ein Leben lang. Unsere schonende, professionelle Zahnreinigung entfernt hartnäckige Beläge und schützt vor Karies und Parodontitis.</p>
+                    <a href="#prophylaxe" class="service-link">Mehr erfahren</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=600&q=80" alt="Ästhetische Zahnmedizin, Veneers und Bleaching">
+                </div>
+                <div class="service-content">
+                    <h3>Ästhetische Zahnmedizin</h3>
+                    <p>Ihr perfektes Lächeln. Mit modernstem Bleaching, unsichtbaren Invisalign-Schienen und hauchdünnen Premium-Veneers.</p>
+                    <a href="#aesthetik" class="service-link">Mehr erfahren</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=600&q=80" alt="Zahnimplantate und moderner Zahnersatz">
+                </div>
+                <div class="service-content">
+                    <h3>Zahnimplantate</h3>
+                    <p>Fester Biss und natürliche Optik. Wir nutzen modernste 3D-Diagnostik für präzise, sichere und langlebige Implantat-Lösungen.</p>
+                    <a href="#implantate" class="service-link">Mehr erfahren</a>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80" alt="Einfühlsame Behandlung für Angstpatienten">
+                </div>
+                <div class="service-content">
+                    <h3>Für Angstpatienten</h3>
+                    <p>Kein Stress, keine Schmerzen. Wir nehmen uns extra viel Zeit, erklären jeden Schritt und bieten sanfte Narkosemöglichkeiten an.</p>
+                    <a href="#angstpatienten" class="service-link">Mehr erfahren</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
 </body>
 </html>
