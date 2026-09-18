@@ -1,2589 +1,2624 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+  <title>JP'S IMBISS – Bottrop</title>
+  <meta name="description"
+        content="JP'S IMBISS in Bottrop – Gyros, Currywurst, Schnitzel, griechische Spezialitäten und mehr.">
 
-    <meta name="description"
-          content="JP’S IMBISS in Bottrop – Gyros, Pita, Currywurst, Schnitzel und griechische Hausmannskost.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <meta name="theme-color" content="#071a35">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
-    <title>JP’S IMBISS | It feels like Greece.</title>
+  <style>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    /* =====================================================
+       JP'S IMBISS
+       Uber-Eats inspired ordering page
+       ===================================================== */
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
+    :root {
+      --black: #0c1117;
+      --dark: #111820;
+      --navy: #172532;
+      --gold: #c9a35a;
+      --gold-light: #e1c47d;
+      --cream: #faf8f2;
+      --white: #ffffff;
+      --gray: #6d7378;
+      --border: #e5e5e5;
+      --green: #1f8f55;
+    }
 
-    <!-- Eigene CSS-Datei -->
-    <link rel="stylesheet" href="style.css">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: #fff;
+      color: #111;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =====================================================
+       HEADER
+       ===================================================== */
+
+    header {
+      height: 64px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 34px;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .menu-button {
+      font-size: 24px;
+      border: 0;
+      background: transparent;
+    }
+
+    .brand-mini {
+      font-family: "Cinzel", serif;
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: 1px;
+    }
+
+    .brand-mini span {
+      color: var(--gold);
+    }
+
+    .location {
+      background: #f4f4f4;
+      border-radius: 30px;
+      padding: 11px 17px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .header-link {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .register {
+      background: #f3f3f3;
+      padding: 11px 17px;
+      border-radius: 25px;
+    }
+
+    /* =====================================================
+       PAGE LAYOUT
+       ===================================================== */
+
+    .page {
+      display: grid;
+      grid-template-columns: 285px minmax(0, 1fr);
+      max-width: 1500px;
+      margin: auto;
+    }
+
+    /* =====================================================
+       LEFT SIDEBAR
+       ===================================================== */
+
+    .sidebar {
+      border-right: 1px solid #eee;
+      min-height: calc(100vh - 64px);
+      padding: 30px 25px;
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+    }
+
+    .logo-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .logo {
+      width: 155px;
+      height: 155px;
+      object-fit: contain;
+    }
+
+    .business-name {
+      font-family: "Cinzel", serif;
+      font-size: 23px;
+      text-align: center;
+      letter-spacing: 1px;
+      margin-bottom: 7px;
+    }
+
+    .business-name span {
+      color: var(--gold);
+    }
+
+    .tagline {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+
+    .rating {
+      text-align: center;
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    .rating strong {
+      color: #111;
+    }
+
+    .info-box {
+      background: #f7f7f7;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .sidebar-title {
+      font-weight: 700;
+      margin-bottom: 13px;
+      font-size: 13px;
+    }
+
+    .categories {
+      list-style: none;
+    }
+
+    .categories li {
+      margin-bottom: 4px;
+    }
+
+    .categories button {
+      width: 100%;
+      text-align: left;
+      border: 0;
+      background: transparent;
+      padding: 11px 13px;
+      border-radius: 7px;
+      font-size: 14px;
+      color: #333;
+      transition: .2s;
+    }
+
+    .categories button:hover,
+    .categories button.active {
+      background: #eeeeee;
+      font-weight: 700;
+      border-left: 3px solid var(--gold);
+    }
+
+    .opening {
+      border-top: 1px solid #eee;
+      margin-top: 25px;
+      padding-top: 20px;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .open {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* =====================================================
+       MAIN
+       ===================================================== */
+
+    main {
+      min-width: 0;
+    }
+
+    .main-inner {
+      max-width: 950px;
+      margin: auto;
+      padding: 30px 35px 100px;
+    }
+
+    /* HERO */
+
+    .hero {
+      height: 270px;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(5,10,14,.92),
+          rgba(5,10,14,.35),
+          rgba(5,10,14,.05)
+        ),
+        url("https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
+      display: flex;
+      align-items: center;
+      padding: 40px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .hero-content {
+      max-width: 470px;
+    }
+
+    .hero-small {
+      color: var(--gold-light);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 {
+      font-family: "Cinzel", serif;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1;
+      margin-bottom: 13px;
+    }
+
+    .hero p {
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 420px;
+    }
+
+    /* SEARCH */
+
+    .search {
+      height: 50px;
+      border: 1px solid #ddd;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      margin-bottom: 18px;
+      background: white;
+    }
+
+    .search span {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .search input {
+      border: 0;
+      outline: 0;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    /* DELIVERY */
+
+    .delivery-switch {
+      display: flex;
+      border: 1px solid #e4e4e4;
+      border-radius: 13px;
+      overflow: hidden;
+      margin-bottom: 35px;
+    }
+
+    .delivery-switch button {
+      flex: 1;
+      border: 0;
+      padding: 14px;
+      background: white;
+      font-weight: 600;
+    }
+
+    .delivery-switch button.active {
+      background: #111;
+      color: white;
+    }
+
+    /* =====================================================
+       SECTION
+       ===================================================== */
+
+    .section {
+      margin-bottom: 48px;
+      scroll-margin-top: 90px;
+    }
+
+    .section h2 {
+      font-family: "Cinzel", serif;
+      font-size: 25px;
+      margin-bottom: 18px;
+    }
+
+    .section-subtitle {
+      color: var(--gray);
+      font-size: 13px;
+      margin-top: -10px;
+      margin-bottom: 20px;
+    }
+
+    /* =====================================================
+       PRODUCTS
+       ===================================================== */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .product {
+      min-height: 145px;
+      border: 1px solid #e8e8e8;
+      border-radius: 13px;
+      overflow: hidden;
+      display: flex;
+      background: white;
+      transition: .2s;
+      position: relative;
+    }
+
+    .product:hover {
+      box-shadow: 0 5px 22px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }
+
+    .product-info {
+      flex: 1;
+      padding: 17px;
+      min-width: 0;
+    }
+
+    .product-info h3 {
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .product-info p {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .product-image {
+      width: 145px;
+      flex-shrink: 0;
+      background: #eee;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .add-button {
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+      width: 33px;
+      height: 33px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background: white;
+      font-size: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .add-button:hover {
+      background: #111;
+      color: white;
+    }
+
+    /* =====================================================
+       OFFERS
+       ===================================================== */
+
+    .offers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+    }
+
+    .offer {
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--navy);
+      color: white;
+      min-height: 180px;
+      position: relative;
+      padding: 20px;
+    }
+
+    .offer img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .42;
+    }
+
+    .offer-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .offer small {
+      color: var(--gold-light);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .offer h3 {
+      font-family: "Cinzel", serif;
+      margin: 8px 0;
+      font-size: 19px;
+    }
+
+    .offer strong {
+      font-size: 18px;
+    }
+
+    /* =====================================================
+       CART
+       ===================================================== */
+
+    .cart {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      width: 340px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 15px 45px rgba(0,0,0,.18);
+      border: 1px solid #ddd;
+      z-index: 1500;
+      display: none;
+      overflow: hidden;
+    }
+
+    .cart.show {
+      display: block;
+    }
+
+    .cart-header {
+      padding: 18px;
+      background: #111;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cart-items {
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 15px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid #eee;
+      padding: 12px 0;
+    }
+
+    .cart-item-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .cart-item-price {
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .cart-controls {
+      display: flex;
+      gap: 6px;
+      margin-top: 5px;
+    }
+
+    .cart-controls button {
+      border: 1px solid #ddd;
+      background: white;
+      width: 23px;
+      height: 23px;
+      border-radius: 5px;
+    }
+
+    .cart-bottom {
+      padding: 17px;
+      border-top: 1px solid #eee;
+    }
+
+    .cart-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .cart-total {
+      font-size: 18px;
+      font-weight: 800;
+      margin-top: 12px;
+    }
+
+    .checkout-button {
+      width: 100%;
+      background: #111;
+      color: white;
+      border: 0;
+      padding: 14px;
+      border-radius: 9px;
+      font-weight: 700;
+      margin-top: 14px;
+    }
+
+    .checkout-button:hover {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .cart-close {
+      background: transparent;
+      color: white;
+      border: 0;
+      font-size: 20px;
+    }
+
+    /* =====================================================
+       MOBILE CART
+       ===================================================== */
+
+    .mobile-cart {
+      display: none;
+    }
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
+
+    footer {
+      border-top: 1px solid #eee;
+      padding: 35px;
+      text-align: center;
+      color: var(--gray);
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: #111;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+
+    @media (max-width: 1000px) {
+
+      .page {
+        grid-template-columns: 230px minmax(0, 1fr);
+      }
+
+      .main-inner {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .offers {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 750px) {
+
+      header {
+        padding: 0 15px;
+      }
+
+      .location,
+      .header-link {
+        display: none;
+      }
+
+      .page {
+        display: block;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        min-height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #eee;
+        padding: 15px;
+      }
+
+      .logo-box {
+        margin-bottom: 8px;
+      }
+
+      .logo {
+        width: 100px;
+        height: 100px;
+      }
+
+      .business-name {
+        font-size: 19px;
+      }
+
+      .categories {
+        display: flex;
+        gap: 5px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .categories li {
+        flex-shrink: 0;
+      }
+
+      .categories button {
+        width: auto;
+        white-space: nowrap;
+        border: 1px solid #eee;
+      }
+
+      .opening,
+      .info-box {
+        display: none;
+      }
+
+      .main-inner {
+        padding: 15px 15px 100px;
+      }
+
+      .hero {
+        height: 260px;
+        padding: 25px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .product {
+        min-height: 125px;
+      }
+
+      .product-image {
+        width: 120px;
+      }
+
+      .cart {
+        width: calc(100% - 20px);
+        right: 10px;
+        bottom: 70px;
+      }
+
+      .mobile-cart {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 62px;
+        background: #111;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        z-index: 1400;
+      }
+
+      .mobile-cart button {
+        background: var(--gold);
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 16px;
+        font-weight: 800;
+      }
+
+    }
+
+  </style>
 </head>
 
 <body>
 
-<!-- =========================================================
+<!-- =====================================================
      HEADER
-========================================================= -->
+     ===================================================== -->
 
-<header class="site-header">
+<header>
 
-    <div class="header-inner">
+  <div class="header-left">
 
-        <a href="#start" class="logo-link">
-            <img
-                src="assets/logo.png"
-                alt="JP’S IMBISS Logo"
-                class="logo"
-            >
-        </a>
+    <button class="menu-button">☰</button>
 
-        <nav class="main-navigation">
-
-            <a href="#start">Startseite</a>
-
-            <a href="#speisekarte">Speisekarte</a>
-
-            <a href="#angebote">Angebote</a>
-
-            <a href="#ueber-uns">Über uns</a>
-
-            <a href="#kontakt">Kontakt</a>
-
-        </nav>
-
-        <button
-            class="cart-button"
-            id="openCart"
-            type="button"
-            aria-label="Warenkorb öffnen"
-        >
-
-            <span class="cart-icon">🛒</span>
-
-            <span class="cart-text">
-                Warenkorb
-            </span>
-
-            <span
-                class="cart-count"
-                id="cartCount"
-            >
-                0
-            </span>
-
-        </button>
-
-        <button
-            class="mobile-menu-button"
-            id="mobileMenuButton"
-            type="button"
-            aria-label="Menü öffnen"
-        >
-            ☰
-        </button>
-
+    <div class="brand-mini">
+      JP'S <span>IMBISS</span>
     </div>
 
-    <!-- Mobile Navigation -->
-
-    <div
-        class="mobile-navigation"
-        id="mobileNavigation"
-    >
-
-        <a href="#start">Startseite</a>
-
-        <a href="#speisekarte">Speisekarte</a>
-
-        <a href="#angebote">Angebote</a>
-
-        <a href="#ueber-uns">Über uns</a>
-
-        <a href="#kontakt">Kontakt</a>
-
+    <div class="location">
+      📍 Bottrop
     </div>
+
+  </div>
+
+  <div class="header-right">
+
+    <div class="header-link">
+      Anmelden
+    </div>
+
+    <div class="header-link register">
+      Registrieren
+    </div>
+
+  </div>
 
 </header>
 
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+<div class="page">
 
-<main>
 
-<section
-    class="hero"
-    id="start"
->
+<!-- =====================================================
+     SIDEBAR
+     ===================================================== -->
 
-    <div class="hero-overlay"></div>
+<aside class="sidebar">
 
-    <div class="hero-content">
+  <div class="logo-box">
 
-        <img
-            src="assets/logo.png"
-            alt="JP’S IMBISS"
-            class="hero-logo"
-        >
-
-        <p class="hero-eyebrow">
-            ORIGINAL GRIECHISCHER GESCHMACK
-        </p>
-
-        <h1>
-            JP’S IMBISS
-        </h1>
-
-        <p class="hero-slogan">
-            It feels like Greece.
-        </p>
-
-        <p class="hero-description">
-            Gyros • Pita • Currywurst • Schnitzel
-            <br>
-            & griechische Hausmannskost
-        </p>
-
-        <div class="hero-buttons">
-
-            <a
-                href="#speisekarte"
-                class="button button-gold"
-            >
-                SPEISEKARTE
-            </a>
-
-            <a
-                href="#bestellen"
-                class="button button-outline"
-            >
-                JETZT BESTELLEN
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     INFO BAR
-========================================================= -->
-
-<section class="info-bar">
-
-    <div class="info-item">
-
-        <span class="info-icon">🇬🇷</span>
-
-        <div>
-            <strong>Original griechisch</strong>
-            <small>Traditionelle Spezialitäten</small>
-        </div>
-
-    </div>
-
-
-    <div class="info-item">
-
-        <span class="info-icon">🥙</span>
-
-        <div>
-            <strong>Frisch zubereitet</strong>
-            <small>Mit Liebe gemacht</small>
-        </div>
-
-    </div>
-
-
-    <div class="info-item">
-
-        <span class="info-icon">🚲</span>
-
-        <div>
-            <strong>Lieferservice</strong>
-            <small>In Bottrop</small>
-        </div>
-
-    </div>
-
-
-    <div class="info-item">
-
-        <span class="info-icon">❤️</span>
-
-        <div>
-            <strong>JP’S Qualität</strong>
-            <small>Frisch • Griechisch • Lecker</small>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     ANGEBOTE
-========================================================= -->
-
-<section
-    class="offers section"
-    id="angebote"
->
-
-    <div class="section-heading">
-
-        <span class="section-kicker">
-            UNSERE FAVORITEN
-        </span>
-
-        <h2>
-            🔥 JP’S ANGEBOTE
-        </h2>
-
-        <div class="gold-line"></div>
-
-        <p>
-            Unsere beliebtesten Kombinationen.
-        </p>
-
-    </div>
-
-
-    <div class="offer-grid">
-
-
-        <!-- Angebot 1 -->
-
-        <article class="offer-card featured">
-
-            <div class="offer-image">
-
-                <img
-                    src="assets/pita.jpg"
-                    alt="Gyros Pita"
-                >
-
-                <span class="offer-badge">
-                    BELIEBT
-                </span>
-
-            </div>
-
-            <div class="offer-content">
-
-                <span class="offer-label">
-                    🇬🇷 JP’S PITA MENÜ
-                </span>
-
-                <h3>
-                    Gyros Pita Menü
-                </h3>
-
-                <p>
-                    Gyros Pita + Pommes + 0,33 l Getränk
-                </p>
-
-                <div class="offer-bottom">
-
-                    <strong>
-                        10,90 €
-                    </strong>
-
-                    <button
-                        type="button"
-                        class="button button-small add-product"
-                        data-product-id="101"
-                    >
-                        BESTELLEN
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- Angebot 2 -->
-
-        <article class="offer-card">
-
-            <div class="offer-image">
-
-                <img
-                    src="assets/gyros.jpg"
-                    alt="Gyros Teller"
-                >
-
-            </div>
-
-            <div class="offer-content">
-
-                <span class="offer-label">
-                    🔥 JP’S GYROS
-                </span>
-
-                <h3>
-                    JP’S Gyros Teller
-                </h3>
-
-                <p>
-                    Gyros + Pommes + Salat + Tzatziki
-                </p>
-
-                <div class="offer-bottom">
-
-                    <strong>
-                        12,90 €
-                    </strong>
-
-                    <button
-                        type="button"
-                        class="button button-small add-product"
-                        data-product-id="102"
-                    >
-                        BESTELLEN
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- Angebot 3 -->
-
-        <article class="offer-card">
-
-            <div class="offer-image">
-
-                <img
-                    src="assets/currywurst.jpg"
-                    alt="Currywurst mit Pommes"
-                >
-
-            </div>
-
-            <div class="offer-content">
-
-                <span class="offer-label">
-                    🌭 JP’S IMBISS
-                </span>
-
-                <h3>
-                    JP’S Imbiss Menü
-                </h3>
-
-                <p>
-                    Currywurst + Pommes + 0,33 l Getränk
-                </p>
-
-                <div class="offer-bottom">
-
-                    <strong>
-                        9,90 €
-                    </strong>
-
-                    <button
-                        type="button"
-                        class="button button-small add-product"
-                        data-product-id="103"
-                    >
-                        BESTELLEN
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     SPEISEKARTE
-========================================================= -->
-
-<section
-    class="menu section"
-    id="speisekarte"
->
-
-    <div class="section-heading">
-
-        <span class="section-kicker">
-            UNSERE SPEISEN
-        </span>
-
-        <h2>
-            SPEISEKARTE
-        </h2>
-
-        <div class="gold-line"></div>
-
-        <p>
-            Griechische Klassiker & beliebte Imbiss-Spezialitäten.
-        </p>
-
-    </div>
-
-
-    <!-- Kategorien -->
-
-    <div class="menu-categories">
-
-        <button
-            class="category-button active"
-            data-category="all"
-        >
-            ALLE
-        </button>
-
-        <button
-            class="category-button"
-            data-category="gyros"
-        >
-            GYROS & PITA
-        </button>
-
-        <button
-            class="category-button"
-            data-category="imbiss"
-        >
-            IMBISS
-        </button>
-
-        <button
-            class="category-button"
-            data-category="griechisch"
-        >
-            GRIECHISCHE SPEZIALITÄTEN
-        </button>
-
-        <button
-            class="category-button"
-            data-category="salate"
-        >
-            SALATE
-        </button>
-
-        <button
-            class="category-button"
-            data-category="dips"
-        >
-            DIPS & EXTRAS
-        </button>
-
-        <button
-            class="category-button"
-            data-category="getraenke"
-        >
-            GETRÄNKE
-        </button>
-
-    </div>
-
-
-    <!-- Produktliste -->
-
-    <div
-        class="product-grid"
-        id="productGrid"
+    <!-- DEIN LOGO -->
+    <img
+      src="Bilder/logo.png"
+      class="logo"
+      alt="JP'S IMBISS Logo"
     >
 
+  </div>
 
-        <!-- GYROS -->
+  <div class="business-name">
+    JP'S <span>IMBISS</span>
+  </div>
 
-        <article
-            class="product-card"
-            data-category="gyros"
-        >
+  <div class="tagline">
+    It feels like Greece. 🇬🇷
+  </div>
 
-            <div class="product-image">
+  <div class="rating">
+    ⭐ <strong>4.8</strong> · Griechischer Imbiss
+  </div>
 
-                <img
-                    src="assets/pita.jpg"
-                    alt="Gyros Pita"
-                >
+  <div class="info-box">
 
-            </div>
+    <strong>JP'S IMBISS</strong><br>
 
-            <div class="product-content">
+    Gyros · Currywurst · Schnitzel<br>
+    Griechische Spezialitäten<br><br>
 
-                <h3>
-                    Gyros Pita
-                </h3>
+    📍 Bottrop<br>
 
-                <p>
-                    Gyros, Tzatziki, Krautsalat und Zwiebeln.
-                </p>
+    🚴 Lieferung möglich<br>
 
-                <div class="product-footer">
+    💶 Mindestbestellwert: 15 €
 
-                    <strong>
-                        7,50 €
-                    </strong>
+  </div>
 
-                    <button
-                        class="add-product"
-                        data-product-id="1"
-                        type="button"
-                    >
-                        +
-                    </button>
 
-                </div>
+  <div class="sidebar-title">
+    Speisekarte
+  </div>
 
-            </div>
+  <ul class="categories">
 
-        </article>
+    <li>
+      <button class="active" onclick="scrollToSection('angebote')">
+        Angebote
+      </button>
+    </li>
 
+    <li>
+      <button onclick="scrollToSection('gyros')">
+        Gyros & Pita
+      </button>
+    </li>
 
-        <article
-            class="product-card"
-            data-category="gyros"
-        >
+    <li>
+      <button onclick="scrollToSection('imbiss')">
+        Imbiss
+      </button>
+    </li>
 
-            <div class="product-image">
+    <li>
+      <button onclick="scrollToSection('schnitzel')">
+        Schnitzel
+      </button>
+    </li>
 
-                <img
-                    src="assets/pita.jpg"
-                    alt="Original griechische Gyros Pita"
-                >
+    <li>
+      <button onclick="scrollToSection('griechisch')">
+        Griechische Küche
+      </button>
+    </li>
 
-            </div>
+    <li>
+      <button onclick="scrollToSection('salate')">
+        Salate
+      </button>
+    </li>
 
-            <div class="product-content">
+    <li>
+      <button onclick="scrollToSection('extras')">
+        Dips & Extras
+      </button>
+    </li>
 
-                <h3>
-                    Original griechische Gyros Pita
-                </h3>
+  </ul>
 
-                <p>
-                    Pita mit Gyros, Tzatziki, Salat und Zwiebeln.
-                </p>
 
-                <div class="product-footer">
+  <div class="opening">
 
-                    <strong>
-                        8,50 €
-                    </strong>
+    <strong>Öffnungszeiten</strong><br>
 
-                    <button
-                        class="add-product"
-                        data-product-id="2"
-                        type="button"
-                    >
-                        +
-                    </button>
+    Montag – Sonntag<br>
 
-                </div>
+    <span class="open">
+      ● Heute geöffnet
+    </span><br>
 
-            </div>
+    11:00 – 22:00
 
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="gyros"
-        >
-
-            <div class="product-image">
-
-                <img
-                    src="assets/gyros.jpg"
-                    alt="Gyros mit Pommes"
-                >
-
-            </div>
-
-            <div class="product-content">
-
-                <h3>
-                    Gyros mit Pommes & Tzatziki
-                </h3>
-
-                <p>
-                    Saftiges Gyros mit knusprigen Pommes und Tzatziki.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        11,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="3"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="gyros"
-        >
-
-            <div class="product-image">
-
-                <img
-                    src="assets/gyros.jpg"
-                    alt="Gyros Teller"
-                >
-
-            </div>
-
-            <div class="product-content">
-
-                <h3>
-                    Gyros-Teller
-                </h3>
-
-                <p>
-                    Gyros, Pommes, Salat und Tzatziki.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        12,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="4"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="gyros"
-        >
-
-            <div class="product-image">
-
-                <img
-                    src="assets/gyros.jpg"
-                    alt="Gyros komplett"
-                >
-
-            </div>
-
-            <div class="product-content">
-
-                <h3>
-                    Gyros komplett
-                </h3>
-
-                <p>
-                    Große Portion Gyros, Pommes, Salat und Tzatziki.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        13,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="5"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="gyros"
-        >
-
-            <div class="product-image">
-
-                <img
-                    src="assets/gyros.jpg"
-                    alt="Taxi Teller"
-                >
-
-            </div>
-
-            <div class="product-content">
-
-                <h3>
-                    Taxi-Teller
-                </h3>
-
-                <p>
-                    Gyros + Currywurst + Pommes.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        10,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="6"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- IMBISS -->
-
-        <article
-            class="product-card"
-            data-category="imbiss"
-        >
-
-            <div class="product-image">
-
-                <img
-                    src="assets/currywurst.jpg"
-                    alt="Currywurst"
-                >
-
-            </div>
-
-            <div class="product-content">
-
-                <h3>
-                    Currywurst
-                </h3>
-
-                <p>
-                    Klassische Currywurst mit hausgemachter Currysauce.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        4,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="7"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="imbiss"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Currywurst mit Pommes
-                </h3>
-
-                <p>
-                    Currywurst mit knusprigen Pommes.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        7,50 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="8"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="imbiss"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Bratwurst
-                </h3>
-
-                <p>
-                    Klassische Bratwurst.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        3,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="9"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="imbiss"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Bratwurst mit Pommes
-                </h3>
-
-                <p>
-                    Bratwurst mit knusprigen Pommes.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        6,50 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="10"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="imbiss"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Schnitzel Wiener Art
-                </h3>
-
-                <p>
-                    Knuspriges Schnitzel nach Wiener Art.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        8,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="11"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="imbiss"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Schnitzel mit Pommes
-                </h3>
-
-                <p>
-                    Schnitzel mit knusprigen Pommes.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        10,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="12"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="imbiss"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Metaxa-Schnitzel mit Pommes
-                </h3>
-
-                <p>
-                    Schnitzel mit griechischer Metaxa-Sauce und Pommes.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        12,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="13"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- GRIECHISCHE SPEZIALITÄTEN -->
-
-        <article
-            class="product-card"
-            data-category="griechisch"
-        >
-
-            <div class="product-image">
-
-                <img
-                    src="assets/moussaka.jpg"
-                    alt="Moussaka"
-                >
-
-            </div>
-
-            <div class="product-content">
-
-                <h3>
-                    Moussaka
-                </h3>
-
-                <p>
-                    Griechischer Klassiker mit Auberginen,
-                    Hackfleisch und Béchamelsauce.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        13,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="14"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="griechisch"
-        >
-
-            <div class="product-image">
-
-                <img
-                    src="assets/pastitsio.jpg"
-                    alt="Pastitsio"
-                >
-
-            </div>
-
-            <div class="product-content">
-
-                <h3>
-                    Pastitsio
-                </h3>
-
-                <p>
-                    Traditioneller griechischer Nudelauflauf.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        13,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="15"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="griechisch"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Griechisches Tagesgericht
-                </h3>
-
-                <p>
-                    Jeden Tag eine andere griechische Spezialität.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        13,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="16"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="griechisch"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Hausmannskost des Tages
-                </h3>
-
-                <p>
-                    Traditionelle griechische Hausmannskost.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        14,90 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="17"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- SALATE -->
-
-        <article
-            class="product-card"
-            data-category="salate"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Kleiner gemischter Salat
-                </h3>
-
-                <p>
-                    Frischer gemischter Salat.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        4,50 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="18"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="salate"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Griechischer Bauernsalat klein
-                </h3>
-
-                <p>
-                    Tomaten, Gurken, Zwiebeln, Oliven und Feta.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        6,50 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="19"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="salate"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Griechischer Bauernsalat groß
-                </h3>
-
-                <p>
-                    Frischer Bauernsalat mit Feta und Oliven.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        9,50 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="20"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="salate"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Krautsalat
-                </h3>
-
-                <p>
-                    Frischer Krautsalat.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        3,50 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="21"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="salate"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Gurken-Tomaten-Salat
-                </h3>
-
-                <p>
-                    Frische Gurken und Tomaten.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        4,50 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="22"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- DIPS -->
-
-        <article
-            class="product-card"
-            data-category="dips"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Tzatziki
-                </h3>
-
-                <p>
-                    Cremiger griechischer Joghurt-Dip mit Knoblauch.
-                </p>
-
-                <div class="product-footer">
-
-                    <strong>
-                        2,50 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="23"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="dips"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Knoblauch-Dip
-                </h3>
-
-                <div class="product-footer">
-
-                    <strong>
-                        2,00 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="24"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="dips"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Feta
-                </h3>
-
-                <div class="product-footer">
-
-                    <strong>
-                        3,00 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="25"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="dips"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Oliven
-                </h3>
-
-                <div class="product-footer">
-
-                    <strong>
-                        3,00 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="26"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="dips"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Peperoni
-                </h3>
-
-                <div class="product-footer">
-
-                    <strong>
-                        3,00 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="27"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="dips"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Extra Gyros
-                </h3>
-
-                <div class="product-footer">
-
-                    <strong>
-                        4,50 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="28"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="dips"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Extra Pommes
-                </h3>
-
-                <div class="product-footer">
-
-                    <strong>
-                        3,00 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="29"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <article
-            class="product-card"
-            data-category="dips"
-        >
-
-            <div class="product-content">
-
-                <h3>
-                    Extra Salat
-                </h3>
-
-                <div class="product-footer">
-
-                    <strong>
-                        3,00 €
-                    </strong>
-
-                    <button
-                        class="add-product"
-                        data-product-id="30"
-                        type="button"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     LIEFERSERVICE
-========================================================= -->
-
-<section
-    class="delivery-section"
-    id="bestellen"
->
-
-    <div class="delivery-content">
-
-        <span class="section-kicker">
-            JP’S LIEFERSERVICE
-        </span>
-
-        <h2>
-            GRIECHISCHER GENUSS
-            <br>
-            DIREKT ZU DIR
-        </h2>
-
-        <p>
-            Bestelle bequem online und wir bringen dein Essen
-            frisch zu dir nach Hause.
-        </p>
-
-
-        <div class="delivery-rules">
-
-            <div>
-                <strong>15 €</strong>
-                <span>Mindestbestellwert</span>
-            </div>
-
-            <div>
-                <strong>2 €</strong>
-                <span>Lieferkosten</span>
-            </div>
-
-            <div>
-                <strong>30 €</strong>
-                <span>kostenlose Lieferung</span>
-            </div>
-
-        </div>
-
-
-        <button
-            class="button button-gold large-order-button"
-            id="startOrder"
-            type="button"
-        >
-            🛒 JETZT BESTELLEN
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     ÜBER UNS
-========================================================= -->
-
-<section
-    class="about section"
-    id="ueber-uns"
->
-
-    <div class="about-grid">
-
-        <div class="about-image">
-
-            <div class="about-decoration"></div>
-
-            <img
-                src="assets/gyros.jpg"
-                alt="Griechisches Gyros"
-            >
-
-        </div>
-
-
-        <div class="about-content">
-
-            <span class="section-kicker">
-                WILLKOMMEN BEI JP’S
-            </span>
-
-            <h2>
-                GRIECHISCHER GESCHMACK
-                <br>
-                IN BOTTROP
-            </h2>
-
-            <div class="gold-line left"></div>
-
-            <p>
-                Bei JP’S IMBISS verbinden wir griechische Klassiker
-                mit beliebten Imbiss-Spezialitäten.
-            </p>
-
-            <p>
-                Von original griechischer Gyros Pita über saftiges
-                Gyros bis hin zu Moussaka und Pastitsio –
-                bei uns steht guter Geschmack im Mittelpunkt.
-            </p>
-
-            <div class="about-features">
-
-                <span>🇬🇷 Original griechisch</span>
-
-                <span>🥙 Frisch zubereitet</span>
-
-                <span>❤️ Mit Liebe gemacht</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     ÖFFNUNGSZEITEN
-========================================================= -->
-
-<section class="opening-hours">
-
-    <div class="opening-inner">
-
-        <div>
-
-            <span class="section-kicker">
-                BESUCH UNS
-            </span>
-
-            <h2>
-                ÖFFNUNGSZEITEN
-            </h2>
-
-        </div>
-
-
-        <div class="hours-list">
-
-            <div class="hours-row">
-
-                <span>
-                    Montag – Samstag
-                </span>
-
-                <strong>
-                    11:00 – 22:00 Uhr
-                </strong>
-
-            </div>
-
-            <div class="hours-row">
-
-                <span>
-                    Sonntag
-                </span>
-
-                <strong>
-                    12:00 – 22:00 Uhr
-                </strong>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     KONTAKT
-========================================================= -->
-
-<section
-    class="contact section"
-    id="kontakt"
->
-
-    <div class="section-heading">
-
-        <span class="section-kicker">
-            KONTAKT
-        </span>
-
-        <h2>
-            KOMM VORBEI
-        </h2>
-
-        <div class="gold-line"></div>
-
-    </div>
-
-
-    <div class="contact-grid">
-
-
-        <div class="contact-card">
-
-            <span class="contact-icon">
-                📍
-            </span>
-
-            <h3>
-                Adresse
-            </h3>
-
-            <p>
-                JP’S IMBISS
-                <br>
-                [ADRESSE HIER EINTRAGEN]
-                <br>
-                Bottrop
-            </p>
-
-        </div>
-
-
-        <div class="contact-card">
-
-            <span class="contact-icon">
-                📞
-            </span>
-
-            <h3>
-                Telefon
-            </h3>
-
-            <p>
-                [TELEFONNUMMER]
-            </p>
-
-            <a
-                href="tel:+490000000000"
-                class="contact-link"
-            >
-                JETZT ANRUFEN
-            </a>
-
-        </div>
-
-
-        <div class="contact-card">
-
-            <span class="contact-icon">
-                🚗
-            </span>
-
-            <h3>
-                Anfahrt
-            </h3>
-
-            <p>
-                Finde schnell den Weg
-                zu JP’S IMBISS.
-            </p>
-
-            <a
-                href="#"
-                class="contact-link"
-            >
-                ROUTE PLANEN
-            </a>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-</main>
-
-
-<!-- =========================================================
-     WARENKORB
-========================================================= -->
-
-<div
-    class="cart-overlay"
-    id="cartOverlay"
-></div>
-
-
-<aside
-    class="cart-sidebar"
-    id="cartSidebar"
-    aria-label="Warenkorb"
->
-
-    <div class="cart-header">
-
-        <div>
-
-            <span class="section-kicker">
-                DEINE BESTELLUNG
-            </span>
-
-            <h2>
-                WARENKORB
-            </h2>
-
-        </div>
-
-        <button
-            id="closeCart"
-            class="close-button"
-            type="button"
-            aria-label="Warenkorb schließen"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <div
-        class="cart-items"
-        id="cartItems"
-    >
-
-        <div class="empty-cart">
-
-            <span>
-                🛒
-            </span>
-
-            <h3>
-                Dein Warenkorb ist leer.
-            </h3>
-
-            <p>
-                Wähle etwas Leckeres aus unserer Speisekarte.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="cart-summary">
-
-        <div class="summary-row">
-
-            <span>
-                Zwischensumme
-            </span>
-
-            <strong id="cartSubtotal">
-                0,00 €
-            </strong>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <span>
-                Lieferung
-            </span>
-
-            <strong id="cartDelivery">
-                0,00 €
-            </strong>
-
-        </div>
-
-
-        <div class="summary-total">
-
-            <span>
-                Gesamt
-            </span>
-
-            <strong id="cartTotal">
-                0,00 €
-            </strong>
-
-        </div>
-
-
-        <button
-            class="button button-gold checkout-button"
-            id="checkoutButton"
-            type="button"
-        >
-            ZUR KASSE
-        </button>
-
-    </div>
+  </div>
 
 </aside>
 
 
-<!-- =========================================================
-     CHECKOUT MODAL
-========================================================= -->
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
 
-<div
-    class="modal-overlay"
-    id="checkoutModal"
->
+<main>
 
-    <div class="checkout-modal">
+<div class="main-inner">
 
-        <button
-            class="close-button"
-            id="closeCheckout"
-            type="button"
-        >
-            ×
-        </button>
 
+<!-- HERO -->
 
-        <div class="section-heading">
+<section class="hero">
 
-            <span class="section-kicker">
-                FAST GESCHAFFT
-            </span>
+  <div class="hero-content">
 
-            <h2>
-                BESTELLUNG ABSCHLIESSEN
-            </h2>
-
-            <div class="gold-line"></div>
-
-        </div>
-
-
-        <!-- Abholung / Lieferung -->
-
-        <div class="order-type">
-
-            <h3>
-                Wie möchtest du deine Bestellung erhalten?
-            </h3>
-
-            <div class="order-type-options">
-
-                <label class="order-type-card">
-
-                    <input
-                        type="radio"
-                        name="orderType"
-                        value="pickup"
-                        checked
-                    >
-
-                    <span class="order-type-content">
-
-                        <span class="order-type-icon">
-                            🏃
-                        </span>
-
-                        <strong>
-                            ABHOLUNG
-                        </strong>
-
-                        <small>
-                            Im Laden abholen
-                        </small>
-
-                    </span>
-
-                </label>
-
-
-                <label class="order-type-card">
-
-                    <input
-                        type="radio"
-                        name="orderType"
-                        value="delivery"
-                    >
-
-                    <span class="order-type-content">
-
-                        <span class="order-type-icon">
-                            🚲
-                        </span>
-
-                        <strong>
-                            LIEFERUNG
-                        </strong>
-
-                        <small>
-                            Direkt zu dir nach Hause
-                        </small>
-
-                    </span>
-
-                </label>
-
-            </div>
-
-        </div>
-
-
-        <!-- Kundendaten -->
-
-        <form
-            id="checkoutForm"
-            class="checkout-form"
-        >
-
-            <div class="form-grid">
-
-                <div class="form-group">
-
-                    <label for="firstName">
-                        Vorname *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        required
-                        placeholder="Vorname"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="lastName">
-                        Nachname *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        required
-                        placeholder="Nachname"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="phone">
-                    Telefonnummer *
-                </label>
-
-                <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    placeholder="z. B. 0176 12345678"
-                >
-
-            </div>
-
-
-            <!-- Lieferadresse -->
-
-            <div
-                class="delivery-address"
-                id="deliveryAddress"
-            >
-
-                <h3>
-                    Lieferadresse
-                </h3>
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label for="street">
-                            Straße *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="street"
-                            name="street"
-                            placeholder="Straße"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="houseNumber">
-                            Hausnummer *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="houseNumber"
-                            name="houseNumber"
-                            placeholder="Nr."
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label for="zip">
-                            PLZ *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="zip"
-                            name="zip"
-                            placeholder="462xx"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="city">
-                            Ort *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="city"
-                            name="city"
-                            value="Bottrop"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="notes">
-                    Bestellnotiz
-                </label>
-
-                <textarea
-                    id="notes"
-                    name="notes"
-                    rows="3"
-                    placeholder="Besondere Wünsche?"
-                ></textarea>
-
-            </div>
-
-
-            <!-- Zahlung -->
-
-            <div class="payment-method">
-
-                <h3>
-                    Zahlungsart
-                </h3>
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="payment"
-                        value="cash"
-                        checked
-                    >
-
-                    💶 Barzahlung
-
-                </label>
-
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="payment"
-                        value="card"
-                    >
-
-                    💳 Kartenzahlung
-
-                </label>
-
-            </div>
-
-
-            <div class="checkout-final-summary">
-
-                <div>
-
-                    <span>
-                        Gesamt
-                    </span>
-
-                    <strong id="checkoutTotal">
-                        0,00 €
-                    </strong>
-
-                </div>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="button button-gold checkout-submit"
-            >
-                BESTELLUNG ABSCHICKEN
-            </button>
-
-            <p class="checkout-note">
-                Deine Bestellung wird nach dem Absenden
-                vorbereitet.
-            </p>
-
-        </form>
-
+    <div class="hero-small">
+      Original Greek Taste
     </div>
+
+    <h1>
+      JP'S IMBISS
+    </h1>
+
+    <p>
+      Gyros, Pita, Currywurst & griechische
+      Hausküche – frisch zubereitet in Bottrop.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<div class="search">
+
+  <span>⌕</span>
+
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Suche bei JP'S IMBISS"
+    onkeyup="searchProducts()"
+  >
 
 </div>
 
 
-<!-- =========================================================
-     BESTELLBESTÄTIGUNG
-========================================================= -->
+<!-- DELIVERY -->
 
-<div
-    class="modal-overlay"
-    id="successModal"
->
+<div class="delivery-switch">
 
-    <div class="success-modal">
+  <button
+    id="deliveryBtn"
+    class="active"
+    onclick="setOrderType('delivery')"
+  >
+    🚴 Lieferung
+  </button>
 
-        <div class="success-icon">
-            ✓
-        </div>
-
-        <span class="section-kicker">
-            JP’S IMBISS
-        </span>
-
-        <h2>
-            DANKE FÜR DEINE BESTELLUNG!
-        </h2>
-
-        <p>
-            Deine Bestellung ist bei uns eingegangen.
-        </p>
-
-        <div class="order-number">
-
-            Bestellung
-
-            <strong id="orderNumber">
-                #JP-0000
-            </strong>
-
-        </div>
-
-        <p>
-            Wir bereiten deine Bestellung frisch zu.
-        </p>
-
-        <button
-            class="button button-gold"
-            id="closeSuccess"
-            type="button"
-        >
-            ZURÜCK ZUR WEBSITE
-        </button>
-
-    </div>
+  <button
+    id="pickupBtn"
+    onclick="setOrderType('pickup')"
+  >
+    🛍 Abholung
+  </button>
 
 </div>
 
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
+<!-- =====================================================
+     ANGEBOTE
+     ===================================================== -->
 
-<footer class="site-footer">
+<section
+  class="section"
+  id="angebote"
+>
 
-    <div class="footer-main">
+  <h2>
+    Angebote
+  </h2>
 
-        <div class="footer-brand">
-
-            <img
-                src="assets/logo.png"
-                alt="JP’S IMBISS Logo"
-                class="footer-logo"
-            >
-
-            <p class="footer-slogan">
-                It feels like Greece.
-            </p>
-
-            <p>
-                Frisch • Griechisch • Lecker
-            </p>
-
-        </div>
+  <div class="offers">
 
 
-        <div class="footer-column">
+    <div class="offer">
 
-            <h3>
-                Navigation
-            </h3>
+      <img
+        src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80"
+        alt="Gyros"
+      >
 
-            <a href="#start">
-                Startseite
-            </a>
+      <div class="offer-content">
 
-            <a href="#speisekarte">
-                Speisekarte
-            </a>
+        <small>JP'S SPECIAL</small>
 
-            <a href="#angebote">
-                Angebote
-            </a>
+        <h3>
+          Pita Menü
+        </h3>
 
-            <a href="#ueber-uns">
-                Über uns
-            </a>
+        <p>
+          Gyros Pita + Pommes + Getränk
+        </p>
 
-        </div>
+        <br>
 
+        <strong>
+          10,90 €
+        </strong>
 
-        <div class="footer-column">
-
-            <h3>
-                Kontakt
-            </h3>
-
-            <span>
-                📍 Bottrop
-            </span>
-
-            <span>
-                📞 [TELEFONNUMMER]
-            </span>
-
-            <span>
-                🇬🇷 It feels like Greece.
-            </span>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h3>
-                Rechtliches
-            </h3>
-
-            <a href="#">
-                Impressum
-            </a>
-
-            <a href="#">
-                Datenschutz
-            </a>
-
-        </div>
+      </div>
 
     </div>
 
 
-    <div class="footer-bottom">
+    <div class="offer">
 
-        <span>
-            © 2026 JP’S IMBISS
-        </span>
+      <img
+        src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=800&q=80"
+        alt="Schnitzel"
+      >
 
-        <span>
-            Frisch • Griechisch • Lecker
-        </span>
+      <div class="offer-content">
+
+        <small>BESTSELLER</small>
+
+        <h3>
+          Gyros Teller
+        </h3>
+
+        <p>
+          Gyros + Pommes + Salat + Tzatziki
+        </p>
+
+        <br>
+
+        <strong>
+          12,90 €
+        </strong>
+
+      </div>
 
     </div>
+
+
+    <div class="offer">
+
+      <img
+        src="https://images.unsplash.com/photo-1526230427044-d092040d48dc?auto=format&fit=crop&w=800&q=80"
+        alt="Pommes"
+      >
+
+      <div class="offer-content">
+
+        <small>IMBISS DEAL</small>
+
+        <h3>
+          Currywurst Menü
+        </h3>
+
+        <p>
+          Currywurst + Pommes + Getränk
+        </p>
+
+        <br>
+
+        <strong>
+          9,90 €
+        </strong>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     GYROS
+     ===================================================== -->
+
+<section
+  class="section"
+  id="gyros"
+>
+
+  <h2>
+    Gyros & Pita
+  </h2>
+
+  <p class="section-subtitle">
+    Original griechisch – frisch vom Spieß.
+  </p>
+
+
+  <div class="products">
+
+
+    <article
+      class="product"
+      data-name="Gyros Pita"
+      data-price="7.50"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Gyros Pita
+        </h3>
+
+        <p>
+          Gyros, Tomate, Zwiebeln,
+          Tzatziki und Pommes im warmen Pita.
+        </p>
+
+        <div class="price">
+          7,50 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
+          alt="Gyros Pita"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Gyros Pita',7.50)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Original griechische Gyros Pita"
+      data-price="8.50"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Original griechische Gyros Pita
+        </h3>
+
+        <p>
+          Klassisches griechisches Gyros,
+          Tzatziki, Tomate, Zwiebel und Pommes.
+        </p>
+
+        <div class="price">
+          8,50 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
+          alt="Original Gyros Pita"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Original griechische Gyros Pita',8.50)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Gyros Box"
+      data-price="8.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Gyros Box
+        </h3>
+
+        <p>
+          Gyros, Pommes und Tzatziki
+          in der praktischen Box.
+        </p>
+
+        <div class="price">
+          8,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
+          alt="Gyros Box"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Gyros Box',8.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Gyros Teller"
+      data-price="12.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Gyros Teller
+        </h3>
+
+        <p>
+          Gyros mit Pommes, Salat
+          und Tzatziki.
+        </p>
+
+        <div class="price">
+          12,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
+          alt="Gyros Teller"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Gyros Teller',12.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Gyros komplett"
+      data-price="13.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Gyros komplett
+        </h3>
+
+        <p>
+          Gyros, Pommes, Salat,
+          Tzatziki und Peperoni.
+        </p>
+
+        <div class="price">
+          13,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
+          alt="Gyros komplett"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Gyros komplett',13.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Taxi Teller"
+      data-price="10.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Taxi-Teller
+        </h3>
+
+        <p>
+          Gyros + Currywurst +
+          Pommes.
+        </p>
+
+        <div class="price">
+          10,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
+          alt="Taxi Teller"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Taxi-Teller',10.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     IMBISS
+     ===================================================== -->
+
+<section
+  class="section"
+  id="imbiss"
+>
+
+  <h2>
+    Imbiss Klassiker
+  </h2>
+
+
+  <div class="products">
+
+
+    <article
+      class="product"
+      data-name="Currywurst"
+      data-price="4.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Currywurst
+        </h3>
+
+        <p>
+          Bratwurst mit unserer
+          hausgemachten Currysauce.
+        </p>
+
+        <div class="price">
+          4,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80"
+          alt="Currywurst"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Currywurst',4.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Currywurst Pommes"
+      data-price="7.50"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Currywurst + Pommes
+        </h3>
+
+        <p>
+          Currywurst mit knusprigen
+          Pommes frites.
+        </p>
+
+        <div class="price">
+          7,50 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1526230427044-d092040d48dc?auto=format&fit=crop&w=600&q=80"
+          alt="Currywurst Pommes"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Currywurst + Pommes',7.50)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Bratwurst"
+      data-price="3.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Bratwurst
+        </h3>
+
+        <p>
+          Klassische Bratwurst
+          frisch vom Grill.
+        </p>
+
+        <div class="price">
+          3,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80"
+          alt="Bratwurst"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Bratwurst',3.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Bratwurst Pommes"
+      data-price="6.50"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Bratwurst + Pommes
+        </h3>
+
+        <p>
+          Bratwurst mit einer Portion
+          knuspriger Pommes.
+        </p>
+
+        <div class="price">
+          6,50 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1526230427044-d092040d48dc?auto=format&fit=crop&w=600&q=80"
+          alt="Bratwurst mit Pommes"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Bratwurst + Pommes',6.50)"
+      >
+        +
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCHNITZEL
+     ===================================================== -->
+
+<section
+  class="section"
+  id="schnitzel"
+>
+
+  <h2>
+    Schnitzel
+  </h2>
+
+
+  <div class="products">
+
+
+    <article
+      class="product"
+      data-name="Schnitzel Wiener Art"
+      data-price="8.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Schnitzel Wiener Art
+        </h3>
+
+        <p>
+          Knusprig paniertes Schnitzel
+          mit Zitrone.
+        </p>
+
+        <div class="price">
+          8,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=600&q=80"
+          alt="Schnitzel"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Schnitzel Wiener Art',8.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Schnitzel Pommes"
+      data-price="10.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Schnitzel + Pommes
+        </h3>
+
+        <p>
+          Schnitzel Wiener Art
+          mit Pommes.
+        </p>
+
+        <div class="price">
+          10,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=600&q=80"
+          alt="Schnitzel mit Pommes"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Schnitzel + Pommes',10.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Metaxa Schnitzel"
+      data-price="12.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Metaxa-Schnitzel + Pommes
+        </h3>
+
+        <p>
+          Schnitzel mit cremiger
+          Metaxa-Sauce und Pommes.
+        </p>
+
+        <div class="price">
+          12,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=600&q=80"
+          alt="Metaxa Schnitzel"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Metaxa-Schnitzel + Pommes',12.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     GRIECHISCHE KÜCHE
+     ===================================================== -->
+
+<section
+  class="section"
+  id="griechisch"
+>
+
+  <h2>
+    Griechische Küche
+  </h2>
+
+  <p class="section-subtitle">
+    Hausgemacht wie bei Mama.
+  </p>
+
+
+  <div class="products">
+
+
+    <article
+      class="product"
+      data-name="Moussaka"
+      data-price="13.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Moussaka
+        </h3>
+
+        <p>
+          Aubergine, Kartoffeln,
+          Hackfleisch und Béchamel.
+        </p>
+
+        <div class="price">
+          13,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1777199311086-ec5ff230aefd?auto=format&fit=crop&w=600&q=80"
+          alt="Moussaka"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Moussaka',13.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Pastitsio"
+      data-price="13.90"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Pastitsio
+        </h3>
+
+        <p>
+          Griechischer Nudelauflauf
+          mit Hackfleisch und Béchamel.
+        </p>
+
+        <div class="price">
+          13,90 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1777199311086-ec5ff230aefd?auto=format&fit=crop&w=600&q=80"
+          alt="Pastitsio"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Pastitsio',13.90)"
+      >
+        +
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SALATE
+     ===================================================== -->
+
+<section
+  class="section"
+  id="salate"
+>
+
+  <h2>
+    Salate
+  </h2>
+
+
+  <div class="products">
+
+
+    <article
+      class="product"
+      data-name="Kleiner gemischter Salat"
+      data-price="4.50"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Kleiner gemischter Salat
+        </h3>
+
+        <p>
+          Frischer gemischter Salat
+          mit Dressing.
+        </p>
+
+        <div class="price">
+          4,50 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1769481614068-47cfb4d1f125?auto=format&fit=crop&w=600&q=80"
+          alt="Salat"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Kleiner gemischter Salat',4.50)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Griechischer Bauernsalat"
+      data-price="9.50"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Griechischer Bauernsalat
+        </h3>
+
+        <p>
+          Tomate, Gurke, Zwiebel,
+          Oliven, Peperoni und Feta.
+        </p>
+
+        <div class="price">
+          9,50 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1769481614068-47cfb4d1f125?auto=format&fit=crop&w=600&q=80"
+          alt="Griechischer Bauernsalat"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Griechischer Bauernsalat',9.50)"
+      >
+        +
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXTRAS
+     ===================================================== -->
+
+<section
+  class="section"
+  id="extras"
+>
+
+  <h2>
+    Dips & Extras
+  </h2>
+
+
+  <div class="products">
+
+
+    <article
+      class="product"
+      data-name="Tzatziki"
+      data-price="2.50"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Tzatziki
+        </h3>
+
+        <p>
+          Hausgemachter griechischer
+          Joghurt-Dip mit Knoblauch.
+        </p>
+
+        <div class="price">
+          2,50 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
+          alt="Tzatziki"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Tzatziki',2.50)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Feta"
+      data-price="3.00"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Feta
+        </h3>
+
+        <p>
+          Original griechischer Feta.
+        </p>
+
+        <div class="price">
+          3,00 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1769481614068-47cfb4d1f125?auto=format&fit=crop&w=600&q=80"
+          alt="Feta"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Feta',3.00)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Extra Gyros"
+      data-price="4.50"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Extra Gyros
+        </h3>
+
+        <p>
+          Extra Portion Gyros
+          für dein Lieblingsgericht.
+        </p>
+
+        <div class="price">
+          4,50 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
+          alt="Extra Gyros"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Extra Gyros',4.50)"
+      >
+        +
+      </button>
+
+    </article>
+
+
+    <article
+      class="product"
+      data-name="Extra Pommes"
+      data-price="3.00"
+    >
+
+      <div class="product-info">
+
+        <h3>
+          Extra Pommes
+        </h3>
+
+        <p>
+          Knusprige Pommes frites.
+        </p>
+
+        <div class="price">
+          3,00 €
+        </div>
+
+      </div>
+
+      <div class="product-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1526230427044-d092040d48dc?auto=format&fit=crop&w=600&q=80"
+          alt="Pommes"
+        >
+
+      </div>
+
+      <button
+        class="add-button"
+        onclick="addToCart('Extra Pommes',3.00)"
+      >
+        +
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+</div>
+
+
+<footer>
+
+  <strong>JP'S IMBISS</strong><br><br>
+
+  Bottrop · Nordrhein-Westfalen<br>
+
+  © 2026 JP'S IMBISS · Impressum · Datenschutz
 
 </footer>
 
+</main>
 
-<!-- =========================================================
-     MOBILE WARENKORB
-========================================================= -->
+</div>
 
-<button
-    class="mobile-cart-bar"
-    id="mobileCartButton"
-    type="button"
+
+<!-- =====================================================
+     CART
+     ===================================================== -->
+
+<div
+  class="cart"
+  id="cart"
 >
 
-    <span>
-        🛒 Warenkorb
-    </span>
+  <div class="cart-header">
 
-    <strong id="mobileCartTotal">
-        0,00 €
+    <strong>
+      🛒 Dein Warenkorb
     </strong>
 
-</button>
+    <button
+      class="cart-close"
+      onclick="toggleCart()"
+    >
+      ×
+    </button>
+
+  </div>
+
+  <div
+    class="cart-items"
+    id="cartItems"
+  >
+
+    <p style="text-align:center;color:#777;padding:25px;">
+      Dein Warenkorb ist leer.
+    </p>
+
+  </div>
 
 
-<!-- =========================================================
+  <div class="cart-bottom">
+
+    <div class="cart-line">
+
+      <span>
+        Zwischensumme
+      </span>
+
+      <strong id="subtotal">
+        0,00 €
+      </strong>
+
+    </div>
+
+
+    <div class="cart-line">
+
+      <span>
+        Lieferung
+      </span>
+
+      <strong id="deliveryPrice">
+        0,00 €
+      </strong>
+
+    </div>
+
+
+    <div class="cart-line cart-total">
+
+      <span>
+        Gesamt
+      </span>
+
+      <span id="total">
+        0,00 €
+      </span>
+
+    </div>
+
+
+    <button
+      class="checkout-button"
+      onclick="checkout()"
+    >
+      Zur Kasse
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- MOBILE CART -->
+
+<div class="mobile-cart">
+
+  <span>
+    🛒 <strong id="mobileCount">0</strong>
+    Artikel
+  </span>
+
+  <button onclick="toggleCart()">
+    Warenkorb
+  </button>
+
+</div>
+
+
+<!-- =====================================================
      JAVASCRIPT
-========================================================= -->
+     ===================================================== -->
 
-<script src="script.js"></script>
+<script>
+
+  let cart = [];
+
+  let orderType = "delivery";
+
+
+  /* ==============================
+     SCROLL
+     ============================== */
+
+  function scrollToSection(id) {
+
+    const section = document.getElementById(id);
+
+    if (section) {
+
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    }
+
+  }
+
+
+  /* ==============================
+     ORDER TYPE
+     ============================== */
+
+  function setOrderType(type) {
+
+    orderType = type;
+
+    document
+      .getElementById("deliveryBtn")
+      .classList.toggle("active", type === "delivery");
+
+    document
+      .getElementById("pickupBtn")
+      .classList.toggle("active", type === "pickup");
+
+    updateCart();
+
+  }
+
+
+  /* ==============================
+     ADD TO CART
+     ============================== */
+
+  function addToCart(name, price) {
+
+    const existing = cart.find(
+      item => item.name === name
+    );
+
+    if (existing) {
+
+      existing.quantity++;
+
+    } else {
+
+      cart.push({
+        name: name,
+        price: price,
+        quantity: 1
+      });
+
+    }
+
+    updateCart();
+
+    document
+      .getElementById("cart")
+      .classList.add("show");
+
+  }
+
+
+  /* ==============================
+     REMOVE ONE
+     ============================== */
+
+  function removeFromCart(name) {
+
+    const item = cart.find(
+      item => item.name === name
+    );
+
+    if (!item) return;
+
+    item.quantity--;
+
+    if (item.quantity <= 0) {
+
+      cart = cart.filter(
+        i => i.name !== name
+      );
+
+    }
+
+    updateCart();
+
+  }
+
+
+  /* ==============================
+     UPDATE CART
+     ============================== */
+
+  function updateCart() {
+
+    const cartItems =
+      document.getElementById("cartItems");
+
+    let subtotal = 0;
+    let count = 0;
+
+    cartItems.innerHTML = "";
+
+
+    if (cart.length === 0) {
+
+      cartItems.innerHTML = `
+        <p style="
+          text-align:center;
+          color:#777;
+          padding:25px;
+        ">
+          Dein Warenkorb ist leer.
+        </p>
+      `;
+
+    }
+
+
+    cart.forEach(item => {
+
+      subtotal +=
+        item.price * item.quantity;
+
+      count += item.quantity;
+
+
+      const div =
+        document.createElement("div");
+
+      div.className = "cart-item";
+
+      div.innerHTML = `
+
+        <div>
+
+          <div class="cart-item-name">
+            ${item.name}
+          </div>
+
+          <div class="cart-controls">
+
+            <button
+              onclick="removeFromCart('${item.name}')"
+            >
+              −
+            </button>
+
+            <span>
+              ${item.quantity}
+            </span>
+
+            <button
+              onclick="addToCart('${item.name}',${item.price})"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="cart-item-price">
+
+          ${(item.price * item.quantity)
+            .toFixed(2)
+            .replace(".", ",")} €
+
+        </div>
+
+      `;
+
+      cartItems.appendChild(div);
+
+    });
+
+
+    let delivery = 0;
+
+    if (
+      orderType === "delivery" &&
+      subtotal > 0 &&
+      subtotal < 30
+    ) {
+
+      delivery = 2;
+
+    }
+
+
+    const total =
+      subtotal + delivery;
+
+
+    document.getElementById("subtotal")
+      .textContent =
+      formatPrice(subtotal);
+
+
+    document.getElementById("deliveryPrice")
+      .textContent =
+      delivery === 0
+        ? "Kostenlos"
+        : formatPrice(delivery);
+
+
+    document.getElementById("total")
+      .textContent =
+      formatPrice(total);
+
+
+    document.getElementById("mobileCount")
+      .textContent = count;
+
+  }
+
+
+  /* ==============================
+     PRICE
+     ============================== */
+
+  function formatPrice(price) {
+
+    return price
+      .toFixed(2)
+      .replace(".", ",") + " €";
+
+  }
+
+
+  /* ==============================
+     TOGGLE CART
+     ============================== */
+
+  function toggleCart() {
+
+    document
+      .getElementById("cart")
+      .classList.toggle("show");
+
+  }
+
+
+  /* ==============================
+     SEARCH
+     ============================== */
+
+  function searchProducts() {
+
+    const query =
+      document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const products =
+      document.querySelectorAll(".product");
+
+
+    products.forEach(product => {
+
+      const name =
+        product
+          .dataset
+          .name
+          .toLowerCase();
+
+
+      if (
+        name.includes(query)
+      ) {
+
+        product.style.display =
+          "flex";
+
+      } else {
+
+        product.style.display =
+          "none";
+
+      }
+
+    });
+
+  }
+
+
+  /* ==============================
+     CHECKOUT
+     ============================== */
+
+  function checkout() {
+
+    if (cart.length === 0) {
+
+      alert(
+        "Dein Warenkorb ist noch leer."
+      );
+
+      return;
+
+    }
+
+
+    if (
+      orderType === "delivery" &&
+      getSubtotal() < 15
+    ) {
+
+      alert(
+        "Der Mindestbestellwert für Lieferung beträgt 15,00 €."
+      );
+
+      return;
+
+    }
+
+
+    alert(
+      "Checkout wird als nächster Schritt angeschlossen."
+    );
+
+  }
+
+
+  function getSubtotal() {
+
+    return cart.reduce(
+      (sum, item) =>
+        sum +
+        item.price *
+        item.quantity,
+      0
+    );
+
+  }
+
+
+  updateCart();
+
+</script>
 
 </body>
 </html>
