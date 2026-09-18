@@ -1,2145 +1,3296 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>JP'S IMBISS – Bottrop</title>
-  <meta name="description"
-        content="JP'S IMBISS in Bottrop – Gyros, Currywurst, Schnitzel, griechische Spezialitäten und mehr.">
+<title>JP'S IMBISS | Bottrop</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="description" content="JP'S IMBISS in Bottrop – Gyros, Pita, Currywurst, Schnitzel und griechische Hausküche.">
 
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <style>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    /* =====================================================
-       JP'S IMBISS
-       Uber-Eats inspired ordering page
-       ===================================================== */
+<style>
 
-    :root {
-      --black: #0c1117;
-      --dark: #111820;
-      --navy: #172532;
-      --gold: #c9a35a;
-      --gold-light: #e1c47d;
-      --cream: #faf8f2;
-      --white: #ffffff;
-      --gray: #6d7378;
-      --border: #e5e5e5;
-      --green: #1f8f55;
+/* =========================================================
+   GRUNDLAGEN
+========================================================= */
+
+:root {
+    --black: #0b0f13;
+    --dark: #111820;
+    --navy: #172632;
+    --gold: #c8a15a;
+    --gold-light: #e0c27c;
+    --cream: #f7f3e9;
+    --white: #ffffff;
+    --gray: #70757a;
+    --light-gray: #f5f5f5;
+    --border: #e5e5e5;
+    --green: #16834b;
+    --danger: #b52a2a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    color: #111;
+    background: #fff;
+    overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* =========================================================
+   TOP NAVIGATION
+========================================================= */
+
+.topbar {
+    height: 64px;
+    border-bottom: 1px solid #e8e8e8;
+    background: rgba(255,255,255,.97);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+}
+
+.top-left {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.menu-icon {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background: transparent;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-logo-text {
+    font-family: "Cinzel", serif;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 1px;
+}
+
+.top-logo-text span {
+    color: var(--gold);
+}
+
+.location-pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: #f3f3f3;
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.top-link {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.register-button {
+    background: #f2f2f2;
+    border-radius: 25px;
+    padding: 10px 17px;
+}
+
+/* =========================================================
+   HAUPT-LAYOUT
+========================================================= */
+
+.layout {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr);
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    border-right: 1px solid #ededed;
+    height: calc(100vh - 64px);
+    position: sticky;
+    top: 64px;
+    overflow-y: auto;
+    padding: 28px 22px;
+    background: #fff;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.restaurant-logo {
+    width: 145px;
+    height: 145px;
+    object-fit: contain;
+}
+
+.restaurant-name {
+    text-align: center;
+    font-family: "Cinzel", serif;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.restaurant-name span {
+    color: var(--gold);
+}
+
+.slogan {
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 5px;
+}
+
+.rating {
+    text-align: center;
+    margin-top: 17px;
+    font-size: 13px;
+}
+
+.rating strong {
+    font-weight: 800;
+}
+
+.info-card {
+    background: #f7f7f7;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 22px 0;
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.info-card strong {
+    font-size: 13px;
+}
+
+.sidebar-heading {
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 9px;
+}
+
+.category-list {
+    list-style: none;
+}
+
+.category-list li {
+    margin-bottom: 2px;
+}
+
+.category-button {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding: 11px 12px;
+    border-radius: 7px;
+    font-size: 13px;
+    color: #333;
+    transition: .2s;
+}
+
+.category-button:hover {
+    background: #f0f0f0;
+}
+
+.category-button.active {
+    background: #ededed;
+    font-weight: 700;
+    border-left: 3px solid var(--gold);
+    padding-left: 9px;
+}
+
+.opening-hours {
+    margin-top: 25px;
+    border-top: 1px solid #ededed;
+    padding-top: 20px;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.open-now {
+    color: var(--green);
+    font-weight: 700;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    min-width: 0;
+}
+
+.content {
+    max-width: 970px;
+    margin: 0 auto;
+    padding: 28px 35px 90px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    height: 275px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 42px;
+    color: white;
+    margin-bottom: 18px;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(8,12,15,.94) 0%,
+            rgba(8,12,15,.68) 45%,
+            rgba(8,12,15,.10) 100%
+        ),
+        url("https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1600&q=85");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero-label {
+    color: var(--gold-light);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.hero h1 {
+    font-family: "Cinzel", serif;
+    font-size: clamp(34px, 5vw, 57px);
+    line-height: 1;
+    letter-spacing: 1px;
+    margin-bottom: 13px;
+}
+
+.hero h1 span {
+    color: var(--gold-light);
+}
+
+.hero p {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 450px;
+}
+
+/* =========================================================
+   SUCHFELD
+========================================================= */
+
+.search-box {
+    height: 52px;
+    border: 1px solid #dedede;
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0 19px;
+    margin-bottom: 15px;
+    background: #fff;
+}
+
+.search-icon {
+    font-size: 20px;
+    margin-right: 9px;
+    color: #333;
+}
+
+.search-box input {
+    width: 100%;
+    border: 0;
+    outline: none;
+    font-size: 14px;
+}
+
+/* =========================================================
+   LIEFERUNG / ABHOLUNG
+========================================================= */
+
+.order-type {
+    display: flex;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 3px;
+    margin-bottom: 34px;
+    background: white;
+}
+
+.order-type button {
+    flex: 1;
+    border: 0;
+    background: white;
+    border-radius: 9px;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.order-type button.active {
+    background: var(--black);
+    color: white;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.menu-section {
+    scroll-margin-top: 85px;
+    margin-bottom: 48px;
+}
+
+.section-title {
+    font-family: "Cinzel", serif;
+    font-size: 25px;
+    margin-bottom: 6px;
+}
+
+.section-subtitle {
+    color: var(--gray);
+    font-size: 12px;
+    margin-bottom: 19px;
+}
+
+/* =========================================================
+   ANGEBOTE
+========================================================= */
+
+.offer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-bottom: 10px;
+}
+
+.offer-card {
+    min-height: 185px;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    color: white;
+    background: var(--navy);
+}
+
+.offer-card img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    inset: 0;
+    opacity: .42;
+    transition: .3s;
+}
+
+.offer-card:hover img {
+    transform: scale(1.05);
+}
+
+.offer-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0,0,0,.15),
+        rgba(0,0,0,.82)
+    );
+}
+
+.offer-content {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 17px;
+    z-index: 2;
+}
+
+.offer-label {
+    color: var(--gold-light);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.offer-content h3 {
+    font-family: "Cinzel", serif;
+    font-size: 18px;
+    margin: 4px 0 5px;
+}
+
+.offer-content p {
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.offer-price {
+    display: block;
+    font-size: 17px;
+    font-weight: 800;
+    margin-top: 7px;
+}
+
+/* =========================================================
+   PRODUKTE
+========================================================= */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.product-card {
+    min-height: 150px;
+    border: 1px solid #e5e5e5;
+    border-radius: 13px;
+    background: white;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    transition: .2s;
+}
+
+.product-card:hover {
+    box-shadow: 0 7px 25px rgba(0,0,0,.09);
+    transform: translateY(-2px);
+}
+
+.product-details {
+    flex: 1;
+    padding: 17px;
+    min-width: 0;
+    padding-right: 8px;
+}
+
+.product-details h3 {
+    font-size: 14px;
+    line-height: 1.35;
+    margin-bottom: 7px;
+}
+
+.product-details p {
+    font-size: 11px;
+    color: var(--gray);
+    line-height: 1.5;
+    max-width: 270px;
+    margin-bottom: 12px;
+}
+
+.product-price {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.product-image {
+    width: 145px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .3s;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.04);
+}
+
+.add-button {
+    position: absolute;
+    right: 11px;
+    bottom: 10px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    z-index: 5;
+}
+
+.add-button:hover {
+    background: var(--black);
+    color: white;
+    border-color: var(--black);
+}
+
+/* =========================================================
+   CART BUTTON
+========================================================= */
+
+.cart-floating-button {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: var(--black);
+    color: white;
+    border: 0;
+    border-radius: 30px;
+    padding: 15px 22px;
+    font-weight: 800;
+    box-shadow: 0 8px 30px rgba(0,0,0,.2);
+    z-index: 1200;
+    display: none;
+}
+
+.cart-floating-button.visible {
+    display: block;
+}
+
+/* =========================================================
+   CART
+========================================================= */
+
+.cart-panel {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 370px;
+    max-width: calc(100vw - 30px);
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 18px 60px rgba(0,0,0,.2);
+    overflow: hidden;
+    z-index: 2000;
+    display: none;
+}
+
+.cart-panel.open {
+    display: block;
+}
+
+.cart-header {
+    background: var(--black);
+    color: white;
+    padding: 17px 19px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-header strong {
+    font-size: 15px;
+}
+
+.close-cart {
+    border: 0;
+    background: transparent;
+    color: white;
+    font-size: 22px;
+}
+
+.cart-items {
+    max-height: 330px;
+    overflow-y: auto;
+    padding: 8px 18px;
+}
+
+.empty-cart {
+    padding: 35px 10px;
+    text-align: center;
+    color: var(--gray);
+    font-size: 13px;
+}
+
+.cart-item {
+    padding: 13px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.cart-item-name {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.cart-item-total {
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.cart-item-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quantity-controls button {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 6px;
+}
+
+.remove-item {
+    border: 0;
+    background: transparent;
+    color: var(--danger);
+    font-size: 11px;
+}
+
+.cart-summary {
+    border-top: 1px solid #eee;
+    padding: 16px 18px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.summary-row.total {
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 13px;
+}
+
+.minimum-warning {
+    color: var(--danger);
+    font-size: 11px;
+    line-height: 1.5;
+    background: #fff3f3;
+    padding: 9px;
+    border-radius: 7px;
+    margin-top: 10px;
+}
+
+.free-delivery {
+    color: var(--green);
+    font-size: 11px;
+    margin-top: 7px;
+    font-weight: 700;
+}
+
+.checkout-btn {
+    width: 100%;
+    border: 0;
+    background: var(--black);
+    color: white;
+    border-radius: 9px;
+    padding: 14px;
+    font-weight: 800;
+    margin-top: 12px;
+}
+
+.checkout-btn:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   CHECKOUT MODAL
+========================================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.62);
+    z-index: 3000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.checkout-modal {
+    background: white;
+    width: 620px;
+    max-width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+    border-radius: 18px;
+    padding: 27px;
+}
+
+.modal-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.modal-top h2 {
+    font-family: "Cinzel", serif;
+}
+
+.close-modal {
+    border: 0;
+    background: #f1f1f1;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+}
+
+.form-group {
+    margin-bottom: 13px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 11px;
+    outline: none;
+    font-size: 13px;
+}
+
+.form-group textarea {
+    min-height: 75px;
+    resize: vertical;
+}
+
+.checkout-order-summary {
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 10px 0 17px;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.submit-order {
+    width: 100%;
+    border: 0;
+    background: var(--black);
+    color: white;
+    padding: 15px;
+    border-radius: 9px;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.success-box {
+    text-align: center;
+    padding: 25px 10px;
+}
+
+.success-icon {
+    font-size: 55px;
+    margin-bottom: 12px;
+}
+
+.success-box h2 {
+    font-family: "Cinzel", serif;
+    margin-bottom: 10px;
+}
+
+.order-number {
+    display: inline-block;
+    background: var(--cream);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 800;
+    margin: 15px 0;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    border-top: 1px solid #eee;
+    padding: 35px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray);
+}
+
+footer strong {
+    color: #111;
+    font-family: "Cinzel", serif;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobile-cart-bar {
+    display: none;
+}
+
+@media (max-width: 1050px) {
+
+    .layout {
+        grid-template-columns: 240px minmax(0,1fr);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    .content {
+        padding-left: 22px;
+        padding-right: 22px;
     }
 
-    html {
-      scroll-behavior: smooth;
+    .product-grid {
+        grid-template-columns: 1fr;
     }
 
-    body {
-      font-family: "Montserrat", sans-serif;
-      background: #fff;
-      color: #111;
+    .offer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+
+    .topbar {
+        height: 60px;
+        padding: 0 14px;
     }
 
-    button,
-    input {
-      font-family: inherit;
+    .top-left {
+        gap: 10px;
     }
 
-    button {
-      cursor: pointer;
+    .top-logo-text {
+        font-size: 16px;
     }
 
-    /* =====================================================
-       HEADER
-       ===================================================== */
-
-    header {
-      height: 64px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 34px;
-      position: sticky;
-      top: 0;
-      background: rgba(255,255,255,.97);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
+    .location-pill,
+    .top-link {
+        display: none;
     }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 24px;
+    .register-button {
+        display: block;
+        font-size: 11px;
+        padding: 9px 12px;
     }
 
-    .menu-button {
-      font-size: 24px;
-      border: 0;
-      background: transparent;
+    .layout {
+        display: block;
     }
-
-    .brand-mini {
-      font-family: "Cinzel", serif;
-      font-weight: 800;
-      font-size: 19px;
-      letter-spacing: 1px;
-    }
-
-    .brand-mini span {
-      color: var(--gold);
-    }
-
-    .location {
-      background: #f4f4f4;
-      border-radius: 30px;
-      padding: 11px 17px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
-
-    .header-link {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .register {
-      background: #f3f3f3;
-      padding: 11px 17px;
-      border-radius: 25px;
-    }
-
-    /* =====================================================
-       PAGE LAYOUT
-       ===================================================== */
-
-    .page {
-      display: grid;
-      grid-template-columns: 285px minmax(0, 1fr);
-      max-width: 1500px;
-      margin: auto;
-    }
-
-    /* =====================================================
-       LEFT SIDEBAR
-       ===================================================== */
 
     .sidebar {
-      border-right: 1px solid #eee;
-      min-height: calc(100vh - 64px);
-      padding: 30px 25px;
-      position: sticky;
-      top: 64px;
-      height: calc(100vh - 64px);
-      overflow-y: auto;
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #eee;
+        padding: 16px 14px 10px;
     }
 
-    .logo-box {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 25px;
+    .logo-container {
+        margin-bottom: 3px;
     }
 
-    .logo {
-      width: 155px;
-      height: 155px;
-      object-fit: contain;
+    .restaurant-logo {
+        width: 90px;
+        height: 90px;
     }
 
-    .business-name {
-      font-family: "Cinzel", serif;
-      font-size: 23px;
-      text-align: center;
-      letter-spacing: 1px;
-      margin-bottom: 7px;
+    .restaurant-name {
+        font-size: 19px;
     }
 
-    .business-name span {
-      color: var(--gold);
-    }
-
-    .tagline {
-      text-align: center;
-      font-size: 12px;
-      color: var(--gray);
-      margin-bottom: 20px;
+    .info-card,
+    .opening-hours {
+        display: none;
     }
 
     .rating {
-      text-align: center;
-      font-size: 13px;
-      margin-bottom: 25px;
+        margin-top: 9px;
+        margin-bottom: 12px;
     }
 
-    .rating strong {
-      color: #111;
+    .sidebar-heading {
+        margin-bottom: 6px;
     }
 
-    .info-box {
-      background: #f7f7f7;
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 25px;
-      font-size: 12px;
-      line-height: 1.6;
+    .category-list {
+        display: flex;
+        overflow-x: auto;
+        gap: 5px;
+        padding-bottom: 3px;
+        scrollbar-width: none;
     }
 
-    .sidebar-title {
-      font-weight: 700;
-      margin-bottom: 13px;
-      font-size: 13px;
+    .category-list::-webkit-scrollbar {
+        display: none;
     }
 
-    .categories {
-      list-style: none;
+    .category-list li {
+        flex-shrink: 0;
     }
 
-    .categories li {
-      margin-bottom: 4px;
+    .category-button {
+        width: auto;
+        white-space: nowrap;
+        border: 1px solid #e5e5e5;
+        padding: 9px 12px;
+        font-size: 11px;
     }
 
-    .categories button {
-      width: 100%;
-      text-align: left;
-      border: 0;
-      background: transparent;
-      padding: 11px 13px;
-      border-radius: 7px;
-      font-size: 14px;
-      color: #333;
-      transition: .2s;
+    .category-button.active {
+        border-left: 1px solid var(--gold);
+        padding-left: 12px;
     }
 
-    .categories button:hover,
-    .categories button.active {
-      background: #eeeeee;
-      font-weight: 700;
-      border-left: 3px solid var(--gold);
+    .content {
+        padding: 13px 13px 100px;
     }
-
-    .opening {
-      border-top: 1px solid #eee;
-      margin-top: 25px;
-      padding-top: 20px;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .open {
-      color: var(--green);
-      font-weight: 700;
-    }
-
-    /* =====================================================
-       MAIN
-       ===================================================== */
-
-    main {
-      min-width: 0;
-    }
-
-    .main-inner {
-      max-width: 950px;
-      margin: auto;
-      padding: 30px 35px 100px;
-    }
-
-    /* HERO */
 
     .hero {
-      height: 270px;
-      border-radius: 15px;
-      overflow: hidden;
-      position: relative;
-      background:
-        linear-gradient(
-          90deg,
-          rgba(5,10,14,.92),
-          rgba(5,10,14,.35),
-          rgba(5,10,14,.05)
-        ),
-        url("https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1600&q=85")
-        center/cover;
-      display: flex;
-      align-items: center;
-      padding: 40px;
-      color: white;
-      margin-bottom: 20px;
-    }
-
-    .hero-content {
-      max-width: 470px;
-    }
-
-    .hero-small {
-      color: var(--gold-light);
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
+        height: 250px;
+        padding: 25px;
+        border-radius: 13px;
     }
 
     .hero h1 {
-      font-family: "Cinzel", serif;
-      font-size: clamp(30px, 4vw, 52px);
-      line-height: 1;
-      margin-bottom: 13px;
+        font-size: 34px;
     }
 
     .hero p {
-      font-size: 14px;
-      line-height: 1.6;
-      max-width: 420px;
+        font-size: 12px;
     }
 
-    /* SEARCH */
-
-    .search {
-      height: 50px;
-      border: 1px solid #ddd;
-      border-radius: 28px;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      margin-bottom: 18px;
-      background: white;
+    .section-title {
+        font-size: 21px;
     }
 
-    .search span {
-      font-size: 20px;
-      margin-right: 10px;
-    }
-
-    .search input {
-      border: 0;
-      outline: 0;
-      width: 100%;
-      font-size: 14px;
-    }
-
-    /* DELIVERY */
-
-    .delivery-switch {
-      display: flex;
-      border: 1px solid #e4e4e4;
-      border-radius: 13px;
-      overflow: hidden;
-      margin-bottom: 35px;
-    }
-
-    .delivery-switch button {
-      flex: 1;
-      border: 0;
-      padding: 14px;
-      background: white;
-      font-weight: 600;
-    }
-
-    .delivery-switch button.active {
-      background: #111;
-      color: white;
-    }
-
-    /* =====================================================
-       SECTION
-       ===================================================== */
-
-    .section {
-      margin-bottom: 48px;
-      scroll-margin-top: 90px;
-    }
-
-    .section h2 {
-      font-family: "Cinzel", serif;
-      font-size: 25px;
-      margin-bottom: 18px;
-    }
-
-    .section-subtitle {
-      color: var(--gray);
-      font-size: 13px;
-      margin-top: -10px;
-      margin-bottom: 20px;
-    }
-
-    /* =====================================================
-       PRODUCTS
-       ===================================================== */
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .product {
-      min-height: 145px;
-      border: 1px solid #e8e8e8;
-      border-radius: 13px;
-      overflow: hidden;
-      display: flex;
-      background: white;
-      transition: .2s;
-      position: relative;
-    }
-
-    .product:hover {
-      box-shadow: 0 5px 22px rgba(0,0,0,.08);
-      transform: translateY(-2px);
-    }
-
-    .product-info {
-      flex: 1;
-      padding: 17px;
-      min-width: 0;
-    }
-
-    .product-info h3 {
-      font-size: 15px;
-      margin-bottom: 7px;
-    }
-
-    .product-info p {
-      font-size: 12px;
-      color: var(--gray);
-      line-height: 1.5;
-      margin-bottom: 12px;
-    }
-
-    .price {
-      font-weight: 700;
-      font-size: 14px;
+    .product-card {
+        min-height: 135px;
     }
 
     .product-image {
-      width: 145px;
-      flex-shrink: 0;
-      background: #eee;
+        width: 125px;
     }
 
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .product-details {
+        padding: 14px;
     }
 
-    .add-button {
-      position: absolute;
-      right: 12px;
-      bottom: 10px;
-      width: 33px;
-      height: 33px;
-      border-radius: 50%;
-      border: 1px solid #ddd;
-      background: white;
-      font-size: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    .product-details h3 {
+        font-size: 13px;
     }
 
-    .add-button:hover {
-      background: #111;
-      color: white;
+    .product-details p {
+        font-size: 10px;
     }
 
-    /* =====================================================
-       OFFERS
-       ===================================================== */
-
-    .offers {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 13px;
-    }
-
-    .offer {
-      border-radius: 14px;
-      overflow: hidden;
-      background: var(--navy);
-      color: white;
-      min-height: 180px;
-      position: relative;
-      padding: 20px;
-    }
-
-    .offer img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: .42;
-    }
-
-    .offer-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .offer small {
-      color: var(--gold-light);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .offer h3 {
-      font-family: "Cinzel", serif;
-      margin: 8px 0;
-      font-size: 19px;
-    }
-
-    .offer strong {
-      font-size: 18px;
-    }
-
-    /* =====================================================
-       CART
-       ===================================================== */
-
-    .cart {
-      position: fixed;
-      right: 25px;
-      bottom: 25px;
-      width: 340px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 15px 45px rgba(0,0,0,.18);
-      border: 1px solid #ddd;
-      z-index: 1500;
-      display: none;
-      overflow: hidden;
-    }
-
-    .cart.show {
-      display: block;
-    }
-
-    .cart-header {
-      padding: 18px;
-      background: #111;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .cart-items {
-      max-height: 320px;
-      overflow-y: auto;
-      padding: 15px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      border-bottom: 1px solid #eee;
-      padding: 12px 0;
-    }
-
-    .cart-item-name {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .cart-item-price {
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .cart-controls {
-      display: flex;
-      gap: 6px;
-      margin-top: 5px;
-    }
-
-    .cart-controls button {
-      border: 1px solid #ddd;
-      background: white;
-      width: 23px;
-      height: 23px;
-      border-radius: 5px;
-    }
-
-    .cart-bottom {
-      padding: 17px;
-      border-top: 1px solid #eee;
-    }
-
-    .cart-line {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 13px;
-    }
-
-    .cart-total {
-      font-size: 18px;
-      font-weight: 800;
-      margin-top: 12px;
-    }
-
-    .checkout-button {
-      width: 100%;
-      background: #111;
-      color: white;
-      border: 0;
-      padding: 14px;
-      border-radius: 9px;
-      font-weight: 700;
-      margin-top: 14px;
-    }
-
-    .checkout-button:hover {
-      background: var(--gold);
-      color: #111;
-    }
-
-    .cart-close {
-      background: transparent;
-      color: white;
-      border: 0;
-      font-size: 20px;
-    }
-
-    /* =====================================================
-       MOBILE CART
-       ===================================================== */
-
-    .mobile-cart {
-      display: none;
-    }
-
-    /* =====================================================
-       FOOTER
-       ===================================================== */
-
-    footer {
-      border-top: 1px solid #eee;
-      padding: 35px;
-      text-align: center;
-      color: var(--gray);
-      font-size: 12px;
-    }
-
-    footer strong {
-      color: #111;
-    }
-
-    /* =====================================================
-       RESPONSIVE
-       ===================================================== */
-
-    @media (max-width: 1000px) {
-
-      .page {
-        grid-template-columns: 230px minmax(0, 1fr);
-      }
-
-      .main-inner {
-        padding-left: 22px;
-        padding-right: 22px;
-      }
-
-      .products {
-        grid-template-columns: 1fr;
-      }
-
-      .offers {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-    @media (max-width: 750px) {
-
-      header {
-        padding: 0 15px;
-      }
-
-      .location,
-      .header-link {
-        display: none;
-      }
-
-      .page {
-        display: block;
-      }
-
-      .sidebar {
-        position: static;
-        height: auto;
-        min-height: auto;
-        border-right: 0;
-        border-bottom: 1px solid #eee;
-        padding: 15px;
-      }
-
-      .logo-box {
-        margin-bottom: 8px;
-      }
-
-      .logo {
-        width: 100px;
-        height: 100px;
-      }
-
-      .business-name {
-        font-size: 19px;
-      }
-
-      .categories {
-        display: flex;
-        gap: 5px;
-        overflow-x: auto;
-        padding-bottom: 5px;
-      }
-
-      .categories li {
-        flex-shrink: 0;
-      }
-
-      .categories button {
-        width: auto;
-        white-space: nowrap;
-        border: 1px solid #eee;
-      }
-
-      .opening,
-      .info-box {
-        display: none;
-      }
-
-      .main-inner {
-        padding: 15px 15px 100px;
-      }
-
-      .hero {
-        height: 260px;
-        padding: 25px;
-      }
-
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      .product {
-        min-height: 125px;
-      }
-
-      .product-image {
-        width: 120px;
-      }
-
-      .cart {
-        width: calc(100% - 20px);
+    .cart-panel {
         right: 10px;
         bottom: 70px;
-      }
+        width: calc(100vw - 20px);
+    }
 
-      .mobile-cart {
+    .cart-floating-button {
+        display: none !important;
+    }
+
+    .mobile-cart-bar {
+        display: flex;
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
         height: 62px;
-        background: #111;
+        background: var(--black);
         color: white;
-        display: flex;
+        z-index: 1800;
         align-items: center;
         justify-content: space-between;
-        padding: 0 20px;
-        z-index: 1400;
-      }
-
-      .mobile-cart button {
-        background: var(--gold);
-        border: 0;
-        border-radius: 8px;
-        padding: 10px 16px;
-        font-weight: 800;
-      }
-
+        padding: 0 15px;
     }
 
-  </style>
+    .mobile-cart-button {
+        border: 0;
+        background: var(--gold);
+        color: #111;
+        border-radius: 8px;
+        padding: 11px 16px;
+        font-weight: 800;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .checkout-modal {
+        padding: 20px;
+    }
+}
+
+</style>
 </head>
+
 
 <body>
 
-<!-- =====================================================
-     HEADER
-     ===================================================== -->
 
-<header>
+<!-- =========================================================
+     OBERE NAVIGATION
+========================================================= -->
 
-  <div class="header-left">
+<header class="topbar">
 
-    <button class="menu-button">☰</button>
+    <div class="top-left">
 
-    <div class="brand-mini">
-      JP'S <span>IMBISS</span>
+        <button class="menu-icon" onclick="toggleMobileMenu()">
+            ☰
+        </button>
+
+        <div class="top-logo-text">
+            JP'S <span>IMBISS</span>
+        </div>
+
+        <div class="location-pill">
+            📍 Bottrop
+        </div>
+
     </div>
 
-    <div class="location">
-      📍 Bottrop
+
+    <div class="top-right">
+
+        <div class="top-link">
+            Anmelden
+        </div>
+
+        <div class="top-link register-button">
+            Registrieren
+        </div>
+
     </div>
-
-  </div>
-
-  <div class="header-right">
-
-    <div class="header-link">
-      Anmelden
-    </div>
-
-    <div class="header-link register">
-      Registrieren
-    </div>
-
-  </div>
 
 </header>
 
 
-<div class="page">
+
+<div class="layout">
 
 
-<!-- =====================================================
+<!-- =========================================================
      SIDEBAR
-     ===================================================== -->
+========================================================= -->
 
-<aside class="sidebar">
+<aside class="sidebar" id="sidebar">
 
-  <div class="logo-box">
+    <div class="logo-container">
 
-    <!-- DEIN LOGO -->
-    <img
-      src="Bilder/logo.png"
-      class="logo"
-      alt="JP'S IMBISS Logo"
-    >
+        <img
+            src="Bilder/logo.png"
+            alt="JP'S IMBISS Logo"
+            class="restaurant-logo"
+        >
 
-  </div>
-
-  <div class="business-name">
-    JP'S <span>IMBISS</span>
-  </div>
-
-  <div class="tagline">
-    It feels like Greece. 🇬🇷
-  </div>
-
-  <div class="rating">
-    ⭐ <strong>4.8</strong> · Griechischer Imbiss
-  </div>
-
-  <div class="info-box">
-
-    <strong>JP'S IMBISS</strong><br>
-
-    Gyros · Currywurst · Schnitzel<br>
-    Griechische Spezialitäten<br><br>
-
-    📍 Bottrop<br>
-
-    🚴 Lieferung möglich<br>
-
-    💶 Mindestbestellwert: 15 €
-
-  </div>
+    </div>
 
 
-  <div class="sidebar-title">
-    Speisekarte
-  </div>
-
-  <ul class="categories">
-
-    <li>
-      <button class="active" onclick="scrollToSection('angebote')">
-        Angebote
-      </button>
-    </li>
-
-    <li>
-      <button onclick="scrollToSection('gyros')">
-        Gyros & Pita
-      </button>
-    </li>
-
-    <li>
-      <button onclick="scrollToSection('imbiss')">
-        Imbiss
-      </button>
-    </li>
-
-    <li>
-      <button onclick="scrollToSection('schnitzel')">
-        Schnitzel
-      </button>
-    </li>
-
-    <li>
-      <button onclick="scrollToSection('griechisch')">
-        Griechische Küche
-      </button>
-    </li>
-
-    <li>
-      <button onclick="scrollToSection('salate')">
-        Salate
-      </button>
-    </li>
-
-    <li>
-      <button onclick="scrollToSection('extras')">
-        Dips & Extras
-      </button>
-    </li>
-
-  </ul>
+    <div class="restaurant-name">
+        JP'S <span>IMBISS</span>
+    </div>
 
 
-  <div class="opening">
+    <div class="slogan">
+        It feels like Greece. 🇬🇷
+    </div>
 
-    <strong>Öffnungszeiten</strong><br>
 
-    Montag – Sonntag<br>
+    <div class="rating">
+        ⭐ <strong>4,8</strong> · Griechischer Imbiss
+    </div>
 
-    <span class="open">
-      ● Heute geöffnet
-    </span><br>
 
-    11:00 – 22:00
+    <div class="info-card">
 
-  </div>
+        <strong>JP'S IMBISS</strong><br>
+
+        Gyros · Pita · Currywurst · Schnitzel<br>
+        Griechische Hausküche<br><br>
+
+        📍 Bottrop<br>
+
+        🚴 Lieferung möglich<br>
+
+        💶 Mindestbestellwert: 15 €
+
+    </div>
+
+
+    <div class="sidebar-heading">
+        Speisekarte
+    </div>
+
+
+    <ul class="category-list">
+
+        <li>
+            <button
+                class="category-button active"
+                onclick="goToCategory('angebote')"
+            >
+                Angebote
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="category-button"
+                onclick="goToCategory('gyros')"
+            >
+                Gyros & Pita
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="category-button"
+                onclick="goToCategory('imbiss')"
+            >
+                Imbiss
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="category-button"
+                onclick="goToCategory('schnitzel')"
+            >
+                Schnitzel
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="category-button"
+                onclick="goToCategory('griechisch')"
+            >
+                Griechische Küche
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="category-button"
+                onclick="goToCategory('salate')"
+            >
+                Salate
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="category-button"
+                onclick="goToCategory('extras')"
+            >
+                Dips & Extras
+            </button>
+        </li>
+
+        <li>
+            <button
+                class="category-button"
+                onclick="goToCategory('getraenke')"
+            >
+                Getränke
+            </button>
+        </li>
+
+    </ul>
+
+
+    <div class="opening-hours">
+
+        <strong>Öffnungszeiten</strong><br>
+
+        Montag – Sonntag<br>
+
+        <span class="open-now">
+            ● Heute geöffnet
+        </span><br>
+
+        11:00 – 22:00
+
+    </div>
 
 </aside>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      MAIN
-     ===================================================== -->
+========================================================= -->
 
-<main>
+<main class="main">
 
-<div class="main-inner">
+<div class="content">
 
 
-<!-- HERO -->
+<!-- =========================================================
+     HERO
+========================================================= -->
 
 <section class="hero">
 
-  <div class="hero-content">
+    <div class="hero-content">
 
-    <div class="hero-small">
-      Original Greek Taste
+        <div class="hero-label">
+            Original Greek Taste
+        </div>
+
+        <h1>
+            JP'S <span>IMBISS</span>
+        </h1>
+
+        <p>
+            Gyros, Pita, Currywurst & griechische
+            Hausküche – frisch zubereitet in Bottrop.
+        </p>
+
     </div>
 
-    <h1>
-      JP'S IMBISS
-    </h1>
+</section>
 
-    <p>
-      Gyros, Pita, Currywurst & griechische
-      Hausküche – frisch zubereitet in Bottrop.
+
+
+<!-- =========================================================
+     SUCHE
+========================================================= -->
+
+<div class="search-box">
+
+    <span class="search-icon">
+        🔍
+    </span>
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Suche bei JP'S IMBISS"
+        oninput="searchProducts()"
+    >
+
+</div>
+
+
+
+<!-- =========================================================
+     LIEFERUNG / ABHOLUNG
+========================================================= -->
+
+<div class="order-type">
+
+    <button
+        id="deliveryButton"
+        class="active"
+        onclick="changeOrderType('delivery')"
+    >
+        🚴 Lieferung
+    </button>
+
+    <button
+        id="pickupButton"
+        onclick="changeOrderType('pickup')"
+    >
+        🛍 Abholung
+    </button>
+
+</div>
+
+
+
+<!-- =========================================================
+     ANGEBOTE
+========================================================= -->
+
+<section
+    class="menu-section"
+    id="angebote"
+>
+
+    <h2 class="section-title">
+        Angebote
+    </h2>
+
+    <p class="section-subtitle">
+        Unsere beliebtesten Kombinationen.
     </p>
 
-  </div>
+
+    <div class="offer-grid">
+
+
+        <div class="offer-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+                alt="Gyros Pita"
+            >
+
+            <div class="offer-overlay"></div>
+
+            <div class="offer-content">
+
+                <div class="offer-label">
+                    JP'S SPECIAL
+                </div>
+
+                <h3>
+                    Pita Menü
+                </h3>
+
+                <p>
+                    Gyros Pita + Pommes + 0,33 L Getränk
+                </p>
+
+                <span class="offer-price">
+                    10,90 €
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="offer-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=85"
+                alt="Gyros Teller"
+            >
+
+            <div class="offer-overlay"></div>
+
+            <div class="offer-content">
+
+                <div class="offer-label">
+                    BESTSELLER
+                </div>
+
+                <h3>
+                    Gyros Teller
+                </h3>
+
+                <p>
+                    Gyros + Pommes + Salat + Tzatziki
+                </p>
+
+                <span class="offer-price">
+                    12,90 €
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="offer-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85"
+                alt="Pommes"
+            >
+
+            <div class="offer-overlay"></div>
+
+            <div class="offer-content">
+
+                <div class="offer-label">
+                    IMBISS DEAL
+                </div>
+
+                <h3>
+                    Currywurst Menü
+                </h3>
+
+                <p>
+                    Currywurst + Pommes + 0,33 L Getränk
+                </p>
+
+                <span class="offer-price">
+                    9,90 €
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
 
 </section>
 
 
-<!-- SEARCH -->
 
-<div class="search">
-
-  <span>⌕</span>
-
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Suche bei JP'S IMBISS"
-    onkeyup="searchProducts()"
-  >
-
-</div>
-
-
-<!-- DELIVERY -->
-
-<div class="delivery-switch">
-
-  <button
-    id="deliveryBtn"
-    class="active"
-    onclick="setOrderType('delivery')"
-  >
-    🚴 Lieferung
-  </button>
-
-  <button
-    id="pickupBtn"
-    onclick="setOrderType('pickup')"
-  >
-    🛍 Abholung
-  </button>
-
-</div>
-
-
-<!-- =====================================================
-     ANGEBOTE
-     ===================================================== -->
-
-<section
-  class="section"
-  id="angebote"
->
-
-  <h2>
-    Angebote
-  </h2>
-
-  <div class="offers">
-
-
-    <div class="offer">
-
-      <img
-        src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80"
-        alt="Gyros"
-      >
-
-      <div class="offer-content">
-
-        <small>JP'S SPECIAL</small>
-
-        <h3>
-          Pita Menü
-        </h3>
-
-        <p>
-          Gyros Pita + Pommes + Getränk
-        </p>
-
-        <br>
-
-        <strong>
-          10,90 €
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="offer">
-
-      <img
-        src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=800&q=80"
-        alt="Schnitzel"
-      >
-
-      <div class="offer-content">
-
-        <small>BESTSELLER</small>
-
-        <h3>
-          Gyros Teller
-        </h3>
-
-        <p>
-          Gyros + Pommes + Salat + Tzatziki
-        </p>
-
-        <br>
-
-        <strong>
-          12,90 €
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div class="offer">
-
-      <img
-        src="https://images.unsplash.com/photo-1526230427044-d092040d48dc?auto=format&fit=crop&w=800&q=80"
-        alt="Pommes"
-      >
-
-      <div class="offer-content">
-
-        <small>IMBISS DEAL</small>
-
-        <h3>
-          Currywurst Menü
-        </h3>
-
-        <p>
-          Currywurst + Pommes + Getränk
-        </p>
-
-        <br>
-
-        <strong>
-          9,90 €
-        </strong>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
+<!-- =========================================================
      GYROS
-     ===================================================== -->
+========================================================= -->
 
 <section
-  class="section"
-  id="gyros"
+    class="menu-section"
+    id="gyros"
 >
 
-  <h2>
-    Gyros & Pita
-  </h2>
+    <h2 class="section-title">
+        Gyros & Pita
+    </h2>
 
-  <p class="section-subtitle">
-    Original griechisch – frisch vom Spieß.
-  </p>
-
-
-  <div class="products">
+    <p class="section-subtitle">
+        Original griechisch – frisch vom Spieß.
+    </p>
 
 
-    <article
-      class="product"
-      data-name="Gyros Pita"
-      data-price="7.50"
-    >
+    <div class="product-grid">
 
-      <div class="product-info">
 
-        <h3>
-          Gyros Pita
-        </h3>
+        <!-- GYROS PITA -->
 
-        <p>
-          Gyros, Tomate, Zwiebeln,
-          Tzatziki und Pommes im warmen Pita.
-        </p>
-
-        <div class="price">
-          7,50 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
-          alt="Gyros Pita"
+        <article
+            class="product-card"
+            data-name="Gyros Pita"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Gyros Pita',7.50)"
-      >
-        +
-      </button>
+                <h3>
+                    Gyros Pita
+                </h3>
 
-    </article>
+                <p>
+                    Gyros, Tomate, Zwiebeln,
+                    Tzatziki und Pommes im warmen Pita.
+                </p>
+
+                <div class="product-price">
+                    7,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=85"
+                    alt="Gyros Pita"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Gyros Pita',7.50)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Original griechische Gyros Pita"
-      data-price="8.50"
-    >
 
-      <div class="product-info">
+        <!-- ORIGINAL PITA -->
 
-        <h3>
-          Original griechische Gyros Pita
-        </h3>
-
-        <p>
-          Klassisches griechisches Gyros,
-          Tzatziki, Tomate, Zwiebel und Pommes.
-        </p>
-
-        <div class="price">
-          8,50 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
-          alt="Original Gyros Pita"
+        <article
+            class="product-card"
+            data-name="Original griechische Gyros Pita"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Original griechische Gyros Pita',8.50)"
-      >
-        +
-      </button>
+                <h3>
+                    Original griechische Gyros Pita
+                </h3>
 
-    </article>
+                <p>
+                    Klassisches griechisches Gyros,
+                    Tzatziki, Tomate, Zwiebeln und Pommes.
+                </p>
+
+                <div class="product-price">
+                    8,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=85"
+                    alt="Original griechische Gyros Pita"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Original griechische Gyros Pita',8.50)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Gyros Box"
-      data-price="8.90"
-    >
 
-      <div class="product-info">
+        <!-- BOX -->
 
-        <h3>
-          Gyros Box
-        </h3>
-
-        <p>
-          Gyros, Pommes und Tzatziki
-          in der praktischen Box.
-        </p>
-
-        <div class="price">
-          8,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
-          alt="Gyros Box"
+        <article
+            class="product-card"
+            data-name="Gyros Box"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Gyros Box',8.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Gyros Box
+                </h3>
 
-    </article>
+                <p>
+                    Gyros, Pommes und Tzatziki
+                    in der praktischen Box.
+                </p>
+
+                <div class="product-price">
+                    8,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=85"
+                    alt="Gyros Box"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Gyros Box',8.90)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Gyros Teller"
-      data-price="12.90"
-    >
 
-      <div class="product-info">
+        <!-- GYROS POMMES -->
 
-        <h3>
-          Gyros Teller
-        </h3>
-
-        <p>
-          Gyros mit Pommes, Salat
-          und Tzatziki.
-        </p>
-
-        <div class="price">
-          12,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
-          alt="Gyros Teller"
+        <article
+            class="product-card"
+            data-name="Gyros mit Pommes und Tzatziki"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Gyros Teller',12.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Gyros mit Pommes & Tzatziki
+                </h3>
 
-    </article>
+                <p>
+                    Saftiges Gyros mit knusprigen
+                    Pommes und hausgemachtem Tzatziki.
+                </p>
+
+                <div class="product-price">
+                    11,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=85"
+                    alt="Gyros mit Pommes"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Gyros mit Pommes & Tzatziki',11.90)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Gyros komplett"
-      data-price="13.90"
-    >
 
-      <div class="product-info">
+        <!-- TELLER -->
 
-        <h3>
-          Gyros komplett
-        </h3>
-
-        <p>
-          Gyros, Pommes, Salat,
-          Tzatziki und Peperoni.
-        </p>
-
-        <div class="price">
-          13,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
-          alt="Gyros komplett"
+        <article
+            class="product-card"
+            data-name="Gyros Teller"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Gyros komplett',13.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Gyros Teller
+                </h3>
 
-    </article>
+                <p>
+                    Gyros mit Pommes,
+                    Salat und Tzatziki.
+                </p>
+
+                <div class="product-price">
+                    12,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=85"
+                    alt="Gyros Teller"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Gyros Teller',12.90)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Taxi Teller"
-      data-price="10.90"
-    >
 
-      <div class="product-info">
+        <!-- KOMPLETT -->
 
-        <h3>
-          Taxi-Teller
-        </h3>
-
-        <p>
-          Gyros + Currywurst +
-          Pommes.
-        </p>
-
-        <div class="price">
-          10,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
-          alt="Taxi Teller"
+        <article
+            class="product-card"
+            data-name="Gyros komplett"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Taxi-Teller',10.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Gyros komplett
+                </h3>
 
-    </article>
+                <p>
+                    Gyros, Pommes, Salat,
+                    Tzatziki und Peperoni.
+                </p>
 
-  </div>
+                <div class="product-price">
+                    13,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=85"
+                    alt="Gyros komplett"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Gyros komplett',13.90)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <!-- TAXI -->
+
+        <article
+            class="product-card"
+            data-name="Taxi Teller"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Taxi-Teller
+                </h3>
+
+                <p>
+                    Gyros + Currywurst
+                    + Pommes.
+                </p>
+
+                <div class="product-price">
+                    10,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=85"
+                    alt="Taxi Teller"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Taxi-Teller',10.90)"
+            >
+                +
+            </button>
+
+        </article>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      IMBISS
-     ===================================================== -->
+========================================================= -->
 
 <section
-  class="section"
-  id="imbiss"
+    class="menu-section"
+    id="imbiss"
 >
 
-  <h2>
-    Imbiss Klassiker
-  </h2>
+    <h2 class="section-title">
+        Imbiss Klassiker
+    </h2>
+
+    <p class="section-subtitle">
+        Klassiker vom Grill.
+    </p>
 
 
-  <div class="products">
+    <div class="product-grid">
 
 
-    <article
-      class="product"
-      data-name="Currywurst"
-      data-price="4.90"
-    >
-
-      <div class="product-info">
-
-        <h3>
-          Currywurst
-        </h3>
-
-        <p>
-          Bratwurst mit unserer
-          hausgemachten Currysauce.
-        </p>
-
-        <div class="price">
-          4,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80"
-          alt="Currywurst"
+        <article
+            class="product-card"
+            data-name="Currywurst"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Currywurst',4.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Currywurst
+                </h3>
 
-    </article>
+                <p>
+                    Bratwurst mit unserer
+                    würzigen Currysauce.
+                </p>
+
+                <div class="product-price">
+                    4,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=85"
+                    alt="Currywurst"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Currywurst',4.90)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Currywurst Pommes"
-      data-price="7.50"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Currywurst + Pommes
-        </h3>
-
-        <p>
-          Currywurst mit knusprigen
-          Pommes frites.
-        </p>
-
-        <div class="price">
-          7,50 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1526230427044-d092040d48dc?auto=format&fit=crop&w=600&q=80"
-          alt="Currywurst Pommes"
+        <article
+            class="product-card"
+            data-name="Currywurst Pommes"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Currywurst + Pommes',7.50)"
-      >
-        +
-      </button>
+                <h3>
+                    Currywurst + Pommes
+                </h3>
 
-    </article>
+                <p>
+                    Currywurst mit knusprigen
+                    Pommes frites.
+                </p>
+
+                <div class="product-price">
+                    7,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=85"
+                    alt="Currywurst mit Pommes"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Currywurst + Pommes',7.50)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Bratwurst"
-      data-price="3.90"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Bratwurst
-        </h3>
-
-        <p>
-          Klassische Bratwurst
-          frisch vom Grill.
-        </p>
-
-        <div class="price">
-          3,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80"
-          alt="Bratwurst"
+        <article
+            class="product-card"
+            data-name="Bratwurst"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Bratwurst',3.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Bratwurst
+                </h3>
 
-    </article>
+                <p>
+                    Klassische Bratwurst
+                    frisch vom Grill.
+                </p>
+
+                <div class="product-price">
+                    3,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=85"
+                    alt="Bratwurst"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Bratwurst',3.90)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Bratwurst Pommes"
-      data-price="6.50"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Bratwurst + Pommes
-        </h3>
-
-        <p>
-          Bratwurst mit einer Portion
-          knuspriger Pommes.
-        </p>
-
-        <div class="price">
-          6,50 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1526230427044-d092040d48dc?auto=format&fit=crop&w=600&q=80"
-          alt="Bratwurst mit Pommes"
+        <article
+            class="product-card"
+            data-name="Bratwurst Pommes"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Bratwurst + Pommes',6.50)"
-      >
-        +
-      </button>
+                <h3>
+                    Bratwurst + Pommes
+                </h3>
 
-    </article>
+                <p>
+                    Bratwurst mit einer Portion
+                    knuspriger Pommes.
+                </p>
 
-  </div>
+                <div class="product-price">
+                    6,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=85"
+                    alt="Bratwurst mit Pommes"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Bratwurst + Pommes',6.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Pommes"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Pommes
+                </h3>
+
+                <p>
+                    Knusprige Pommes frites.
+                </p>
+
+                <div class="product-price">
+                    3,00 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=85"
+                    alt="Pommes"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Pommes',3.00)"
+            >
+                +
+            </button>
+
+        </article>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      SCHNITZEL
-     ===================================================== -->
+========================================================= -->
 
 <section
-  class="section"
-  id="schnitzel"
+    class="menu-section"
+    id="schnitzel"
 >
 
-  <h2>
-    Schnitzel
-  </h2>
+    <h2 class="section-title">
+        Schnitzel
+    </h2>
+
+    <p class="section-subtitle">
+        Knusprig paniert und frisch zubereitet.
+    </p>
 
 
-  <div class="products">
+    <div class="product-grid">
 
 
-    <article
-      class="product"
-      data-name="Schnitzel Wiener Art"
-      data-price="8.90"
-    >
-
-      <div class="product-info">
-
-        <h3>
-          Schnitzel Wiener Art
-        </h3>
-
-        <p>
-          Knusprig paniertes Schnitzel
-          mit Zitrone.
-        </p>
-
-        <div class="price">
-          8,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=600&q=80"
-          alt="Schnitzel"
+        <article
+            class="product-card"
+            data-name="Schnitzel Wiener Art"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Schnitzel Wiener Art',8.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Schnitzel Wiener Art
+                </h3>
 
-    </article>
+                <p>
+                    Knusprig paniertes Schnitzel
+                    mit Zitrone.
+                </p>
+
+                <div class="product-price">
+                    8,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=600&q=85"
+                    alt="Schnitzel Wiener Art"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Schnitzel Wiener Art',8.90)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Schnitzel Pommes"
-      data-price="10.90"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Schnitzel + Pommes
-        </h3>
-
-        <p>
-          Schnitzel Wiener Art
-          mit Pommes.
-        </p>
-
-        <div class="price">
-          10,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=600&q=80"
-          alt="Schnitzel mit Pommes"
+        <article
+            class="product-card"
+            data-name="Schnitzel Pommes"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Schnitzel + Pommes',10.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Schnitzel + Pommes
+                </h3>
 
-    </article>
+                <p>
+                    Schnitzel Wiener Art
+                    mit knusprigen Pommes.
+                </p>
+
+                <div class="product-price">
+                    10,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=600&q=85"
+                    alt="Schnitzel mit Pommes"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Schnitzel + Pommes',10.90)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Metaxa Schnitzel"
-      data-price="12.90"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Metaxa-Schnitzel + Pommes
-        </h3>
-
-        <p>
-          Schnitzel mit cremiger
-          Metaxa-Sauce und Pommes.
-        </p>
-
-        <div class="price">
-          12,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=600&q=80"
-          alt="Metaxa Schnitzel"
+        <article
+            class="product-card"
+            data-name="Metaxa Schnitzel"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Metaxa-Schnitzel + Pommes',12.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Metaxa-Schnitzel + Pommes
+                </h3>
 
-    </article>
+                <p>
+                    Schnitzel mit cremiger
+                    Metaxa-Sauce und Pommes.
+                </p>
 
-  </div>
+                <div class="product-price">
+                    12,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1599921841143-819065a55cc6?auto=format&fit=crop&w=600&q=85"
+                    alt="Metaxa Schnitzel"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Metaxa-Schnitzel + Pommes',12.90)"
+            >
+                +
+            </button>
+
+        </article>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      GRIECHISCHE KÜCHE
-     ===================================================== -->
+========================================================= -->
 
 <section
-  class="section"
-  id="griechisch"
+    class="menu-section"
+    id="griechisch"
 >
 
-  <h2>
-    Griechische Küche
-  </h2>
+    <h2 class="section-title">
+        Griechische Küche
+    </h2>
 
-  <p class="section-subtitle">
-    Hausgemacht wie bei Mama.
-  </p>
-
-
-  <div class="products">
+    <p class="section-subtitle">
+        Hausgemachte Klassiker wie bei Mama.
+    </p>
 
 
-    <article
-      class="product"
-      data-name="Moussaka"
-      data-price="13.90"
-    >
+    <div class="product-grid">
 
-      <div class="product-info">
 
-        <h3>
-          Moussaka
-        </h3>
-
-        <p>
-          Aubergine, Kartoffeln,
-          Hackfleisch und Béchamel.
-        </p>
-
-        <div class="price">
-          13,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1777199311086-ec5ff230aefd?auto=format&fit=crop&w=600&q=80"
-          alt="Moussaka"
+        <article
+            class="product-card"
+            data-name="Moussaka"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Moussaka',13.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Moussaka
+                </h3>
 
-    </article>
+                <p>
+                    Aubergine, Kartoffeln,
+                    Hackfleisch und Béchamel.
+                </p>
+
+                <div class="product-price">
+                    13,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1572453800999-e8d2d1589b7c?auto=format&fit=crop&w=600&q=85"
+                    alt="Moussaka"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Moussaka',13.90)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Pastitsio"
-      data-price="13.90"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Pastitsio
-        </h3>
-
-        <p>
-          Griechischer Nudelauflauf
-          mit Hackfleisch und Béchamel.
-        </p>
-
-        <div class="price">
-          13,90 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1777199311086-ec5ff230aefd?auto=format&fit=crop&w=600&q=80"
-          alt="Pastitsio"
+        <article
+            class="product-card"
+            data-name="Pastitsio"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Pastitsio',13.90)"
-      >
-        +
-      </button>
+                <h3>
+                    Pastitsio
+                </h3>
 
-    </article>
+                <p>
+                    Griechischer Nudelauflauf
+                    mit Hackfleisch und Béchamel.
+                </p>
 
-  </div>
+                <div class="product-price">
+                    13,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1572453800999-e8d2d1589b7c?auto=format&fit=crop&w=600&q=85"
+                    alt="Pastitsio"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Pastitsio',13.90)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Griechisches Tagesgericht"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Griechisches Tagesgericht
+                </h3>
+
+                <p>
+                    Jeden Tag frisch – nach
+                    traditionellem griechischem Rezept.
+                </p>
+
+                <div class="product-price">
+                    13,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=85"
+                    alt="Griechisches Tagesgericht"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Griechisches Tagesgericht',13.90)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Hausgericht des Tages"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Hausgericht des Tages
+                </h3>
+
+                <p>
+                    Griechische Hausküche,
+                    täglich wechselnd.
+                </p>
+
+                <div class="product-price">
+                    14,90 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=85"
+                    alt="Griechisches Hausgericht"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Hausgericht des Tages',14.90)"
+            >
+                +
+            </button>
+
+        </article>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      SALATE
-     ===================================================== -->
+========================================================= -->
 
 <section
-  class="section"
-  id="salate"
+    class="menu-section"
+    id="salate"
 >
 
-  <h2>
-    Salate
-  </h2>
+    <h2 class="section-title">
+        Salate
+    </h2>
+
+    <p class="section-subtitle">
+        Frisch, knackig und griechisch.
+    </p>
 
 
-  <div class="products">
+    <div class="product-grid">
 
 
-    <article
-      class="product"
-      data-name="Kleiner gemischter Salat"
-      data-price="4.50"
-    >
-
-      <div class="product-info">
-
-        <h3>
-          Kleiner gemischter Salat
-        </h3>
-
-        <p>
-          Frischer gemischter Salat
-          mit Dressing.
-        </p>
-
-        <div class="price">
-          4,50 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1769481614068-47cfb4d1f125?auto=format&fit=crop&w=600&q=80"
-          alt="Salat"
+        <article
+            class="product-card"
+            data-name="Kleiner gemischter Salat"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Kleiner gemischter Salat',4.50)"
-      >
-        +
-      </button>
+                <h3>
+                    Kleiner gemischter Salat
+                </h3>
 
-    </article>
+                <p>
+                    Frischer gemischter Salat
+                    mit Dressing.
+                </p>
+
+                <div class="product-price">
+                    4,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=85"
+                    alt="Gemischter Salat"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Kleiner gemischter Salat',4.50)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Griechischer Bauernsalat"
-      data-price="9.50"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Griechischer Bauernsalat
-        </h3>
-
-        <p>
-          Tomate, Gurke, Zwiebel,
-          Oliven, Peperoni und Feta.
-        </p>
-
-        <div class="price">
-          9,50 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1769481614068-47cfb4d1f125?auto=format&fit=crop&w=600&q=80"
-          alt="Griechischer Bauernsalat"
+        <article
+            class="product-card"
+            data-name="Griechischer Bauernsalat"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Griechischer Bauernsalat',9.50)"
-      >
-        +
-      </button>
+                <h3>
+                    Griechischer Bauernsalat
+                </h3>
 
-    </article>
+                <p>
+                    Tomate, Gurke, Zwiebel,
+                    Oliven, Peperoni und Feta.
+                </p>
 
-  </div>
+                <div class="product-price">
+                    9,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=85"
+                    alt="Griechischer Bauernsalat"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Griechischer Bauernsalat',9.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Griechischer Bauernsalat klein"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Griechischer Bauernsalat klein
+                </h3>
+
+                <p>
+                    Tomate, Gurke, Zwiebel,
+                    Feta, Oliven und Peperoni.
+                </p>
+
+                <div class="product-price">
+                    6,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=85"
+                    alt="Kleiner griechischer Bauernsalat"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Griechischer Bauernsalat klein',6.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Krautsalat"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Krautsalat
+                </h3>
+
+                <p>
+                    Frischer knackiger Krautsalat.
+                </p>
+
+                <div class="product-price">
+                    3,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=85"
+                    alt="Krautsalat"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Krautsalat',3.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Gurken Tomaten Salat"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Gurken-Tomaten-Salat
+                </h3>
+
+                <p>
+                    Gurke, Tomate und
+                    frische Zwiebeln.
+                </p>
+
+                <div class="product-price">
+                    4,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=85"
+                    alt="Gurken Tomaten Salat"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Gurken-Tomaten-Salat',4.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+    </div>
 
 </section>
 
 
-<!-- =====================================================
-     EXTRAS
-     ===================================================== -->
+
+<!-- =========================================================
+     DIPS & EXTRAS
+========================================================= -->
 
 <section
-  class="section"
-  id="extras"
+    class="menu-section"
+    id="extras"
 >
 
-  <h2>
-    Dips & Extras
-  </h2>
+    <h2 class="section-title">
+        Dips & Extras
+    </h2>
+
+    <p class="section-subtitle">
+        Der richtige Extra-Kick für dein Essen.
+    </p>
 
 
-  <div class="products">
+    <div class="product-grid">
 
 
-    <article
-      class="product"
-      data-name="Tzatziki"
-      data-price="2.50"
-    >
-
-      <div class="product-info">
-
-        <h3>
-          Tzatziki
-        </h3>
-
-        <p>
-          Hausgemachter griechischer
-          Joghurt-Dip mit Knoblauch.
-        </p>
-
-        <div class="price">
-          2,50 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
-          alt="Tzatziki"
+        <article
+            class="product-card"
+            data-name="Tzatziki"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Tzatziki',2.50)"
-      >
-        +
-      </button>
+                <h3>
+                    Tzatziki
+                </h3>
 
-    </article>
+                <p>
+                    Hausgemachter griechischer
+                    Joghurt-Dip mit Knoblauch.
+                </p>
+
+                <div class="product-price">
+                    2,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=600&q=85"
+                    alt="Tzatziki"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Tzatziki',2.50)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Feta"
-      data-price="3.00"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Feta
-        </h3>
-
-        <p>
-          Original griechischer Feta.
-        </p>
-
-        <div class="price">
-          3,00 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1769481614068-47cfb4d1f125?auto=format&fit=crop&w=600&q=80"
-          alt="Feta"
+        <article
+            class="product-card"
+            data-name="Knoblauch Dip"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Feta',3.00)"
-      >
-        +
-      </button>
+                <h3>
+                    Knoblauch-Dip
+                </h3>
 
-    </article>
+                <p>
+                    Cremiger Dip mit feinem
+                    Knoblauchgeschmack.
+                </p>
+
+                <div class="product-price">
+                    2,00 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=600&q=85"
+                    alt="Knoblauch Dip"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Knoblauch-Dip',2.00)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Extra Gyros"
-      data-price="4.50"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Extra Gyros
-        </h3>
-
-        <p>
-          Extra Portion Gyros
-          für dein Lieblingsgericht.
-        </p>
-
-        <div class="price">
-          4,50 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80"
-          alt="Extra Gyros"
+        <article
+            class="product-card"
+            data-name="Feta"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Extra Gyros',4.50)"
-      >
-        +
-      </button>
+                <h3>
+                    Feta
+                </h3>
 
-    </article>
+                <p>
+                    Original griechischer Feta.
+                </p>
+
+                <div class="product-price">
+                    3,00 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1552767059-ce182ead6c1b?auto=format&fit=crop&w=600&q=85"
+                    alt="Feta"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Feta',3.00)"
+            >
+                +
+            </button>
+
+        </article>
 
 
-    <article
-      class="product"
-      data-name="Extra Pommes"
-      data-price="3.00"
-    >
 
-      <div class="product-info">
-
-        <h3>
-          Extra Pommes
-        </h3>
-
-        <p>
-          Knusprige Pommes frites.
-        </p>
-
-        <div class="price">
-          3,00 €
-        </div>
-
-      </div>
-
-      <div class="product-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1526230427044-d092040d48dc?auto=format&fit=crop&w=600&q=80"
-          alt="Pommes"
+        <article
+            class="product-card"
+            data-name="Oliven"
         >
 
-      </div>
+            <div class="product-details">
 
-      <button
-        class="add-button"
-        onclick="addToCart('Extra Pommes',3.00)"
-      >
-        +
-      </button>
+                <h3>
+                    Oliven
+                </h3>
 
-    </article>
+                <p>
+                    Griechische Oliven als Beilage.
+                </p>
 
-  </div>
+                <div class="product-price">
+                    3,00 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1601039641847-7857b994d704?auto=format&fit=crop&w=600&q=85"
+                    alt="Oliven"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Oliven',3.00)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Peperoni"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Peperoni
+                </h3>
+
+                <p>
+                    Gegrillte Peperoni.
+                </p>
+
+                <div class="product-price">
+                    3,00 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=600&q=85"
+                    alt="Peperoni"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Peperoni',3.00)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Extra Gyros"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Extra Gyros
+                </h3>
+
+                <p>
+                    Eine zusätzliche Portion
+                    unseres Gyros.
+                </p>
+
+                <div class="product-price">
+                    4,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=85"
+                    alt="Extra Gyros"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Extra Gyros',4.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Extra Pommes"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Extra Pommes
+                </h3>
+
+                <p>
+                    Eine Portion knusprige Pommes.
+                </p>
+
+                <div class="product-price">
+                    3,00 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=85"
+                    alt="Extra Pommes"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Extra Pommes',3.00)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Extra Salat"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Extra Salat
+                </h3>
+
+                <p>
+                    Frische Salatbeilage.
+                </p>
+
+                <div class="product-price">
+                    3,00 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=85"
+                    alt="Extra Salat"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Extra Salat',3.00)"
+            >
+                +
+            </button>
+
+        </article>
+
+    </div>
 
 </section>
+
+
+
+<!-- =========================================================
+     GETRÄNKE
+========================================================= -->
+
+<section
+    class="menu-section"
+    id="getraenke"
+>
+
+    <h2 class="section-title">
+        Getränke
+    </h2>
+
+    <p class="section-subtitle">
+        Kalt serviert.
+    </p>
+
+
+    <div class="product-grid">
+
+
+        <article
+            class="product-card"
+            data-name="Coca Cola"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Coca-Cola 0,33 L
+                </h3>
+
+                <p>
+                    Kalt serviert.
+                </p>
+
+                <div class="product-price">
+                    2,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=600&q=85"
+                    alt="Coca Cola"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Coca-Cola 0,33 L',2.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Coca Cola Zero"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Coca-Cola Zero 0,33 L
+                </h3>
+
+                <p>
+                    Kalt serviert.
+                </p>
+
+                <div class="product-price">
+                    2,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=600&q=85"
+                    alt="Coca Cola Zero"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Coca-Cola Zero 0,33 L',2.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Fanta"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Fanta 0,33 L
+                </h3>
+
+                <p>
+                    Kalt serviert.
+                </p>
+
+                <div class="product-price">
+                    2,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1629203849820-fdd70d49c38e?auto=format&fit=crop&w=600&q=85"
+                    alt="Fanta"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Fanta 0,33 L',2.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Sprite"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Sprite 0,33 L
+                </h3>
+
+                <p>
+                    Kalt serviert.
+                </p>
+
+                <div class="product-price">
+                    2,50 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1629203851122-3726ecdf080e?auto=format&fit=crop&w=600&q=85"
+                    alt="Sprite"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Sprite 0,33 L',2.50)"
+            >
+                +
+            </button>
+
+        </article>
+
+
+
+        <article
+            class="product-card"
+            data-name="Wasser"
+        >
+
+            <div class="product-details">
+
+                <h3>
+                    Wasser 0,5 L
+                </h3>
+
+                <p>
+                    Still oder sprudelnd.
+                </p>
+
+                <div class="product-price">
+                    2,00 €
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=600&q=85"
+                    alt="Wasser"
+                >
+
+            </div>
+
+            <button
+                class="add-button"
+                onclick="addProduct('Wasser 0,5 L',2.00)"
+            >
+                +
+            </button>
+
+        </article>
+
+    </div>
+
+</section>
+
 
 
 </div>
 
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer>
 
-  <strong>JP'S IMBISS</strong><br><br>
+    <strong>JP'S IMBISS</strong>
 
-  Bottrop · Nordrhein-Westfalen<br>
+    <br><br>
 
-  © 2026 JP'S IMBISS · Impressum · Datenschutz
+    It feels like Greece. 🇬🇷
+
+    <br><br>
+
+    Bottrop · Nordrhein-Westfalen
+
+    <br><br>
+
+    Impressum &nbsp; · &nbsp;
+    Datenschutz &nbsp; · &nbsp;
+    Kontakt
+
+    <br><br>
+
+    © 2026 JP'S IMBISS
 
 </footer>
 
@@ -2148,205 +3299,516 @@
 </div>
 
 
-<!-- =====================================================
-     CART
-     ===================================================== -->
+
+<!-- =========================================================
+     WARENKORB
+========================================================= -->
 
 <div
-  class="cart"
-  id="cart"
+    class="cart-panel"
+    id="cartPanel"
 >
 
-  <div class="cart-header">
+    <div class="cart-header">
 
-    <strong>
-      🛒 Dein Warenkorb
-    </strong>
+        <strong>
+            🛒 Dein Warenkorb
+        </strong>
 
-    <button
-      class="cart-close"
-      onclick="toggleCart()"
+        <button
+            class="close-cart"
+            onclick="toggleCart()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-items"
+        id="cartItems"
     >
-      ×
-    </button>
 
-  </div>
-
-  <div
-    class="cart-items"
-    id="cartItems"
-  >
-
-    <p style="text-align:center;color:#777;padding:25px;">
-      Dein Warenkorb ist leer.
-    </p>
-
-  </div>
-
-
-  <div class="cart-bottom">
-
-    <div class="cart-line">
-
-      <span>
-        Zwischensumme
-      </span>
-
-      <strong id="subtotal">
-        0,00 €
-      </strong>
+        <div class="empty-cart">
+            Dein Warenkorb ist leer.
+        </div>
 
     </div>
 
 
-    <div class="cart-line">
+    <div class="cart-summary">
 
-      <span>
-        Lieferung
-      </span>
+        <div class="summary-row">
 
-      <strong id="deliveryPrice">
-        0,00 €
-      </strong>
+            <span>
+                Zwischensumme
+            </span>
+
+            <strong id="subtotal">
+                0,00 €
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Lieferung
+            </span>
+
+            <strong id="deliveryCost">
+                0,00 €
+            </strong>
+
+        </div>
+
+
+        <div
+            id="deliveryMessage"
+        ></div>
+
+
+        <div class="summary-row total">
+
+            <span>
+                Gesamt
+            </span>
+
+            <span id="total">
+                0,00 €
+            </span>
+
+        </div>
+
+
+        <button
+            class="checkout-btn"
+            id="checkoutButton"
+            onclick="openCheckout()"
+            disabled
+        >
+            Zur Kasse
+        </button>
 
     </div>
-
-
-    <div class="cart-line cart-total">
-
-      <span>
-        Gesamt
-      </span>
-
-      <span id="total">
-        0,00 €
-      </span>
-
-    </div>
-
-
-    <button
-      class="checkout-button"
-      onclick="checkout()"
-    >
-      Zur Kasse
-    </button>
-
-  </div>
 
 </div>
 
 
-<!-- MOBILE CART -->
 
-<div class="mobile-cart">
+<!-- =========================================================
+     MOBILE CART
+========================================================= -->
 
-  <span>
-    🛒 <strong id="mobileCount">0</strong>
-    Artikel
-  </span>
+<div class="mobile-cart-bar">
 
-  <button onclick="toggleCart()">
-    Warenkorb
-  </button>
+    <div>
+        🛒
+        <strong id="mobileCartCount">
+            0
+        </strong>
+        Artikel
+    </div>
+
+    <button
+        class="mobile-cart-button"
+        onclick="toggleCart()"
+    >
+        Warenkorb
+    </button>
 
 </div>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
+     CHECKOUT MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="checkoutModal"
+>
+
+    <div class="checkout-modal">
+
+        <div class="modal-top">
+
+            <h2>
+                Deine Bestellung
+            </h2>
+
+            <button
+                class="close-modal"
+                onclick="closeCheckout()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            class="checkout-order-summary"
+            id="checkoutSummary"
+        >
+        </div>
+
+
+        <form
+            id="checkoutForm"
+            onsubmit="submitOrder(event)"
+        >
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Vorname *
+                    </label>
+
+                    <input
+                        type="text"
+                        required
+                        placeholder="Vorname"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Nachname *
+                    </label>
+
+                    <input
+                        type="text"
+                        required
+                        placeholder="Nachname"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Telefonnummer *
+                    </label>
+
+                    <input
+                        type="tel"
+                        required
+                        placeholder="Telefonnummer"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        E-Mail
+                    </label>
+
+                    <input
+                        type="email"
+                        placeholder="E-Mail"
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Bestellart
+                    </label>
+
+                    <select
+                        id="checkoutOrderType"
+                        onchange="checkoutTypeChanged()"
+                    >
+
+                        <option value="delivery">
+                            🚴 Lieferung
+                        </option>
+
+                        <option value="pickup">
+                            🛍 Abholung
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    id="addressFields"
+                    class="form-group full"
+                >
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Straße *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="street"
+                                placeholder="Straße"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Hausnummer *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="houseNumber"
+                                placeholder="Nr."
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                PLZ *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="zip"
+                                placeholder="462xx"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Ort *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                value="Bottrop"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Wunschzeit
+                    </label>
+
+                    <select>
+
+                        <option>
+                            So schnell wie möglich
+                        </option>
+
+                        <option>
+                            30 Minuten
+                        </option>
+
+                        <option>
+                            45 Minuten
+                        </option>
+
+                        <option>
+                            60 Minuten
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Zahlungsart
+                    </label>
+
+                    <select>
+
+                        <option>
+                            Barzahlung
+                        </option>
+
+                        <option>
+                            Kartenzahlung
+                        </option>
+
+                        <option>
+                            Onlinezahlung
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Lieferhinweise
+                    </label>
+
+                    <textarea
+                        placeholder="z. B. Hintereingang, Klingel bei Müller..."
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-order"
+            >
+                Bestellung abschicken
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
      JAVASCRIPT
-     ===================================================== -->
+========================================================= -->
 
 <script>
 
-  let cart = [];
+/* =========================================================
+   WARENKORB
+========================================================= */
 
-  let orderType = "delivery";
+let cart = [];
+
+let orderType = "delivery";
 
 
-  /* ==============================
-     SCROLL
-     ============================== */
+/* =========================================================
+   LOCAL STORAGE LADEN
+========================================================= */
 
-  function scrollToSection(id) {
+function loadCart() {
 
-    const section = document.getElementById(id);
+    try {
 
-    if (section) {
+        const saved =
+            localStorage.getItem("jps-imbiss-cart");
 
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+        if (saved) {
+
+            cart = JSON.parse(saved);
+
+        }
+
+    } catch (error) {
+
+        cart = [];
 
     }
 
-  }
-
-
-  /* ==============================
-     ORDER TYPE
-     ============================== */
-
-  function setOrderType(type) {
-
-    orderType = type;
-
-    document
-      .getElementById("deliveryBtn")
-      .classList.toggle("active", type === "delivery");
-
-    document
-      .getElementById("pickupBtn")
-      .classList.toggle("active", type === "pickup");
-
     updateCart();
 
-  }
+}
 
 
-  /* ==============================
-     ADD TO CART
-     ============================== */
+/* =========================================================
+   LOCAL STORAGE SPEICHERN
+========================================================= */
 
-  function addToCart(name, price) {
+function saveCart() {
 
-    const existing = cart.find(
-      item => item.name === name
+    localStorage.setItem(
+        "jps-imbiss-cart",
+        JSON.stringify(cart)
     );
+
+}
+
+
+/* =========================================================
+   PRODUKT HINZUFÜGEN
+========================================================= */
+
+function addProduct(name, price) {
+
+    const existing =
+        cart.find(item => item.name === name);
 
     if (existing) {
 
-      existing.quantity++;
+        existing.quantity++;
 
     } else {
 
-      cart.push({
-        name: name,
-        price: price,
-        quantity: 1
-      });
+        cart.push({
+
+            name: name,
+
+            price: price,
+
+            quantity: 1
+
+        });
 
     }
+
+    saveCart();
 
     updateCart();
 
     document
-      .getElementById("cart")
-      .classList.add("show");
+        .getElementById("cartPanel")
+        .classList.add("open");
 
-  }
+}
 
 
-  /* ==============================
-     REMOVE ONE
-     ============================== */
+/* =========================================================
+   PRODUKT ENTFERNEN
+========================================================= */
 
-  function removeFromCart(name) {
+function decreaseProduct(name) {
 
-    const item = cart.find(
-      item => item.name === name
-    );
+    const item =
+        cart.find(item => item.name === name);
 
     if (!item) return;
 
@@ -2354,269 +3816,865 @@
 
     if (item.quantity <= 0) {
 
-      cart = cart.filter(
-        i => i.name !== name
-      );
+        cart =
+            cart.filter(item => item.name !== name);
 
     }
 
+    saveCart();
+
     updateCart();
 
-  }
+}
 
 
-  /* ==============================
-     UPDATE CART
-     ============================== */
+/* =========================================================
+   KOMPLETT ENTFERNEN
+========================================================= */
 
-  function updateCart() {
+function removeProduct(name) {
+
+    cart =
+        cart.filter(item => item.name !== name);
+
+    saveCart();
+
+    updateCart();
+
+}
+
+
+/* =========================================================
+   PREIS FORMATIEREN
+========================================================= */
+
+function formatPrice(value) {
+
+    return value
+        .toFixed(2)
+        .replace(".", ",") + " €";
+
+}
+
+
+/* =========================================================
+   ZWISCHENSUMME
+========================================================= */
+
+function getSubtotal() {
+
+    return cart.reduce(
+
+        function(total, item) {
+
+            return total +
+                item.price *
+                item.quantity;
+
+        },
+
+        0
+
+    );
+
+}
+
+
+/* =========================================================
+   ARTIKELANZAHL
+========================================================= */
+
+function getCartCount() {
+
+    return cart.reduce(
+
+        function(total, item) {
+
+            return total + item.quantity;
+
+        },
+
+        0
+
+    );
+
+}
+
+
+/* =========================================================
+   WARENKORB AKTUALISIEREN
+========================================================= */
+
+function updateCart() {
 
     const cartItems =
-      document.getElementById("cartItems");
+        document.getElementById("cartItems");
 
-    let subtotal = 0;
-    let count = 0;
+    const subtotal =
+        getSubtotal();
 
-    cartItems.innerHTML = "";
+    const count =
+        getCartCount();
+
+
+    let delivery = 0;
+
+
+    if (
+        orderType === "delivery" &&
+        subtotal > 0 &&
+        subtotal < 30
+    ) {
+
+        delivery = 2;
+
+    }
+
+
+    const total =
+        subtotal + delivery;
+
+
+    /* ==========================
+       ITEMS
+    ========================== */
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+
+            <div class="empty-cart">
+
+                🛒<br><br>
+
+                Dein Warenkorb ist leer.
+
+            </div>
+
+        `;
+
+    } else {
+
+        cartItems.innerHTML = "";
+
+        cart.forEach(function(item) {
+
+            const itemElement =
+                document.createElement("div");
+
+            itemElement.className =
+                "cart-item";
+
+            itemElement.innerHTML = `
+
+                <div class="cart-item-top">
+
+                    <div class="cart-item-name">
+                        ${escapeHtml(item.name)}
+                    </div>
+
+                    <div class="cart-item-total">
+                        ${formatPrice(
+                            item.price * item.quantity
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="cart-item-bottom">
+
+                    <div class="quantity-controls">
+
+                        <button
+                            onclick="decreaseProduct('${escapeAttribute(item.name)}')"
+                        >
+                            −
+                        </button>
+
+                        <strong>
+                            ${item.quantity}
+                        </strong>
+
+                        <button
+                            onclick="addProduct('${escapeAttribute(item.name)}',${item.price})"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="remove-item"
+                        onclick="removeProduct('${escapeAttribute(item.name)}')"
+                    >
+                        Entfernen
+                    </button>
+
+                </div>
+
+            `;
+
+            cartItems.appendChild(itemElement);
+
+        });
+
+    }
+
+
+    /* ==========================
+       PREISE
+    ========================== */
+
+    document.getElementById("subtotal")
+        .textContent =
+        formatPrice(subtotal);
+
+
+    document.getElementById("deliveryCost")
+        .textContent =
+        delivery === 0
+            ? "Kostenlos"
+            : formatPrice(delivery);
+
+
+    document.getElementById("total")
+        .textContent =
+        formatPrice(total);
+
+
+    /* ==========================
+       DELIVERY MESSAGE
+    ========================== */
+
+    const message =
+        document.getElementById("deliveryMessage");
+
+
+    if (
+        orderType === "delivery" &&
+        subtotal > 0 &&
+        subtotal < 15
+    ) {
+
+        message.innerHTML = `
+
+            <div class="minimum-warning">
+
+                Mindestbestellwert für Lieferung:
+                <strong>15,00 €</strong>
+
+                <br>
+
+                Noch
+                <strong>
+                    ${formatPrice(15 - subtotal)}
+                </strong>
+                bis zum Mindestbestellwert.
+
+            </div>
+
+        `;
+
+    }
+
+    else if (
+        orderType === "delivery" &&
+        subtotal >= 15 &&
+        subtotal < 30
+    ) {
+
+        message.innerHTML = `
+
+            <div class="free-delivery">
+
+                Ab 30,00 € kostenloser Versand.
+
+            </div>
+
+        `;
+
+    }
+
+    else if (
+        orderType === "delivery" &&
+        subtotal >= 30
+    ) {
+
+        message.innerHTML = `
+
+            <div class="free-delivery">
+
+                ✓ Kostenlose Lieferung
+
+            </div>
+
+        `;
+
+    }
+
+    else {
+
+        message.innerHTML = "";
+
+    }
+
+
+    /* ==========================
+       CHECKOUT BUTTON
+    ========================== */
+
+    const checkoutButton =
+        document.getElementById("checkoutButton");
+
+
+    let canCheckout = true;
 
 
     if (cart.length === 0) {
 
-      cartItems.innerHTML = `
-        <p style="
-          text-align:center;
-          color:#777;
-          padding:25px;
-        ">
-          Dein Warenkorb ist leer.
-        </p>
-      `;
+        canCheckout = false;
 
     }
 
 
-    cart.forEach(item => {
+    if (
+        orderType === "delivery" &&
+        subtotal < 15
+    ) {
 
-      subtotal +=
-        item.price * item.quantity;
+        canCheckout = false;
 
-      count += item.quantity;
+    }
 
 
-      const div =
+    checkoutButton.disabled =
+        !canCheckout;
+
+
+    /* ==========================
+       MOBILE
+    ========================== */
+
+    document.getElementById("mobileCartCount")
+        .textContent = count;
+
+}
+
+
+/* =========================================================
+   HTML SICHERHEIT
+========================================================= */
+
+function escapeHtml(text) {
+
+    const div =
         document.createElement("div");
 
-      div.className = "cart-item";
+    div.textContent = text;
 
-      div.innerHTML = `
+    return div.innerHTML;
 
-        <div>
+}
 
-          <div class="cart-item-name">
-            ${item.name}
-          </div>
 
-          <div class="cart-controls">
+function escapeAttribute(text) {
 
-            <button
-              onclick="removeFromCart('${item.name}')"
-            >
-              −
-            </button>
+    return text
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
 
-            <span>
-              ${item.quantity}
-            </span>
+}
 
-            <button
-              onclick="addToCart('${item.name}',${item.price})"
-            >
-              +
-            </button>
 
-          </div>
+/* =========================================================
+   WARENKORB ÖFFNEN/SCHLIESSEN
+========================================================= */
 
-        </div>
+function toggleCart() {
 
-        <div class="cart-item-price">
+    document
+        .getElementById("cartPanel")
+        .classList.toggle("open");
 
-          ${(item.price * item.quantity)
-            .toFixed(2)
-            .replace(".", ",")} €
+}
 
-        </div>
 
-      `;
+/* =========================================================
+   LIEFERUNG / ABHOLUNG
+========================================================= */
 
-      cartItems.appendChild(div);
+function changeOrderType(type) {
+
+    orderType = type;
+
+
+    document
+        .getElementById("deliveryButton")
+        .classList.toggle(
+            "active",
+            type === "delivery"
+        );
+
+
+    document
+        .getElementById("pickupButton")
+        .classList.toggle(
+            "active",
+            type === "pickup"
+        );
+
+
+    updateCart();
+
+}
+
+
+/* =========================================================
+   KATEGORIE SCROLLEN
+========================================================= */
+
+function goToCategory(id) {
+
+    const element =
+        document.getElementById(id);
+
+    if (!element) return;
+
+    element.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "start"
+
+    });
+
+}
+
+
+/* =========================================================
+   AKTIVE KATEGORIE
+========================================================= */
+
+const sections =
+    document.querySelectorAll(".menu-section");
+
+const categoryButtons =
+    document.querySelectorAll(".category-button");
+
+
+const observer =
+    new IntersectionObserver(
+
+        function(entries) {
+
+            entries.forEach(function(entry) {
+
+                if (entry.isIntersecting) {
+
+                    categoryButtons.forEach(
+                        function(button) {
+
+                            button.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    const active =
+                        document.querySelector(
+                            `.category-button[onclick*="${entry.target.id}"]`
+                        );
+
+
+                    if (active) {
+
+                        active.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+
+            });
+
+        },
+
+        {
+            rootMargin:
+                "-25% 0px -60% 0px"
+        }
+
+    );
+
+
+sections.forEach(
+    section => observer.observe(section)
+);
+
+
+/* =========================================================
+   SUCHE
+========================================================= */
+
+function searchProducts() {
+
+    const query =
+        document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const products =
+        document.querySelectorAll(".product-card");
+
+
+    products.forEach(function(product) {
+
+        const name =
+            product.dataset.name
+                .toLowerCase();
+
+
+        if (
+            name.includes(query)
+        ) {
+
+            product.style.display =
+                "flex";
+
+        } else {
+
+            product.style.display =
+                "none";
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   CHECKOUT ÖFFNEN
+========================================================= */
+
+function openCheckout() {
+
+    const subtotal =
+        getSubtotal();
+
+
+    if (cart.length === 0) {
+
+        alert(
+            "Dein Warenkorb ist leer."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        orderType === "delivery" &&
+        subtotal < 15
+    ) {
+
+        alert(
+            "Der Mindestbestellwert für Lieferung beträgt 15,00 €."
+        );
+
+        return;
+
+    }
+
+
+    const summary =
+        document.getElementById(
+            "checkoutSummary"
+        );
+
+
+    let html = "";
+
+    cart.forEach(function(item) {
+
+        html += `
+
+            ${item.quantity} ×
+            ${escapeHtml(item.name)}
+            – ${formatPrice(
+                item.price *
+                item.quantity
+            )}
+
+            <br>
+
+        `;
 
     });
 
 
     let delivery = 0;
 
+
     if (
-      orderType === "delivery" &&
-      subtotal > 0 &&
-      subtotal < 30
+        orderType === "delivery" &&
+        subtotal < 30
     ) {
 
-      delivery = 2;
+        delivery = 2;
 
     }
 
 
-    const total =
-      subtotal + delivery;
+    html += `
+
+        <hr style="border:0;border-top:1px solid #ddd;margin:10px 0">
+
+        Zwischensumme:
+        <strong>${formatPrice(subtotal)}</strong>
+
+        <br>
+
+        Lieferung:
+        <strong>
+            ${
+                delivery === 0
+                    ? "Kostenlos"
+                    : formatPrice(delivery)
+            }
+        </strong>
+
+        <br>
+
+        Gesamt:
+        <strong>
+            ${formatPrice(subtotal + delivery)}
+        </strong>
+
+    `;
 
 
-    document.getElementById("subtotal")
-      .textContent =
-      formatPrice(subtotal);
+    summary.innerHTML = html;
 
 
-    document.getElementById("deliveryPrice")
-      .textContent =
-      delivery === 0
-        ? "Kostenlos"
-        : formatPrice(delivery);
+    document.getElementById(
+        "checkoutOrderType"
+    ).value = orderType;
 
 
-    document.getElementById("total")
-      .textContent =
-      formatPrice(total);
+    checkoutTypeChanged();
 
-
-    document.getElementById("mobileCount")
-      .textContent = count;
-
-  }
-
-
-  /* ==============================
-     PRICE
-     ============================== */
-
-  function formatPrice(price) {
-
-    return price
-      .toFixed(2)
-      .replace(".", ",") + " €";
-
-  }
-
-
-  /* ==============================
-     TOGGLE CART
-     ============================== */
-
-  function toggleCart() {
 
     document
-      .getElementById("cart")
-      .classList.toggle("show");
+        .getElementById("checkoutModal")
+        .classList.add("open");
 
-  }
-
-
-  /* ==============================
-     SEARCH
-     ============================== */
-
-  function searchProducts() {
-
-    const query =
-      document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
+}
 
 
-    const products =
-      document.querySelectorAll(".product");
+/* =========================================================
+   CHECKOUT SCHLIESSEN
+========================================================= */
+
+function closeCheckout() {
+
+    document
+        .getElementById("checkoutModal")
+        .classList.remove("open");
+
+}
 
 
-    products.forEach(product => {
+/* =========================================================
+   CHECKOUT BESTELLART
+========================================================= */
 
-      const name =
-        product
-          .dataset
-          .name
-          .toLowerCase();
+function checkoutTypeChanged() {
 
-
-      if (
-        name.includes(query)
-      ) {
-
-        product.style.display =
-          "flex";
-
-      } else {
-
-        product.style.display =
-          "none";
-
-      }
-
-    });
-
-  }
+    const type =
+        document
+            .getElementById(
+                "checkoutOrderType"
+            )
+            .value;
 
 
-  /* ==============================
-     CHECKOUT
-     ============================== */
+    const fields =
+        document.getElementById(
+            "addressFields"
+        );
 
-  function checkout() {
 
-    if (cart.length === 0) {
+    if (type === "delivery") {
 
-      alert(
-        "Dein Warenkorb ist noch leer."
-      );
+        fields.style.display =
+            "block";
 
-      return;
+
+        document.getElementById("street")
+            .required = true;
+
+
+        document.getElementById("houseNumber")
+            .required = true;
+
+
+        document.getElementById("zip")
+            .required = true;
+
+
+        document.getElementById("city")
+            .required = true;
+
+    } else {
+
+        fields.style.display =
+            "none";
+
+
+        document.getElementById("street")
+            .required = false;
+
+
+        document.getElementById("houseNumber")
+            .required = false;
+
+
+        document.getElementById("zip")
+            .required = false;
+
+
+        document.getElementById("city")
+            .required = false;
 
     }
+
+}
+
+
+/* =========================================================
+   BESTELLUNG ABSENDEN
+========================================================= */
+
+function submitOrder(event) {
+
+    event.preventDefault();
+
+
+    const orderNumber =
+        "JP-" +
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        );
+
+
+    const modal =
+        document.querySelector(
+            ".checkout-modal"
+        );
+
+
+    modal.innerHTML = `
+
+        <div class="success-box">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Vielen Dank!
+            </h2>
+
+            <p>
+                Deine Bestellung bei
+                <strong>JP'S IMBISS</strong>
+                wurde aufgenommen.
+            </p>
+
+            <div class="order-number">
+                ${orderNumber}
+            </div>
+
+            <p style="font-size:12px;color:#777;">
+                Deine Bestellung wird vorbereitet.
+            </p>
+
+            <br>
+
+            <button
+                class="submit-order"
+                onclick="finishOrder()"
+            >
+                Fertig
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   BESTELLUNG ABSCHLIESSEN
+========================================================= */
+
+function finishOrder() {
+
+    cart = [];
+
+    saveCart();
+
+    updateCart();
+
+    closeCheckout();
+
+    document
+        .getElementById("cartPanel")
+        .classList.remove("open");
+
+}
+
+
+/* =========================================================
+   MOBILE MENÜ
+========================================================= */
+
+function toggleMobileMenu() {
+
+    const sidebar =
+        document.getElementById("sidebar");
 
 
     if (
-      orderType === "delivery" &&
-      getSubtotal() < 15
+        window.innerWidth <= 760
     ) {
 
-      alert(
-        "Der Mindestbestellwert für Lieferung beträgt 15,00 €."
-      );
-
-      return;
+        sidebar.scrollIntoView({
+            behavior: "smooth"
+        });
 
     }
 
-
-    alert(
-      "Checkout wird als nächster Schritt angeschlossen."
-    );
-
-  }
+}
 
 
-  function getSubtotal() {
+/* =========================================================
+   START
+========================================================= */
 
-    return cart.reduce(
-      (sum, item) =>
-        sum +
-        item.price *
-        item.quantity,
-      0
-    );
-
-  }
-
-
-  updateCart();
+loadCart();
 
 </script>
 
